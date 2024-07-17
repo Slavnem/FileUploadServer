@@ -82,6 +82,24 @@ trait UserError {
         "description" => "Theme ID value not found, make sure you entered the parameter",
     ];
 
+    protected static array $AutoErrorNotValidEmail = [
+        "code" => -1,
+        "message" => "Email Address Is Not Valid",
+        "description" => "Email address is not valid, it has to be like that: example@email.com"
+    ];
+
+    protected static array $AutoErrorLessThenMinPasswordLength = [
+        "code" => -1,
+        "message" => "Password Length Not Enough",
+        "description" => "Your Password is Less Then Minimum Password Length"
+    ];
+
+    protected static array $AutoErrorUpdateDatasAreEmpty = [
+        "code" => -1,
+        "message" => "New Datas Not Found",
+        "description" => "New Update Datas Are Empty or Not Valid"
+    ];
+
     // Anahtar Kelimeleri Getirtme
     final public static function getCode(): ?string {
         return self::$keyCode;
@@ -142,6 +160,18 @@ trait UserError {
 
     final public static function getAutoErrorNotFoundThemeid(): ?array {
         return self::$AutoErrorNotFoundThemeid;
+    }
+
+    final public static function getAutoErrorNotValidEmail(): ?array {
+        return self::$AutoErrorNotValidEmail;
+    }
+
+    final public static function getAutoErrorLessThenMinPasswordLength(): ?array {
+        return self::$AutoErrorLessThenMinPasswordLength;
+    }
+
+    final public static function getAutoErrorUpdateDatasAreEmpty(): ?array {
+        return self::$AutoErrorUpdateDatasAreEmpty;
     }
 
     // Özel Hata Döndürme

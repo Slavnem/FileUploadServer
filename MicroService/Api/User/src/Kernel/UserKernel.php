@@ -76,9 +76,9 @@ $StoreNewUserData = [
     // Yeni Üye
     UpdateUserParams::getMember() => $PostData[UpdateUserParams::getMember()] ?? null,
     // Yeni Dil
-    UserParams::getLanguage() => $PostData[UserParams::getLanguage()] ?? null,
+    UpdateUserParams::getLanguage() => $PostData[UpdateUserParams::getLanguage()] ?? null,
     // Yeni Doğrulama
-    UserParams::getVerify() => $PostData[UserParams::getVerify()] ?? null,
+    UpdateUserParams::getVerify() => $PostData[UpdateUserParams::getVerify()] ?? null,
     // Yeni Tema
     UpdateUserParams::getTheme() => $PostData[UpdateUserParams::getTheme()] ?? null
 ];

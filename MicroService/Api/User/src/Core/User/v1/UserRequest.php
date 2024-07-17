@@ -24,6 +24,8 @@ final class UserRequest {
     protected UserDatabase $userDatabase;
     protected PDO $userDatabaseConn;
 
+    protected static int $minPasswdLength = 8;
+
     // Sınıf Başlangıç Tanımlamaları
     public final function __construct() {
         $this->userDatabase = new UserDatabase();
@@ -60,8 +62,11 @@ final class UserRequest {
         // sorguyu çalıştırmak
         $stmt->execute();
 
+        $fetch = $stmt->fetchAll(PDO::FETCH_ASSOC)[0] ?? null;
+        $stmt->closeCursor();
+
         // sorgu sonucunu döndürsün
-        return $stmt->fetchAll(PDO::FETCH_ASSOC)[0] ?? null;
+        return $fetch ?? null;
     }
 
     // Oluştur
@@ -81,8 +86,12 @@ final class UserRequest {
             return UserError::getAutoErrorNotFoundUsername();
         else if($tempEmail == null)
             return UserError::getAutoErrorNotFoundEmail();
+        else if(!filter_var($tempEmail, FILTER_VALIDATE_EMAIL))
+            return UserError::getAutoErrorNotValidEmail();
         else if($tempPassword == null)
             return UserError::getAutoErrorNotFoundPassword();
+        else if(strlen($tempPassword) < self::$minPasswdLength)
+            return UserError::getAutoErrorLessThenMinPasswordLength();
 
         // kullanıcı verilerini veritabanından almayı deniyoruz,
         // eğer kullanıcı yoksa yeni kullanıcı oluşturulabilir
@@ -115,6 +124,7 @@ final class UserRequest {
 
         // sorguyu çalıştırmak
         $stmt->execute();
+        $stmt->closeCursor();
 
         // kullanıcı bilgisini veritabanından yine alsın
         // dönen veriye göre cevap dönsün
@@ -149,6 +159,31 @@ final class UserRequest {
         else if($storedPassword == null)
             return UserError::getAutoErrorNotFoundPassword();
 
+        // argüman verilerini depolamak
+        $tempUsername = $argDatas[UpdateUserParams::getUsername()] ?? null;
+        $tempFirstname = $argDatas[UpdateUserParams::getFirstname()] ?? null;
+        $tempLastname = $argDatas[UpdateUserParams::getLastname()] ?? null;
+        $tempEmail = $argDatas[UpdateUserParams::getEmail()] ?? null;
+        $tempPassword = $argDatas[UpdateUserParams::getPassword()] ?? null;
+        $tempMember = $argDatas[UpdateUserParams::getMember()] ?? null;
+        $tempLanguage = $argDatas[UpdateUserParams::getLanguage()] ?? null;
+        $tempVerify = $argDatas[UpdateUserParams::getVerify()] ?? null;
+        $tempTheme = $argDatas[UpdateUserParams::getTheme()] ?? null;
+
+        if(strlen($tempEmail) > 0 && !filter_var($tempEmail, FILTER_VALIDATE_EMAIL))
+            return UserError::getAutoErrorNotValidEmail();
+        else if(strlen($tempPassword) > 0 && strlen($tempPassword) < self::$minPasswdLength)
+            return UserError::getAutoErrorLessThenMinPasswordLength();
+
+        // eğer tüm veriler boşsa, güncellenecek veri yoktur
+        if
+        (
+            strlen($tempUsername) < 1 && strlen($tempFirstname) < 1 && strlen($tempLastname) < 1 &&
+            strlen($tempPassword) < 1 && strlen($tempMember) < 1 && strlen($tempLanguage) < 1 &&
+            strlen($tempVerify) < 1 && strlen($tempVerify) < 1
+        )
+            return UserError::getAutoErrorUpdateDatasAreEmpty();
+
         // kullanıcı bilgisini almaya çalışsın,
         // eğer kullanıcı yoksa zaten güncellenemez
         $fetch = self::Fetch($argStoredDatas);
@@ -161,19 +196,8 @@ final class UserRequest {
         if($fetchUsername == null && $fetchEmail == null && $fetchPassword == null)
             return UserError::getAutoErrorUserNotFound();
 
-        // argüman verilerini depolamak
-        $tempUsername = $argDatas[UpdateUserParams::getUsername()] ?? null;
-        $tempFirstname = $argDatas[UpdateUserParams::getFirstname()] ?? null;
-        $tempLastname = $argDatas[UpdateUserParams::getLastname()] ?? null;
-        $tempEmail = $argDatas[UpdateUserParams::getEmail()] ?? null;
-        $tempPassword = $argDatas[UpdateUserParams::getPassword()] ?? null;
-        $tempMember = $argDatas[UpdateUserParams::getMember()] ?? null;
-        $tempLanguage = $argDatas[UpdateUserParams::getLanguage()] ?? null;
-        $tempVerify = $argDatas[UpdateUserParams::getVerify()] ?? null;
-        $tempTheme = $argDatas[UpdateUserParams::getTheme()] ?? null;
-
         // sql sorgusunu ayarlamak
-        $sqlQuery = UserProcedures::getCreate();
+        $sqlQuery = UserProcedures::getUpdate();
 
         // sorgu ayarlaması
         $stmt = $this->userDatabaseConn->prepare($sqlQuery);
@@ -197,6 +221,7 @@ final class UserRequest {
 
         // sorguyu çalıştırmak
         $stmt->execute();
+        $stmt->closeCursor();
 
         // kullancıyı veritabanından almak için küçük düzenleme
         $tempDatas = [
@@ -205,42 +230,8 @@ final class UserRequest {
             UserParams::getPassword() => ($tempPassword == null) ? $storedPassword : $tempPassword
         ];
 
-        // verileri çeksin
-        $fetch = self::Fetch($tempDatas);
-
-        // alınmış veriler
-        $fetchUsername = $fetch[TableUsers::getUsername()] ?? null;
-        $fetchFirstname = $fetch[TableUsers::getFirstname()] ?? null;
-        $fetchLastname = $fetch[TableUsers::getLastname()] ?? null;
-        $fetchEmail = $fetch[TableUsers::getEmail()] ?? null;
-        $fetchPassword = $fetch[TableUsers::getPassword()] ?? null;
-        $fetchMember = $fetch[TableMembership::getValue()] ?? null;
-        $fetchLanguage = $fetch[TableLanguages::getValue()] ?? null;
-        $fetchVerify = $fetch[TableVerify::getValue()] ?? null;
-        $fetchTheme = $fetch[TableThemes::getValue()] ?? null;
-
-        // doğrulama yapsın
-        switch(true)
-        {
-            // veriler eşleşti
-            // hiçbir veri güncellenmese bile
-            // şirenin saklanan hali otomatik yeni bir şifreleme
-            // ile tekrar şifrelenip saklanacak
-            // güncellenmiş veriyi döndür
-            case $fetchUsername == ($tempUsername == null ? $storedUsername : $tempUsername):
-            case $tempFirstname == null || ($tempFirstname != null && $fetchFirstname == $tempFirstname):
-            case $tempLastname == null || ($tempLastname != null && $fetchLastname == $tempLastname):
-            case $fetchEmail == ($tempEmail == null ? $storedEmail : $tempEmail):
-            case $fetchPassword == ($tempPassword == null ? $storedPassword : $tempPassword):
-            case $tempMember == null || ($tempMember != null && $fetchMember == $tempMember):
-            case $tempLanguage == null || ($tempLanguage != null && $fetchLanguage == $tempLanguage):
-            case $tempVerify == null || ($tempVerify != null && $fetchVerify == $tempVerify):
-            case $tempTheme == null || ($tempTheme != null && $fetchTheme == $tempTheme):
-                return $fetch ?? null;
-        }
-
-        // bilinmeyen durum
-        return null;
+        // verileri çeksin ve döndürsün
+        return self::Fetch($tempDatas) ?? null;
     }
 
     // Sil
@@ -265,11 +256,11 @@ final class UserRequest {
 
         // kullanıcı verilerini veritabanından almayı deniyoruz,
         // eğer kullanıcı yoksa kullanıcı silinemez
-        $fetch = self::Fetch($argDatas);
+        $fetchNonDeleted = self::Fetch($argDatas);
         
-        $fetchUsername = $fetch[TableUsers::getUsername()] ?? null;
-        $fetchEmail = $fetch[TableUsers::getEmail()] ?? null;
-        $fetchPassword = $fetch[TableUsers::getPassword()] ?? null;
+        $fetchUsername = $fetchNonDeleted[TableUsers::getUsername()] ?? null;
+        $fetchEmail = $fetchNonDeleted[TableUsers::getEmail()] ?? null;
+        $fetchPassword = $fetchNonDeleted[TableUsers::getPassword()] ?? null;
 
         // hepsi boş ise kullanıcı yok demektir
         if($fetchUsername == null || $fetchEmail == null || $fetchPassword == null)
@@ -288,6 +279,7 @@ final class UserRequest {
 
         // sorguyu çalıştırmak
         $stmt->execute();
+        $stmt->closeCursor();
 
         // kullanıcı bilgisini veritabanından yine alsın
         // dönen veriye göre cevap dönsün
@@ -300,9 +292,9 @@ final class UserRequest {
         
         // kullanıcı adı, email, şifre zorunlu kısımlar
         // eğer veri yoksa kullanıcı başarıyla silinmiş demektir
-        // silinen kullanıcı için gelen argüman verisi döndürülsün
+        // silinmeden önceki kayıtlı veriyi döndürsün
         if($fetchUsername == null && $fetchEmail == null && $fetchPassword == null)
-            return $argDatas;
+            return $fetchNonDeleted;
 
         // kullanıcı silinemedi, null dönsün
         return null;
