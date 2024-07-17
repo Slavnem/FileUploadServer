@@ -1,0 +1,411 @@
+/* IMPORT ROOT */
+@import url("/core/style/static/root/root.css");
+
+/* ROOT */
+:root {
+    /* CRYPT */
+    --crypt-main-width: 100%;
+    --crypt-main-height: 100dvh;
+    --crypt-main-display: flex;
+    --crypt-main-position: relative;
+    --crypt-main-display-wrap: flex-wrap;
+    --crypt-main-display-direction: column;
+    --crypt-main-align-items: center;
+    --crypt-main-align-content: center;
+    --crypt-main-align-text: center;
+    --crypt-main-fontfamily: var(--root-font-family-elite);
+    --crypt-main-padding: 0;
+    --crypt-main-margin: 0;
+    --crypt-main-overflow-x: hidden;
+
+    /* CRYPT AREA */
+    --crypt-area-width: auto;
+    --crypt-area-height: auto;
+    --crypt-area-display: flex;
+    --crypt-area-position: relative;
+    --crypt-area-display-wrap: wrap;
+    --crypt-area-display-direction: column;
+    --crypt-area-align-items: center;
+    --crypt-area-align-content: center;
+    --crypt-area-align-text: center;
+    --crypt-area-color: var(--theme-hex-color-opposite);
+    --crypt-area-bgcolor: rgba(var(--theme-rgb-color-theme-low), 0.5);
+    --crypt-area-border: 0;
+    --crypt-area-border-radius: 1.25rem;
+    --crypt-area-boxshadow: 0 0 30px 1px rgba(var(--theme-rgb-color-theme-low), 0.25);
+    --crypt-area-backdrop-filter: blur(0.75rem);
+    --crypt-area-padding: clamp(0.5rem, 5dvh, 3rem) clamp(0.5rem, 5%, 3rem);
+    --crypt-area-margin: 0;
+    --crypt-area-transition: 0.5s all;
+    --crypt-area-overflow: none;
+    --crypt-area-zindex: 0;
+
+    /* CRYPT ENCRYPT AREA */
+    --crypt-enccryptarea-width: auto;
+    --crypt-enccryptarea-height: auto;
+    --crypt-enccryptarea-display: flex;
+    --crypt-enccryptarea-display-direction: column;
+    --crypt-enccryptarea-display-wrap: flex-wrap;
+    --crypt-enccryptarea-position: relative;
+    --crypt-enccryptarea-align-items: center;
+    --crypt-enccryptarea-align-content: center;
+    --crypt-enccryptarea-align-text: center;
+    --crypt-enccryptarea-padding: 0;
+    --crypt-enccryptarea-margin: 0;
+
+    /* CRYPT MULTI AREA */
+    --crypt-multiarea-width: 100%;
+    --crypt-multiarea-height: auto;
+    --crypt-multiarea-display: flex;
+    --crypt-multiarea-position: relative;
+    --crypt-multiarea-display-wrap: flex-wrap;
+    --crypt-multiarea-display-direction: column;
+    --crypt-multiarea-align-items: center;
+    --crypt-multiarea-align-content: center;
+    --crypt-multiarea-align-text: center;
+    --crypt-multiarea-padding: clamp(0.25rem, 5dvh, 1rem) clamp(0.25rem, 5%, 1rem);
+    --crypt-multiarea-margin: clamp(0.125rem, 2dvh, 0.125rem) 0 0 0;
+
+    /* CRYPT TITLE AREA */
+    --crypt-titlearea-width: auto;
+    --crypt-titlearea-height: auto;
+    --crypt-titlearea-max-width: 600px;
+    --crypt-titlearea-bgcolor: rgba(var(--theme-rgb-color-theme), 0);
+    --crypt-titlearea-border: 0;
+    --crypt-titlearea-border-radius: 1.25rem;
+    --crypt-titlearea-position: relative;
+    --crypt-titlearea-align-items: center;
+    --crypt-titlearea-align-content: center;
+    --crypt-titlearea-align-text: center;
+    --crypt-titlearea-font-family: var(--root-font-family-elite);
+
+    /* CRYPT TITLE AREA TEXT AREA */
+    --crypt-titlearea-textarea-display: flex;
+    --crypt-titlearea-textarea-position: relative;
+    --crypt-titlearea-textarea-display-wrap: wrap;
+    --crypt-titlearea-textarea-flex-direction: column;
+
+    /* CRYPT TITLE AREA TEXT AREA TTILE */
+    --crypt-titlearea-textarea-title-color: var(--crypt-titlearea-color);
+    --crypt-titlearea-textarea-title-bgcolor: var(--color-global-transparent);
+    --crypt-titlearea-textarea-title-fontsize: clamp(1rem, 10vw, 2.5rem);
+    --crypt-titlearea-textarea-title-padding: 0;
+    --crypt-titlearea-textarea-title-margin: clamp(0.125rem, 5dvh, 0.5rem) 0;
+
+    /* CRYPT TITLE AREA TEXT AREA DESCRIPTION */
+    --crypt-titlearea-textarea-description-color: var(--theme-hex-color-opposite-low);
+    --crypt-titlearea-textarea-description-bgcolor: var(--color-global-transparent);
+    --crypt-titlearea-textarea-description-fontsize: clamp(0.9rem, 5vw, 1rem);
+    --crypt-titlearea-textarea-description-padding: 0;
+    --crypt-titlearea-textarea-description-margin: clamp(0.125rem, 5dvh, 0.25rem) 0;
+
+    /* CRYPT INPUT AREA */
+    --crypt-inputarea-width: 100%;
+    --crypt-inputarea-height: auto;
+    --crypt-inputarea-display: flex;
+    --crypt-inputarea-position: relative;
+    --crypt-inputarea-display-wrap: wrap;
+    --crypt-inputarea-display-direction: column;
+    --crypt-inputarea-align-items: center;
+    --crypt-inputarea-align-contents: center;
+    --crypt-inputarea-color: var(--theme-hex-color-opposite-low);
+    --crypt-inputarea-bgcolor: rgba(var(--theme-rgb-color-theme), 0.0);
+    --crypt-inputarea-padding: 0;
+    --crypt-inputarea-margin: clamp(0.125rem, 5dvh, 0.5rem) 0;
+
+    /* CRYPT INPUT AREA INPUT */
+    --crypt-inputarea-input-width: 100%;
+    --crypt-inputarea-input-height: auto;
+    --crypt-inputarea-input-display: flex;
+    --crypt-inputarea-input-position: relative;
+    --crypt-inputarea-input-display-wrap: wrap;
+    --crypt-inputarea-input-flex-direction: row;
+    --crypt-inputarea-input-color: var(--theme-hex-color-opposite-low);
+    --crypt-inputarea-input-bgcolor: rgba(var(--theme-rgb-color-theme), 1);
+    --crypt-inputarea-input-boxshadow: 0 0 10px 0px rgba(var(--theme-rgb-color-theme-low), 0.25);
+    --crypt-inputarea-input-outline: 0;
+    --crypt-inputarea-input-border: 0;
+    --crypt-inputarea-input-border-radius: 1.25rem;
+    --crypt-inputarea-input-fontfamily: var(--root-font-family-elite);
+    --crypt-inputarea-input-fontsize: clamp(0.8rem, 3vw, 0.9rem);
+    --crypt-inputarea-input-padding: clamp(0.25rem, 5dvh, 0.75rem) clamp(0.75rem, 10%, 1.5rem);
+    --crypt-inputarea-input-margin: clamp(0.125rem, 2dvh, 0.125rem) 0;
+
+    /* CRYPT ENC ALGORITHM AREA */
+    --crypt-algorithmarea-width: 100%;
+    --crypt-algorithmarea-height: auto;
+    --crypt-algorithmarea-display: flex;
+    --crypt-algorithmarea-position: relative;
+    --crypt-algorithmarea-display-wrap: wrap;
+    --crypt-algorithmarea-display-direction: row;
+    --crypt-algorithmarea-align-items: center;
+    --crypt-algorithmarea-align-content: center;
+    --crypt-algorithmarea-align-text: center;
+    --crypt-algorithmarea-color: var(--theme-hex-color-theme);
+    --crypt-algorithmarea-bgcolor: rgba(var(--theme-rgb-color-opposite-low), 1);
+    --crypt-algorithmarea-border: 0;
+    --crypt-algorithmarea-border-radius: 1.25rem;
+    --crypt-algorithmarea-padding: clamp(0.25rem, 5dvh, 0.5rem) clamp(0.5rem, 5%, 1rem);
+    --crypt-algorithmarea-margin: clamp(0.125rem, 2dvh, 0.25rem) 0;
+
+    /* CRYPT ENC ALGORITHM AREA LABEL */
+    --crypt-algorithmarea-label-margin: 0 clamp(0.125rem, 5%, 0.5rem);
+
+    /* CRYPT ENC ALGORITHM AREA SELECT */
+    --crypt-algorithmarea-select-color: var(--theme-hex-color-opposite-low);
+    --crypt-algorithmarea-select-bgcolor: rgba(var(--theme-rgb-color-theme-low), 1);
+    --crypt-algorithmarea-select-border: 0;
+    --crypt-algorithmarea-select-border-radius: 1.25rem;
+    --crypt-algorithmarea-select-align-items: center;
+    --crypt-algorithmarea-select-align-content: center;
+    --crypt-algorithmarea-select-align-text: center;
+    --crypt-algorithmarea-select-padding: clamp(0.125rem, 2dvh, 0.25rem) clamp(0.125rem, 5%, 0.75rem);
+    --crypt-algorithmarea-select-margin: 0;
+
+    /* CRYPT SUBMIT AREA */
+    --crypt-submitarea-margin: clamp(0.25rem, 5dvh, 0.75rem) 0 clamp(0.125rem, 2dvh, 0.125rem) 0;
+
+    /* CRYPT SUBMIT AREA BUTTON */
+    --crypt-submitarea-btn-width: 100%;
+    --crypt-submitarea-btn-height: auto;
+    --crypt-submitarea-btn-display: flex;
+    --crypt-submitarea-btn-position: relative;
+    --crypt-submitarea-btn-align-items: center;
+    --crypt-submitarea-btn-align-content: center;
+    --crypt-submitarea-btn-align-text: center;
+    --crypt-submitarea-btn-color: var(--theme-hex-color-opposite-low);
+    --crypt-submitarea-btn-bgcolor: rgba(var(--theme-rgb-color-theme), 1);
+    --crypt-submitarea-btn-boxshadow: 0 0 10px 0px rgba(var(--theme-rgb-color-theme-low), 0.25);
+    --crypt-submitarea-btn-fontfamily: var(--root-font-family-elite);
+    --crypt-submitarea-btn-fontsize: clamp(0.8rem, 2vw, 0.9rem);
+    --crypt-submitarea-btn-border: 0;
+    --crypt-submitarea-btn-border-radius: 1.25rem;
+    --crypt-submitarea-btn-padding: clamp(0.25rem, 5dvh, 0.6rem) clamp(0.5rem, 5vw, 2.4rem);
+    --crypt-submitarea-btn-margin: 0;
+    
+    --crypt-submitarea-hover-btn-color: var(--theme-hex-color-theme);
+    --crypt-submitarea-hover-btn-bgcolor: rgba(var(--theme-rgb-color-opposite), 1);
+    --crypt-submitarea-hover-btn-boxshadow: 0 0 30px 3px rgba(var(--theme-rgb-color-opposite-low), 0.25);
+    --crypt-submitarea-hover-btn-transition: 0.24s linear;
+}
+
+/* CRYPT MAIN */
+.cryptmain {
+    width: var(--crypt-main-width);
+    height: var(--crypt-main-height);
+    display: var(--crypt-main-display);
+    position: var(--crypt-main-position);
+    flex-wrap: var(--crypt-main-display-wrap);
+    flex-direction: var(--crypt-main-display-direction);
+    align-items: var(--crypt-main-align-items);
+    justify-content: var(--crypt-main-align-content);
+    text-align: var(--crypt-main-align-text);
+    font-family: var(--crypt-main-fontfamily);
+    padding: var(--crypt-main-padding);
+    margin: var(--crypt-main-margin);
+    overflow-x: var(--crypt-main-overflow-x);
+}
+
+/* CRYPT AREA */
+.cryptarea {
+    width: var(--crypt-area-width);
+    height: var(--crypt-area-height);
+    display: var(--crypt-area-display);
+    position: var(--crypt-area-position);
+    flex-wrap: var(--crypt-area-display-wrap);
+    flex-direction: var(--crypt-area-display-direction);
+    align-items: var(--crypt-area-align-items);
+    justify-content: var(--crypt-area-align-content);
+    text-align: var(--crypt-area-align-text);
+    color: var(--crypt-area-color);
+    background: var(--crypt-area-bgcolor);
+    border: var(--crypt-area-border);
+    border-radius: var(--crypt-area-border-radius);
+    box-shadow: var(--crypt-area-boxshadow);
+    backdrop-filter: var(--crypt-area-backdrop-filter);
+    padding: var(--crypt-area-padding);
+    margin: var(--crypt-area-margin);
+    transition: var(--crypt-area-transition);
+    overflow: var(--crypt-area-overflow);
+    z-index: var(--crypt-area-zindex);
+}
+
+/* CRYPT ENCRYPT AREA */
+.enccryptarea {
+    width: var(--crypt-enccryptarea-width);
+    height: var(--crypt-enccryptarea-height);
+    display: var(--crypt-enccryptarea-display);
+    flex-direction: var(--crypt-enccryptarea-display-direction);
+    flex-wrap: var(--crypt-enccryptarea-display-wrap);
+    position: var(--crypt-enccryptarea-position);
+    align-items: var(--crypt-enccryptarea-align-items);
+    justify-content: var(--crypt-enccryptarea-align-content);
+    text-align: var(--crypt-enccryptarea-align-text);
+    padding: var(--crypt-enccryptarea-padding);
+    margin: var(--crypt-enccryptarea-margin);
+}
+
+/* CRYPT TITLE AREA */
+.crypttitlearea {
+    width: var(--crypt-multiarea-width);
+    height: var(--crypt-multiarea-height);
+    display: var(--crypt-multiarea-display);
+    position: var(--crypt-multiarea-position);
+    flex-wrap: var(--crypt-multiarea-display-wrap);
+    flex-direction: var(--crypt-multiarea-display-direction);
+    align-items: var(--crypt-multiarea-align-items);
+    justify-content: var(--crypt-multiarea-align-content);
+    text-align: var(--crypt-multiarea-align-text);
+    padding: var(--crypt-multiarea-padding);
+    margin: var(--crypt-multiarea-margin);
+}
+
+/* CRYPT TITLE AREA */
+.crypttitlearea {
+    width: var(--crypt-titlearea-width);
+    height: var(--crypt-titlearea-height);
+    max-width: var(--crypt-titlearea-max-width);
+    position: var(--crypt-titlearea-position);
+    color: var(--crypt-titlearea-color);
+    background: var(--crypt-titlearea-bgcolor);
+    border: var(--crypt-titlearea-border);
+    border-radius: var(--crypt-titlearea-border-radius);
+    align-items: var(--crypt-titlearea-align-items);
+    justify-content: var(--crypt-titlearea-align-content);
+    text-align: var(--crypt-titlearea-align-text);
+    font-family: var(--crypt-titlearea-font-family);
+}
+
+/* CRYPT TITLE AREA -> CRYPT TEXT AREA */
+.crypttitlearea .crypttitlearea_textarea {
+    display: var(--crypt-titlearea-display);
+    position: var(--crypt-titlearea-position);
+    flex-wrap: var(--crypt-titlearea-display-wrap);
+    flex-direction: var(--crypt-titlearea-flex-direction);
+}
+
+/* CRYPT TEXT AREA -> TITLE */
+.crypttextarea .crypttextarea_title {
+    color: var(--crypt-titlearea-textarea-title-color);
+    background: var(--crypt-titlearea-textarea-title-bgcolor);
+    font-size: var(--crypt-titlearea-textarea-title-fontsize);
+    padding: var(--crypt-titlearea-textarea-title-padding);
+    margin: var(--crypt-titlearea-textarea-title-margin);
+}
+
+/* CRYPT TEXT AREA -> DESCRIPTION */
+.crypttextarea .crypttextarea_description {
+    color: var(--crypt-titlearea-textarea-description-color);
+    background: var(--crypt-titlearea-textarea-description-bgcolor);
+    font-size: var(--crypt-titlearea-textarea-description-fontsize);
+    padding: var(--crypt-titlearea-textarea-description-padding);
+    margin: var(--crypt-titlearea-textarea-description-margin);
+}
+
+/* ENC INPUT AREA */
+.encinputarea {
+    width: var(--crypt-inputarea-width);
+    height: var(--crypt-inputarea-height);
+    display: var(--crypt-inputarea-display);
+    position: var(--crypt-inputarea-position);
+    flex-wrap: var(--crypt-inputarea-display-wrap);
+    flex-direction: var(--crypt-inputarea-display-direction);
+    align-items: var(--crypt-inputarea-align-items);
+    justify-content: var(--crypt-inputarea-align-contents);
+    color: var(--crypt-inputarea-color);
+    background: var(--crypt-inputarea-bgcolor);
+    padding: var(--crypt-inputarea-padding);
+    margin: var(--crypt-inputarea-margin);
+}
+
+/* ENC INPUT AREA -> INPUT ENC DATA */
+.encinputarea .input_encdata {
+    width: var(--crypt-inputarea-input-width);
+    height: var(--crypt-inputarea-input-height);
+    display: var(--crypt-inputarea-input-display);
+    position: var(--crypt-inputarea-input-position);
+    flex-wrap: var(--crypt-inputarea-input-display-wrap);
+    flex-direction: var(--crypt-inputarea-input-flex-direction);
+    color: var(--crypt-inputarea-input-color);
+    background: var(--crypt-inputarea-input-bgcolor);
+    outline: var(--crypt-inputarea-input-outline);
+    border: var(--crypt-inputarea-input-border);
+    border-radius: var(--crypt-inputarea-input-border-radius);
+    font-family: var(--crypt-inputarea-input-fontfamily);
+    font-size: var(--crypt-inputarea-input-fontsize);
+    box-shadow: var(--crypt-inputarea-input-boxshadow);
+    padding: var(--crypt-inputarea-input-padding);
+    margin: var(--crypt-inputarea-input-margin);
+}
+
+/* ENC ALGORITHM AREA, ENC TYPE AREA */
+.cryptalgorithmarea,
+.cryptprocarea {
+    width: var(--crypt-algorithmarea-width);
+    height: var(--crypt-algorithmarea-height);
+    display: var(--crypt-algorithmarea-display);
+    position: var(--crypt-algorithmarea-position);
+    flex-wrap: var(--crypt-algorithmarea-display-wrap);
+    flex-direction: var(--crypt-algorithmarea-display-direction);
+    align-items: var(--crypt-algorithmarea-align-items);
+    justify-content: var(--crypt-algorithmarea-align-content);
+    text-align: var(--crypt-algorithmarea-align-text);
+    color: var(--crypt-algorithmarea-color);
+    background: var(--crypt-algorithmarea-bgcolor);
+    border: var(--crypt-algorithmarea-border);
+    border-radius: var(--crypt-algorithmarea-border-radius);
+    padding: var(--crypt-algorithmarea-padding);
+    margin: var(--crypt-algorithmarea-margin);
+}
+
+/* ENC ALGORITHM AREA -> LABEL, ENC TYPE AREA -> LABEL */
+.cryptalgorithmarea p,
+.cryptprocarea p {
+    margin: var(--crypt-algorithmarea-label-margin);
+}
+
+/* ENC ALGORITHM AREA -> SELECT, ENC TYPE AREA -> SELECT */
+.cryptalgorithmarea select,
+.cryptprocarea select {
+    color: var(--crypt-algorithmarea-select-color);
+    background: var(--crypt-algorithmarea-select-bgcolor);
+    border: var(--crypt-algorithmarea-select-border);
+    border-radius: var(--crypt-algorithmarea-select-border-radius);
+    align-items: var(--crypt-algorithmarea-select-align-items);
+    justify-content: var(--crypt-algorithmarea-select-align-content);
+    text-align: var(--crypt-algorithmarea-select-align-text);
+    padding: var(--crypt-algorithmarea-select-padding);
+    margin: var(--crypt-algorithmarea-select-margin);
+}
+
+/* CRYPT SUBMIT AREA */
+.cryptsubmitarea {
+    margin: var(--crypt-submitarea-margin);
+}
+
+/* CRYPT SUBMIT AREA -> SUBMIT BUTTON */
+.cryptsubmitarea .cryptbtn {
+    width: var(--crypt-submitarea-btn-width);
+    height: var(--crypt-submitarea-btn-height);
+    display: var(--crypt-submitarea-btn-display);
+    position: var(--crypt-submitarea-btn-position);
+    align-items: var(--crypt-submitarea-btn-align-items);
+    justify-content: var(--crypt-submitarea-btn-align-content);
+    text-align: var(--crypt-submitarea-btn-align-text);
+    color: var(--crypt-submitarea-btn-color);
+    background: var(--crypt-submitarea-btn-bgcolor);
+    box-shadow: var(--crypt-submitarea-btn-boxshadow);
+    font-family: var(--crypt-submitarea-btn-fontfamily);
+    font-size: var(--crypt-submitarea-btn-fontsize);
+    border: var(--crypt-submitarea-btn-border);
+    border-radius: var(--crypt-submitarea-btn-border-radius);
+    padding: var(--crypt-submitarea-btn-padding);
+    margin: var(--crypt-submitarea-btn-margin);
+}
+
+.cryptbtn:hover {
+    color: var(--crypt-submitarea-hover-btn-color);
+    background: var(--crypt-submitarea-hover-btn-bgcolor);
+    box-shadow: var(--crypt-submitarea-hover-btn-boxshadow);
+    transition: var(--crypt-submitarea-hover-btn-transition);
+}

@@ -1,0 +1,79 @@
+/* IMPORT SIGN */
+@import url("/core/style/static/sign/sign.css");
+
+/* LOGIN ROOT */
+:root {
+    /* LOIGN */
+    --login-main-color: var(--color-elite-white-dark);
+    --login-main-bgcolor: rgba(var(--color-rgb-elite-black-dark), 0.5);
+
+    /* FORGOTAREA */
+    --login-forgotarea-width: 100%;
+    --login-forgotarea-height: auto;
+    --login-forgotarea-display: flex;
+    --login-forgotarea-position: relative;
+    --login-forgotarea-align-items: center;
+    --login-forgotarea-align-content: flex-start;
+    --login-forgotarea-align-text: left;
+    --login-forgotarea-color: var(--theme-hex-color-opposite);
+    --login-forgotarea-bgcolor: rgba(var(--theme-rgb-color-theme), 0.0);
+    --login-forgotarea-fontfamily: var(--root-font-family-elite);
+    --login-forgotarea-border: 0;
+    --login-forgotarea-border-radius: 1.25rem;
+    --login-forgotarea-outline: 0;
+    --login-forgotarea-padding: clamp(0.125rem, 2dvh, 0.25rem) clamp(0.25rem, 5%, 0.5rem);
+    --login-forgotarea-margin: 0;
+
+    /* FORGOTAREA BUTTON */
+    --login-forgotarea-forgotbtn-color: var(--theme-hex-color-opposite);
+    --login-forgotarea-forgotbtn-bgcolor: rgba(var(--theme-rgb-color-theme), 0.0);
+    --login-forgotarea-forgotbtn-border: 0;
+    --login-forgotarea-forgotbtn-border-radius: 1.25rem;
+    --login-forgotarea-forgotbtn-outline: 0;
+    --login-forgotarea-forgotbtn-padding: clamp(0.125rem, 3dvh, 0.375rem) clamp(0.25rem, 5%, 0.75rem);
+    --login-forgotarea-forgotbtn-margin: 0;
+    --login-forgotarea-forgotbtn-fontsize: clamp(0.9rem, 3vw, 1rem);
+    
+    --login-forgotarea-forgotbtn-hover-color: var(--theme-hex-color-theme-low);
+    --login-forgotarea-forgotbtn-hover-bgcolor: rgba(var(--theme-rgb-color-opposite), 1);
+    --login-forgotarea-forgotbtn-hover-boxshadow: 0 0 30px 3px rgba(var(--theme-rgb-color-opposite-low), 0.25);
+    --login-forgotarea-forgotbtn-hover-transition: 0.24s linear;
+}
+
+/* FORGOT AREA */
+.forgotarea {
+    width: var(--login-forgotarea-width);
+    height: var(--login-forgotarea-height);
+    display: var(--login-forgotarea-display);
+    position: var(--login-forgotarea-position);
+    align-items: var(--login-forgotarea-align-items);
+    justify-content: var(--login-forgotarea-align-content);
+    text-align: var(--login-forgotarea-align-text);
+    color: var(--login-forgotarea-color);
+    background: var(--login-forgotarea-bgcolor);
+    font-family: var(--login-forgotarea-fontfamily);
+    border: var(--login-forgotarea-border);
+    border-radius: var(--login-forgotarea-border-radius);
+    outline: var(--login-forgotarea-outline);
+    padding: var(--login-forgotarea-padding);
+    margin: var(--login-forgotarea-margin);
+}
+
+/* FORGOT AREA -> FORGOT BUTTON */
+.forgotarea .forgotbtn {
+    font-size: var(--login-forgotarea-forgotbtn-fontsize);
+    color: var(--login-forgotarea-forgotbtn-color);
+    background: var(--login-forgotarea-forgotbtn-bgcolor);
+    border: var(--login-forgotarea-forgotbtn-border);
+    border-radius: var(--login-forgotarea-forgotbtn-border-radius);
+    outline: var(--login-forgotarea-forgotbtn-outline);
+    padding: var(--login-forgotarea-forgotbtn-padding);
+    margin: var(--login-forgotarea-forgotbtn-margin);
+}
+
+.forgotbtn:hover {
+    color: var(--login-forgotarea-forgotbtn-hover-color);
+    background: var(--login-forgotarea-forgotbtn-hover-bgcolor);
+    box-shadow: var(--login-forgotarea-forgotbtn-hover-boxshadow);
+    transition: var(--login-forgotarea-forgotbtn-hover-transition);
+}

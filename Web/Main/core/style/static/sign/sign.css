@@ -1,0 +1,504 @@
+/* IMPORT ROOT */
+@import url("/core/style/static/root/root.css");
+
+/* ROOT */
+:root {
+    /* SIGN */
+    --sign-main-width: 100%;
+    --sign-main-height: 100dvh;
+    --sign-main-display: flex;
+    --sign-main-position: relative;
+    --sign-main-display-wrap: flex-wrap;
+    --sign-main-display-direction: column;
+    --sign-main-align-items: center;
+    --sign-main-align-content: center;
+    --sign-main-align-text: center;
+    --sign-main-fontfamily: var(--root-font-family-elite);
+    --sign-main-padding: 0;
+    --sign-main-margin: 0;
+    --sign-main-overflow-x: hidden;
+
+    /* SIGN AREA */
+    --sign-area-width: auto;
+    --sign-area-height: auto;
+    --sign-area-display: flex;
+    --sign-area-position: relative;
+    --sign-area-display-wrap: wrap;
+    --sign-area-display-direction: column;
+    --sign-area-align-items: center;
+    --sign-area-align-content: center;
+    --sign-area-align-text: center;
+    --sign-area-color: var(--theme-color-hero);
+    --sign-area-bgcolor:  rgba(var(--theme-rgb-color-theme-low), 0.5);
+    --sign-area-border: 0;
+    --sign-area-border-radius: 1.25rem;
+    --sign-area-boxshadow: 0 0 30px 1px rgba(var(--theme-rgb-color-theme-low), 0.25);
+    --sign-area-backdrop-filter: blur(1rem);
+    --sign-area-padding: clamp(0.5rem, 5dvh, 1.5rem) clamp(0.5rem, 5%, 3rem);
+    --sign-area-margin: 0;
+    --sign-area-overflow: none;
+    --sign-area-zindex: 0;
+
+    /* SIGN MULTI AREA */
+    --sign-multiarea-width: 100%;
+    --sign-multiarea-height: auto;
+    --sign-multiarea-display: flex;
+    --sign-multiarea-position: relative;
+    --sign-multiarea-display-wrap: flex-wrap;
+    --sign-multiarea-display-direction: column;
+    --sign-multiarea-align-items: center;
+    --sign-multiarea-align-content: center;
+    --sign-multiarea-align-text: center;
+    --sign-multiarea-padding: clamp(0.25rem, 5dvh, 0.75rem) 0;
+    --sign-multiarea-margin: clamp(0.125rem, 2dvh, 0.125rem) 0 0 0;
+
+    /* SIGN MINI BTN AREA */
+    --sign-minibtnarea-width: 100%;
+    --sign-minibtnarea-height: auto;
+    --sign-minibtnarea-display: flex;
+    --sign-minibtnarea-position: relative;
+    --sign-minibtnarea-display-wrap: wrap;
+    --sign-minibtnarea-display-direction: row;
+    --sign-minibtnarea-align-items: center;
+    --sign-minibtnarea-align-content: flex-end;
+    --sign-minibtnarea-align-text: center;
+    --sign-minibtnarea-border: 0;
+    --sign-minibtnarea-border-radius: 1.25rem;
+    --sign-minibtnarea-backdrop-filter: 0;
+    --sign-minibtnarea-padding: clamp(0.25rem, 10%, 0.75rem);
+    --sign-minibtnarea-margin: 0;
+    --sign-minibtnarea-zindex: 3;
+
+    /* SIGN MINI BTN AREA SVG */
+    --sign-minibtnarea-svg-width: clamp(0.5rem, 25vw, 1.5rem);
+    --sign-minibtnarea-svg-height: clamp(0.5rem, 25dvh, 1.5rem);
+    --sign-minibtnarea-svg-padding: clamp(0.125rem, 5%, 0.125rem);
+
+    /* THEME AREA BUTTON */
+    --sign-minibtnarea-minibtn-display: flex;
+    --sign-minibtnarea-minibtn-position: relative;
+    --sign-minibtnarea-minibtn-align-items: center;
+    --sign-minibtnarea-minibtn-align-content: center;
+    --sign-minibtnarea-minibtn-border: 0;
+    --sign-minibtnarea-minibtn-border-radius: 1.25rem;
+    --sign-minibtnarea-minibtn-color: var(--theme-rgb-color-opposite-low);
+    --sign-minibtnarea-minibtn-bgcolor: rgba(var(--theme-rgb-color-theme-low), 1);
+    --sign-minibtnarea-minibtn-boxshadow: 0 0 30px 3px rgba(var(--theme-rgb-color-theme-low), 0.25);
+    --sign-minibtnarea-minibtn-padding: clamp(0.125rem, 5%, 0.375rem);
+    --sign-minibtnarea-minibtn-margin: clamp(0.125rem, 5dvh, 0.125rem) clamp(0.125rem, 5%, 0.25rem);
+    --sign-minibtnarea-minibtn-cursor: pointer;
+    --sign-minibtnarea-minibtn-zindex: 2;
+
+    --sign-minibtnarea-minibtn-hover-color: var(--theme-hex-color-theme-low);
+    --sign-minibtnarea-minibtn-hover-bgcolor: rgba(var(--theme-rgb-color-opposite-low), 1);
+    --sign-minibtnarea-minibtn-hover-boxshadow: 0 0 30px 3px rgba(var(--theme-rgb-color-opposite-low), 0.25);
+    --sign-minibtnarea-minibtn-hover-transition: 0.24s linear;
+
+    /* INFO AREA */
+    --sign-infotextarea-width: 100%;
+    --sign-infotextarea-minheight: 100%;
+    --sign-infotextarea-height: auto;
+    --sign-infotextarea-position: absolute;
+    --sign-infotextarea-top: 50%;
+    --sign-infotextarea-left: 50%;
+    --sign-infotextarea-transform: translate(-50%, -50%);
+    --sign-infotextarea-display: none;
+    --sign-infotextarea-display-direction: column;
+    --sign-infotextarea-align-items: center;
+    --sign-infotextarea-align-content: center;
+    --sign-infotextarea-align-text: center;
+    --sign-infotextarea-color: var(--theme-hex-color-opposite);
+    --sign-infotextarea-bgcolor: rgba(var(--theme-rgb-color-theme-low), 0.5);
+    --sign-infotextarea-fontfamily: var(--root-font-family-elite);
+    --sign-infotextarea-fontsize: clamp(0.9rem, 3vw, 1rem);
+    --sign-infotextarea-border: 0;
+    --sign-infotextarea-border-radius: 1.25rem;
+    --sign-infotextarea-backdropfilter: blur(1rem);
+    --sign-infotextarea-overflow-x: hidden;
+    --sign-infotextarea-overflow-y: auto;
+    --sign-infotextarea-padding: clamp(0.5rem, 5dvh, 5dvh) clamp(0.5rem, 5%, 5%);
+    --sign-infoatextrea-margin: 0;
+    --sign-infotextarea-zindex: 1;
+
+    --sign-infotextarea-text-color: var(--theme-hex-color-opposite-low);
+    --sign-infotextarea-text-bgcolor: rgba(var(--theme-rgb-color-theme), 0.75);
+    --sign-infotextarea-text-border: 0;
+    --sign-infotextarea-text-border-radius: 1.25rem;
+    --sign-infotextarea-text-backdrop-filter: blur(1rem);
+    --sign-infotextarea-text-padding: clamp(0.5rem, 5dvh, 1.5rem) clamp(0.25rem, 10vw, 3rem);
+    --sign-infotextarea-text-margin: clamp(0.125rem, 2dvh, 0.25rem) 0;
+
+    /* SIGN TITLE AREA */
+    --sign-titlearea-color: var(--theme-hex-color-opposite);
+    --sign-titlearea-bgcolor: rgba(var(--theme-rgb-color-theme), 0);
+    --sign-titlearea-border: 0;
+    --sign-titlearea-border-radius: 1.25rem;
+    --sign-titlearea-position: relative;
+    --sign-titlearea-align-items: center;
+    --sign-titlearea-align-content: center;
+    --sign-titlearea-align-text: center;
+    --sign-titlearea-font-family: var(--root-font-family-elite);
+
+    /* SIGN TITLE AREA TEXT AREA */
+    --sign-titlearea-textarea-display: flex;
+    --sign-titlearea-textarea-position: relative;
+    --sign-titlearea-textarea-display-wrap: wrap;
+    --sign-titlearea-textarea-flex-direction: column;
+
+    /* SIGN TITLE AREA TEXT AREA TTILE */
+    --sign-titlearea-textarea-title-color: var(--sign-titlearea-color);
+    --sign-titlearea-textarea-title-bgcolor: var(--color-global-transparent);
+    --sign-titlearea-textarea-title-fontsize: clamp(1.5rem, 10vw, 2.5rem);
+    --sign-titlearea-textarea-title-padding: 0;
+    --sign-titlearea-textarea-title-margin: clamp(0.125rem, 5dvh, 0.25rem) 0;
+
+    /* SIGN TITLE AREA TEXT AREA DESCRIPTION */
+    --sign-titlearea-textarea-description-color: var(--theme-hex-color-opposite-low);
+    --sign-titlearea-textarea-description-bgcolor: var(--color-global-transparent);
+    --sign-titlearea-textarea-description-fontsize: clamp(0.9rem, 5vw, 1.1rem);
+    --sign-titlearea-textarea-description-padding: 0;
+    --sign-titlearea-textarea-description-margin: clamp(0.125rem, 5dvh, 0.25rem) 0;
+
+    /* SIGN INPUT AREA */
+    --sign-inputarea-color: var(--theme-hex-color-opposite-low);
+    --sign-inputarea-bgcolor: rgba(var(--theme-rgb-color-theme), 0.0);
+
+    /* SIGN INPUT AREA INPUT */
+    --sign-inputarea-input-width: 100%;
+    --sign-inputarea-input-height: auto;
+    --sign-inputarea-input-display: flex;
+    --sign-inputarea-input-position: relative;
+    --sign-inputarea-input-display-wrap: wrap;
+    --sign-inputarea-input-flex-direction: row;
+    --sign-inputarea-input-color: var(--theme-hex-color-opposite-low);
+    --sign-inputarea-input-bgcolor: rgba(var(--theme-rgb-color-theme), 1);
+    --sign-inputarea-input-boxshadow: 0 0 10px 0px rgba(var(--theme-rgb-color-theme-low), 0.25);
+    --sign-inputarea-input-outline: 0;
+    --sign-inputarea-input-border: 0;
+    --sign-inputarea-input-border-radius: 1.25rem;
+    --sign-inputarea-input-fontfamily: var(--root-font-family-elite);
+    --sign-inputarea-input-fontsize: clamp(0.8rem, 3vw, 0.9rem);
+    --sign-inputarea-input-padding: clamp(0.25rem, 4dvh, 0.75rem) clamp(0.75rem, 10%, 1.5rem);
+    --sign-inputarea-input-margin: clamp(0.125rem, 4dvh, 0.25rem) 0;
+
+    /* SUBMITAREA */
+    --sign-submitarea-margin: clamp(0.25rem, 5dvh, 0.75rem) 0 clamp(0.125rem, 2dvh, 0.125rem) 0;
+
+    /* SUBMITAREA BUTTON */
+    --sign-submitarea-btn-width: 100%;
+    --sign-submitarea-btn-height: auto;
+    --sign-submitarea-btn-display: block;
+    --sign-submitarea-btn-position: relative;
+    --sign-submitarea-btn-align-items: center;
+    --sign-submitarea-btn-align-content: center;
+    --sign-submitarea-btn-align-text: center;
+    --sign-submitarea-btn-color: var(--theme-hex-color-opposite-low);
+    --sign-submitarea-btn-bgcolor: rgba(var(--theme-rgb-color-theme), 1);
+    --sign-submitarea-btn-boxshadow: 0 0 10px 0px rgba(var(--theme-rgb-color-theme-low), 0.25);
+    --sign-submitarea-btn-fontfamily: var(--root-font-family-elite);
+    --sign-submitarea-btn-fontsize: clamp(0.9rem, 5vw, 0.9rem);
+    --sign-submitarea-btn-border: 0;
+    --sign-submitarea-btn-border-radius: 1.25rem;
+    --sign-submitarea-btn-padding: clamp(0.25rem, 5dvh, 0.75rem) clamp(0.5rem, 10%, 2.5rem);
+    --sign-submitarea-btn-margin: 0;
+    
+    --sign-submitarea-hover-btn-color: var(--theme-hex-color-theme);
+    --sign-submitarea-hover-btn-bgcolor: rgba(var(--theme-rgb-color-opposite), 1);
+    --sign-submitarea-hover-btn-boxshadow: 0 0 30px 3px rgba(var(--theme-rgb-color-opposite-low), 0.25);
+    --sign-submitarea-hover-btn-transition: 0.24s linear;
+    
+    /* REDIRECTAREA BUTTON */
+    --sign-redirectarea-btn-width: 100%;
+    --sign-redirectarea-btn-height: auto;
+    --sign-redirectarea-btn-display: flex;
+    --sign-redirectarea-btn-display-wrap: wrap;
+    --sign-redirectarea-btn-color: var(--theme-hex-color-opposite);
+    --sign-redirectarea-btn-bgcolor: rgba(var(--theme-rgb-color-theme), 0.0);
+    --sign-redirectarea-btn-border: 0;
+    --sign-redirectarea-btn-border-radius: 1.25rem;
+    --sign-redirectarea-btn-fontfamily: var(--root-font-family-elite);
+    --sign-redirectarea-btn-fontsize: clamp(0.8rem, 3vw, 0.9rem);
+    --sign-redirectarea-btn-backdropfilter: blur(0rem);
+    --sign-redirectarea-btn-padding: clamp(0.25rem, 5dvh, 0.75rem) clamp(0.5rem, 10%, 2.5rem);
+    --sign-redirectarea-btn-margin: 0;
+    
+    --sign-redirectarea-hover-btn-color: var(--theme-hex-color-theme);
+    --sign-redirectarea-hover-btn-bgcolor: rgba(var(--theme-rgb-color-opposite), 1);
+    --sign-redirectarea-hover-btn-boxshadow: 0 0 30px 3px rgba(var(--theme-rgb-color-opposite-low), 0.25);
+    --sign-redirectarea-hover-btn-transition: 0.24s linear;
+
+    /* DISABLED */
+    --sign-disabled-display: none;
+}
+
+/* SIGN MAIN */
+.signmain {
+    width: var(--sign-main-width);
+    height: var(--sign-main-height);
+    display: var(--sign-main-display);
+    position: var(--sign-main-position);
+    flex-wrap: var(--sign-main-display-wrap);
+    flex-direction: var(--sign-main-display-direction);
+    align-items: var(--sign-main-align-items);
+    justify-content: var(--sign-main-align-content);
+    text-align: var(--sign-main-align-text);
+    font-family: var(--sign-main-fontfamily);
+    padding: var(--sign-main-padding);
+    margin: var(--sign-main-margin);
+    overflow-x: var(--sign-main-overflow-x);
+}
+
+/* SIGN AREA */
+.signarea {
+    min-width: var(--sign-area-minwidth);
+    width: var(--sign-area-width);
+    height: var(--sign-area-height);
+    display: var(--sign-area-display);
+    position: var(--sign-area-position);
+    flex-wrap: var(--sign-area-display-wrap);
+    flex-direction: var(--sign-area-display-direction);
+    align-items: var(--sign-area-align-items);
+    justify-content: var(--sign-area-align-content);
+    text-align: var(--sign-area-align-text);
+    color: var(--sign-area-color);
+    background: var(--sign-area-bgcolor);
+    border: var(--sign-area-border);
+    border-radius: var(--sign-area-border-radius);
+    box-shadow: var(--sign-area-boxshadow);
+    backdrop-filter: var(--sign-area-backdrop-filter);
+    padding: var(--sign-area-padding);
+    margin: var(--sign-area-margin);
+    overflow: var(--sign-area-overflow);
+    z-index: var(--sign-area-zindex);
+}
+
+/* TITLE AREA, INPUT AREA, SUBMIT AREA, REDIRECT AREA */
+.titlearea,
+.inputarea,
+.submitarea,
+.redirectarea {
+    width: var(--sign-multiarea-width);
+    height: var(--sign-multiarea-height);
+    display: var(--sign-multiarea-display);
+    position: var(--sign-multiarea-position);
+    flex-wrap: var(--sign-multiarea-display-wrap);
+    flex-direction: var(--sign-multiarea-display-direction);
+    align-items: var(--sign-multiarea-align-items);
+    justify-content: var(--sign-multiarea-align-content);
+    text-align: var(--sign-multiarea-align-text);
+    padding: var(--sign-multiarea-padding);
+    margin: var(--sign-multiarea-margin);
+}
+
+/* MINI BTN AREA */
+.minibtnarea {
+    width: var(--sign-minibtnarea-width);
+    height: var(--sign-minibtnarea-height);
+    display: var(--sign-minibtnarea-display);
+    position: var(--sign-minibtnarea-position);
+    flex-wrap: var(--sign-minibtnarea-display-wrap);
+    flex-direction: var(--sign-minibtnarea-display-direction);
+    align-items: var(--sign-minibtnarea-align-items);
+    justify-content: var(--sign-minibtnarea-align-content);
+    text-align: var(--sign-minibtnarea-align-text);
+    border: var(--sign-minibtnarea-border);
+    border-radius: var(--sign-minibtnarea-border-radius);
+    backdrop-filter: var(--sign-minibtnarea-backdrop-filter);
+    padding: var(--sign-minibtnarea-padding);
+    margin: var(--sign-minibtnarea-margin);
+    z-index: var(--sign-minibtnarea-zindex);
+}
+
+/* MINI BTN AREA -> SVG */
+.minibtnarea svg {
+    width: var(--sign-minibtnarea-svg-width);
+    height: var(--sign-minibtnarea-svg-height);
+    padding: var(--sign-minibtnarea-svg-padding);
+}
+
+.minibtnarea .minibtn {
+    display: var(--sign-minibtnarea-minibtn-display);
+    position: var(--sign-minibtnarea-minibtn-position);
+    align-items: var(--sign-minibtnarea-minibtn-align-items);
+    justify-content: var(--sign-minibtnarea-minibtn-align-content);
+    border: var(--sign-minibtnarea-minibtn-border);
+    border-radius: var(--sign-minibtnarea-minibtn-border-radius);
+    color: var(--sign-minibtnarea-minibtn-color);
+    background: var(--sign-minibtnarea-minibtn-bgcolor);
+    box-shadow: var(--sign-minibtnarea-minibtn-boxshadow);
+    padding: var(--sign-minibtnarea-minibtn-padding);
+    margin: var(--sign-minibtnarea-minibtn-margin);
+    cursor: var(--sign-minibtnarea-minibtn-cursor);
+}
+
+.minibtn:hover {
+    color: var(--sign-minibtnarea-minibtn-hover-color);
+    background: var(--sign-minibtnarea-minibtn-hover-bgcolor);
+    box-shadow: var(--sign-minibtnarea-minibtn-hover-boxshadow);
+    transition: var(--sign-minibtnarea-minibtn-hover-transition);
+}
+
+/* INFO TEXT AREA */
+.infotextarea {
+    width: var(--sign-infotextarea-width);
+    min-height: var(--sign-infotextarea-minheight);
+    height: var(--sign-infotextarea-height);
+    position: var(--sign-infotextarea-position);
+    top: var(--sign-infotextarea-top);
+    left: var(--sign-infotextarea-left);
+    transform: var(--sign-infotextarea-transform);
+    display: var(--sign-infotextarea-display);
+    flex-direction: var(--sign-infotextarea-display-direction);
+    align-items: var(--sign-infotextarea-align-items);
+    justify-content: var(--sign-infotextarea-align-content);
+    text-align: var(--sign-infotextarea-align-text);
+    color: var(--sign-infotextarea-color);
+    background: var(--sign-infotextarea-bgcolor);
+    font-family: var(--sign-infotextarea-fontfamily);
+    font-size: var(--sign-infotextarea-fontsize);
+    border: var(--sign-infotextarea-border);
+    border-radius: var(--sign-infotextarea-border-radius);
+    backdrop-filter: var(--sign-infotextarea-backdropfilter);
+    overflow-x: var(--sign-infotextarea-overflow-x);
+    overflow-y: var(--sign-infotextarea-overflow-y);
+    padding: var(--sign-infotextarea-padding);
+    margin: var(--sign-infotextarea-margin);
+    z-index: var(--sign-infotextarea-zindex);
+}
+
+/* INFO TEXT AREA TEXT */
+.infotextarea .info_text {
+    background: var(--sign-infotextarea-text-bgcolor);
+    border: var(--sign-infotextarea-text-border);
+    border-radius: var(--sign-infotextarea-text-border-radius);
+    backdrop-filter: var(--sign-infotextarea-text-backdrop-filter);
+    padding: var(--sign-infotextarea-text-padding);
+    margin: var(--sign-infotextarea-text-margin);
+}
+
+/* TITLE AREA */
+.titlearea {
+    position: var(--sign-titlearea-position);
+    color: var(--sign-titlearea-color);
+    background: var(--sign-titlearea-bgcolor);
+    border: var(--sign-titlearea-border);
+    border-radius: var(--sign-titlearea-border-radius);
+    align-items: var(--sign-titlearea-align-items);
+    justify-content: var(--sign-titlearea-align-content);
+    text-align: var(--sign-titlearea-align-text);
+    font-family: var(--sign-titlearea-font-family);
+}
+
+/* TITLE AREA -> TEXT AREA */
+.titlearea .titlearea_textarea {
+    display: var(--sign-titlearea-display);
+    position: var(--sign-titlearea-position);
+    flex-wrap: var(--sign-titlearea-display-wrap);
+    flex-direction: var(--sign-titlearea-flex-direction);
+}
+
+/* TEXT AREA -> TITLE */
+.titlearea_textarea .textarea_title {
+    color: var(--sign-titlearea-textarea-title-color);
+    background: var(--sign-titlearea-textarea-title-bgcolor);
+    font-size: var(--sign-titlearea-textarea-title-fontsize);
+    padding: var(--sign-titlearea-textarea-title-padding);
+    margin: var(--sign-titlearea-textarea-title-margin);
+}
+
+/* TEXT AREA -> DESCRIPTION */
+.titlearea_textarea .textarea_description {
+    color: var(--sign-titlearea-textarea-description-color);
+    background: var(--sign-titlearea-textarea-description-bgcolor);
+    font-size: var(--sign-titlearea-textarea-description-fontsize);
+    padding: var(--sign-titlearea-textarea-description-padding);
+    margin: var(--sign-titlearea-textarea-description-margin);
+}
+
+/* INPUT AREA */
+.inputarea {
+    color: var(--sign-inputarea-color);
+    background: var(--sign-inputarea-bgcolor);
+}
+
+/* INPUT AREA -> INPUT DATA */
+.inputarea .input_data {
+    width: var(--sign-inputarea-input-width);
+    height: var(--sign-inputarea-input-height);
+    display: var(--sign-inputarea-input-display);
+    position: var(--sign-inputarea-input-position);
+    flex-wrap: var(--sign-inputarea-input-display-wrap);
+    flex-direction: var(--sign-inputarea-input-flex-direction);
+    color: var(--sign-inputarea-input-color);
+    background: var(--sign-inputarea-input-bgcolor);
+    outline: var(--sign-inputarea-input-outline);
+    border: var(--sign-inputarea-input-border);
+    border-radius: var(--sign-inputarea-input-border-radius);
+    font-family: var(--sign-inputarea-input-fontfamily);
+    font-size: var(--sign-inputarea-input-fontsize);
+    box-shadow: var(--sign-inputarea-input-boxshadow);
+    padding: var(--sign-inputarea-input-padding);
+    margin: var(--sign-inputarea-input-margin);
+}
+
+/* SUBMIT AREA */
+.submitarea {
+    margin: var(--sign-submitarea-margin);
+}
+
+/* SUBMIT AREA -> SUBMIT BUTTON */
+.submitarea .input_submitbtn {
+    width: var(--sign-submitarea-btn-width);
+    height: var(--sign-submitarea-btn-height);
+    display: var(--sign-submitarea-btn-display);
+    position: var(--sign-submitarea-btn-position);
+    align-items: var(--sign-submitarea-btn-align-items);
+    justify-content: var(--sign-submitarea-btn-align-content);
+    text-align: var(--sign-submitarea-btn-align-text);
+    color: var(--sign-submitarea-btn-color);
+    background: var(--sign-submitarea-btn-bgcolor);
+    box-shadow: var(--sign-submitarea-btn-boxshadow);
+    font-family: var(--sign-submitarea-btn-fontfamily);
+    font-size: var(--sign-submitarea-btn-fontsize);
+    border: var(--sign-submitarea-btn-border);
+    border-radius: var(--sign-submitarea-btn-border-radius);
+    padding: var(--sign-submitarea-btn-padding);
+    margin: var(--sign-submitarea-btn-margin);
+}
+
+.input_submitbtn:hover {
+    color: var(--sign-submitarea-hover-btn-color);
+    background: var(--sign-submitarea-hover-btn-bgcolor);
+    box-shadow: var(--sign-submitarea-hover-btn-boxshadow);
+    transition: var(--sign-submitarea-hover-btn-transition);
+}
+
+/* REDIRECT AREA -> REDIRECT BUTTON */
+.redirectarea .redirect_btn {
+    width: var(--sign-redirectarea-btn-width);
+    height: var(--sign-redirectarea-btn-height);
+    display: var(--sign-redirectarea-btn-display);
+    flex-wrap: var(--sign-redirectarea-btn-display-wrap);
+    color: var(--sign-redirectarea-btn-color);
+    background: var(--sign-redirectarea-btn-bgcolor);
+    border: var(--sign-redirectarea-btn-border);
+    border-radius: var(--sign-redirectarea-btn-border-radius);
+    font-family: var(--sign-redirectarea-btn-fontfamily);
+    font-size: var(--sign-redirectarea-btn-fontsize);
+    /*backdrop-filter: var(--sign-redirectarea-btn-backdropfilter);*/
+    padding: var(--sign-redirectarea-btn-padding);
+    margin: var(--sign-redirectarea-btn-margin);
+}
+
+.redirect_btn:hover {
+    color: var(--sign-redirectarea-hover-btn-color);
+    background: var(--sign-redirectarea-hover-btn-bgcolor);
+    box-shadow: var(--sign-redirectarea-hover-btn-boxshadow);
+    transition: var(--sign-redirectarea-hover-btn-transition);
+}
+
+/* DISABLED */
+.input_data:disabled,
+.input_submitbtn:disabled {
+    display: var(--sign-disabled-display);
+}

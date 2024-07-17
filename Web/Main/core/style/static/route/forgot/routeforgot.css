@@ -1,0 +1,89 @@
+/* IMPORT ROOT */
+@import url("/core/style/static/root/root.css");
+
+/* ROOT */
+:root {
+    --forgotroute-page-color: var(--color-elite-white-light);
+    --forgotroute-page-backgroundcolor: rgba(var(--color-rgb-elite-black-dark), 0.5);
+    --forgotroute-page-boxshadowcolor: rgba(var(--color-rgb-elite-white-light), 0.5);
+    --forgotroute-page-fontfamily: "font-aeronaut";
+
+    --forgotroute-area-maxwidth: 630px;
+    --forgotroute-area-color: var(--color-elite-black-light);
+    --forgotroute-area-backgroundcolor: rgba(var(--color-rgb-elite-black-light), 0.5);
+    --forgotroute-area-boxshadow: 0 0 30px 1px rgba(var(--color-rgb-elite-black-light), 0.5);
+
+    --forgotroute-forgotbtn-color: var(--color-elite-black-light-extra);
+    --forgotroute-forgotbtn-backgroundcolor: var(--color-elite-white-light);
+    --forgotroute-forgotbtn-transition: 0.24s ease-in-out;
+
+    --forgotroute-forgotbtn-hover-color: var(--color-elite-white-light);
+    --forgotroute-forgotbtn-hover-backgroundcolor: var(--color-elite-red-light);
+    --forgotroute-forgotbtn-hover-boxshadow: 0 0 30px 1px var(--color-elite-red-light-extra);
+}
+
+/* FORGOT ROUTE MAIN */
+.forgotroute_main {
+    width: 100%;
+    height: 100dvh;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    font-family: var(--forgotroute-page-fontfamily);
+    padding: clamp(0.5rem, 5dvh, 5dvh) clamp(0.5rem, 5%, 5%);
+}
+
+/* FORGOT ROUTE AREA */
+.forgotroute_area {
+    width: 100%;
+    max-width: var(--forgotroute-area-maxwidth);
+    align-items: center;
+    justify-content: center;
+    color: var(--forgotroute-area-color);
+    background-color: var(--forgotroute-area-backgroundcolor);
+    border: none;
+    border-radius: 2rem;
+    box-shadow: var(--forgotroute-area-boxshadow);
+    padding: clamp(0.5rem, 10dvh, 2.5rem) clamp(0.5rem, 10%, 2.5rem);
+    backdrop-filter: blur(0.5rem);
+}
+
+/* FORGOT TITLE RESETNOW */
+.forgot_title_resetnow {
+    font-family: var(--forgotroute-page-fontfamily);
+    font-size: clamp(1.25rem, 5vw, 2rem);
+    color: var(--forgotroute-forgotbtn-color);
+    background-color: var(--forgotroute-forgotbtn-backgroundcolor);
+    border: none;
+    border-radius: 1rem;
+    padding: clamp(0.25rem, 5vh, 1.5rem) clamp(0.5rem, 5%, 2rem);
+    margin: clamp(0.125rem, 5vh, 0.25rem) 0 clamp(0.25rem, 10dvh, 1rem) 0;
+}
+
+/* FORGOT REDIRECT AREA */
+.forgotroute_redirect_area {
+    position: relative;
+    display: grid;
+}
+
+/* FORGOT BUTTON */
+.forgot_btn {
+    width: 100%;
+    color: var(--forgotroute-forgotbtn-color);
+    background-color: var(--forgotroute-forgotbtn-backgroundcolor);
+    border: none;
+    border-radius: 1rem;
+    font-size: clamp(0.9rem, 5vw, 1rem);
+    padding: clamp(0.25rem, 5vh, 1.5rem) clamp(0.5rem, 5%, 2rem);
+    margin: clamp(0.125rem, 5vh, 0.25rem) 0;
+    transition: var(--forgotroute-forgotbtn-transition);
+}
+
+.forgot_btn:hover {
+    color: var(--forgotroute-forgotbtn-hover-color);
+    background-color: var(--forgotroute-forgotbtn-hover-backgroundcolor);
+    box-shadow: var(--forgotroute-forgotbtn-hover-boxshadow);
+}
