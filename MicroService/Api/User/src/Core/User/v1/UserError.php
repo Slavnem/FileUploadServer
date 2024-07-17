@@ -10,73 +10,83 @@ trait UserError {
     protected static string $keyDesc = "description";
 
     // Başlangıçta varolan hata çeşitleri
-    protected static $AutoErrorNonData = [
+    protected static array $AutoErrorNotFound = [
+        "code" => -1,
+        "message" => "Not Found",
+        "description" => "Requested Data Not Found"
+    ];
+
+    protected static array $AutoErrorNonData = [
         "code" => -1,
         "message" => "No Valid Data",
         "description" => "Lack of Valid Data Causes Error",
     ];
 
-    protected static $AutoErrorUsernameTaken = [
+    protected static array $AutoErrorUsernameTaken = [
         "code" => -1,
         "message" => "Username Already Using",
         "description" => "Try another username because this username has already been taken before",
     ];
 
-    protected static $AutoErrorEmailTaken = [
+    protected static array $AutoErrorEmailTaken = [
         "code" => -1,
         "message" => "Username Already Using",
         "description" => "Try another email address because this email address has already been taken before",
     ];
 
-    protected static $AutoErrorCreateUserFail = [
+    protected static array $AutoErrorCreateUserFail = [
         "code" => -1,
         "message" => "Failed To Create New User",
         "description" => "Attempted to create a new user but failed with an error",
     ];
 
-    protected static $AutoErrorUpdateUserFail = [
+    protected static array $AutoErrorUpdateUserFail = [
         "code" => -1,
         "message" => "Failed To Update a User",
         "description" => "Attempted to update a user but failed with an error",
     ];
 
-    protected static $AutoErrorDeleteUserFail = [
+    protected static array $AutoErrorDeleteUserFail = [
         "code" => -1,
         "message" => "Failed To Delete a User",
         "description" => "Attempted to delete a user but failed with an error",
     ];
 
-    protected static $AutoErrorNotFoundUsername = [
+    protected static array $AutoErrorNotFoundUsername = [
         "code" => -1,
         "message" => "Username Not Found",
         "description" => "No Username parameter found. Make sure you have the parameters",
     ];
 
-    protected static $AutoErrorNotFoundEmail = [
+    protected static array $AutoErrorNotFoundEmail = [
         "code" => -1,
         "message" => "Email Not Found",
         "description" => "No Email parameter found. Make sure you have the parameters",
     ];
 
-    protected static $AutoErrorNotFoundPassword = [
+    protected static array $AutoErrorNotFoundPassword = [
         "code" => -1,
         "message" => "Password Value Not Found",
         "description" => "Password value not found, make sure you entered the parameter",
     ];
 
-    protected static $AutoErrorNotFoundLanguageid = [
+    protected static array $AutoErrorNotFoundLanguageid = [
         "code" => -1,
         "message" => "Language ID Value Not Found",
         "description" => "Language ID value not found, make sure you entered the parameter",
     ];
 
-    protected static $AutoErrorNotFoundThemeid = [
+    protected static array $AutoErrorNotFoundThemeid = [
         "code" => -1,
         "message" => "Theme ID Value Not Found",
         "description" => "Theme ID value not found, make sure you entered the parameter",
     ];
 
     // Hata Bilgilerini Getirtme
+    final public static function getAutoErrorNotFound(): ?array {
+        return self::$AutoErrorNotFound;
+    }
+
     final public static function getAutoErrorNonData(): ?array {
         return self::$AutoErrorNonData;
     }
@@ -120,7 +130,6 @@ trait UserError {
     final public static function getAutoErrorNotFoundThemeid(): ?array {
         return self::$AutoErrorNotFoundThemeid;
     }
-
 
     // Özel Hata Döndürme
     final public static function ErrorReturn(

@@ -4,6 +4,7 @@ namespace UserApi\Core\User\v1;
 
 // Gerekli Sınıflar
 use PDO;
+use UserApi\Core\User\v1\UserError as UserError;
 use UserApi\Includes\Database\v1\Table\TableThemes;
 use UserApi\Includes\Database\v1\UserDatabase as UserDatabase;
 use UserApi\Core\User\v1\Methods as Methods;
@@ -23,14 +24,6 @@ final class UserRequest {
     protected UserDatabase $userDatabase;
     protected PDO $userDatabaseConn;
 
-    // Hata mesajları
-    static protected string $errorUserAlreadyExists = "* User Already Exists *";
-    static protected string $errorUsernameCannotBeNull = "* Username Cannot Be Null *";
-    static protected string $errorEmailCannotBeNull = "* Email Cannot Be Null *";
-    static protected string $errorPasswordCannotBeNull = "* Password Cannot Be Null *";
-    static protected string $erorNewUserDidntCreate = "* New User Didn't Create *";
-    static protected string $errorUserNotFound = "* User Not Found *";
-
     // Sınıf Başlangıç Tanımlamaları
     public final function __construct() {
         $this->userDatabase = new UserDatabase();
@@ -47,11 +40,11 @@ final class UserRequest {
 
         // zorunlu verileri kontrol etsin, yoksa null dönsün
         if($tempUsername == null)
-            return [self::$errorUsernameCannotBeNull];
+            return UserError::getAutoErrorNotFoundUsername();
         else if($tempEmail == null)
-            return [self::$errorEmailCannotBeNull];
+            return UserError::getAutoErrorNotFoundEmail();
         else if($tempPassword == null)
-            return [self::$errorPasswordCannotBeNull];
+            return UserError::getAutoErrorNotFoundPassword();
         
         // sql sorgusunu ayarlamak
         $sqlQuery = UserProcedures::getFetch();
@@ -83,13 +76,13 @@ final class UserRequest {
         $tempLanguage = $argDatas[UserParams::getLanguage()] ?? null;
         $tempTheme = $argDatas[UserParams::getTheme()] ?? null;
 
-        // zorunlu verileri kontrol etsin, yoksa null dönsün
+        // zorunlu verileri kontrol etsin
         if($tempUsername == null)
-            return [self::$errorUsernameCannotBeNull];
+            return UserError::getAutoErrorNotFoundUsername();
         else if($tempEmail == null)
-            return [self::$errorEmailCannotBeNull];
+            return UserError::getAutoErrorNotFoundEmail();
         else if($tempPassword == null)
-            return [self::$errorPasswordCannotBeNull];
+            return UserError::getAutoErrorNotFoundPassword();
 
         // kullanıcı verilerini veritabanından almayı deniyoruz,
         // eğer kullanıcı yoksa yeni kullanıcı oluşturulabilir
@@ -99,9 +92,11 @@ final class UserRequest {
         $fetchEmail = $fetch[TableUsers::getEmail()] ?? null;
         $fetchPassword = $fetch[TableUsers::getPassword()] ?? null;
 
-        // herhangi birisi boş değilse veri var demektir
-        if($fetchUsername != null || $fetchEmail != null || $fetchPassword != null)
-            return [self::$errorUserAlreadyExists];
+        // boş olmayana göre hata mesajı döndürmek
+        if($fetchUsername != null)
+            return UserError::getAutoErrorUsernameTaken();
+        else if($fetchEmail != null)
+            return UserError::getAutoErrorEmailTaken();
 
         // sql sorgusunu ayarlamak
         $sqlQuery = UserProcedures::getCreate();
@@ -132,7 +127,7 @@ final class UserRequest {
         
         // kullanıcı adı, email, şifre zorunlu kısımlar
         if($fetchUsername == null || $fetchEmail == null || $fetchPassword == null)
-            return [self::$erorNewUserDidntCreate];
+            return UserError::getAutoErrorCreateUserFail();
 
         // verisi alınan kullanıcı bilgilerini döndürsün
         return $fetch ?? null;
@@ -146,13 +141,13 @@ final class UserRequest {
         $storedEmail = $argStoredDatas[UserParams::getEmail()] ?? null;
         $storedPassword = $argStoredDatas[UserParams::getPassword()] ?? null;
 
-        // zorunlu verileri kontrol etsin, yoksa null dönsün
+        // zorunlu verileri kontrol etsin
         if($storedUsername == null)
-            return [self::$errorUsernameCannotBeNull];
+            return UserError::getAutoErrorNotFoundUsername();
         else if($storedEmail == null)
-            return [self::$errorEmailCannotBeNull];
+            return UserError::getAutoErrorNotFoundEmail();
         else if($storedPassword == null)
-            return [self::$errorPasswordCannotBeNull];
+            return UserError::getAutoErrorNotFoundPassword();
 
         // kullanıcı bilgisini almaya çalışsın,
         // eğer kullanıcı yoksa zaten güncellenemez
@@ -164,7 +159,7 @@ final class UserRequest {
 
         // hepsi boş ise kullanıcı yok demektir
         if($fetchUsername == null && $fetchEmail == null && $fetchPassword == null)
-            return [self::$errorUserNotFound];
+            return UserError::getAutoErrorNotFound();
 
         // argüman verilerini depolamak
         $tempUsername = $argDatas[UpdateUserParams::getUsername()] ?? null;
@@ -260,13 +255,13 @@ final class UserRequest {
         $tempLanguage = $argDatas[UserParams::getLanguage()] ?? null;
         $tempTheme = $argDatas[UserParams::getTheme()] ?? null;
 
-        // zorunlu verileri kontrol etsin, yoksa null dönsün
+        // zorunlu verileri kontrol etsin
         if($tempUsername == null)
-            return [self::$errorUsernameCannotBeNull];
+            return UserError::getAutoErrorNotFoundUsername();
         else if($tempEmail == null)
-            return [self::$errorEmailCannotBeNull];
+            return UserError::getAutoErrorNotFoundEmail();
         else if($tempPassword == null)
-            return [self::$errorPasswordCannotBeNull];
+            return UserError::getAutoErrorNotFoundPassword();
 
         // kullanıcı verilerini veritabanından almayı deniyoruz,
         // eğer kullanıcı yoksa kullanıcı silinemez
@@ -278,7 +273,7 @@ final class UserRequest {
 
         // hepsi boş ise kullanıcı yok demektir
         if($fetchUsername == null || $fetchEmail == null || $fetchPassword == null)
-            return [self::$errorUserNotFound];
+            return UserError::getAutoErrorNotFound();
 
         // sql sorgusunu ayarlamak
         $sqlQuery = UserProcedures::getDelete();
