@@ -1,0 +1,49 @@
+DELIMITER ;;
+
+CREATE PROCEDURE ProcDeleteUser_v1(
+    IN valueUsername VARCHAR(64),
+    IN valueEmail VARCHAR(256),
+    IN valuePassword VARCHAR(512)
+)
+DeleteUser:
+BEGIN
+    -- Değişken tanımlama, SHA512 şifrelemesi 128 karakter olduğu için şifreli metin 128 karakterdir
+    DECLARE encryptPassword VARCHAR(128);
+    DECLARE storedPassword VARCHAR(512);
+    
+    -- Kontroller
+    IF valueUsername IS NULL OR valueEmail IS NULL OR valuePassword IS NULL THEN
+        SELECT 'Kullanıcı Adı, E-posta Adresi veya Şifre Boş Olamaz!' AS message;
+        LEAVE DeleteUser;
+    END IF;
+    
+    -- Gelen metni şifreleme türü ile oluşturmak
+    SET encryptPassword = SHA2(valuePassword, 512);
+    
+    -- Veritabanındaki kullanıcıyı bulsun ve şifresini saklasın
+    SELECT usersPassword INTO storedPassword FROM Users WHERE usersUsername = valueUsername AND usersEmail = valueEmail LIMIT 1;
+    
+    -- Eğer kullanıcı bulunmamışsa
+    IF storedPassword IS NULL THEN
+        SELECT 'Kullanıcıya Ait Bilgiler Bulunamadı...' AS message;
+        LEAVE DeleteUser;
+    END IF;
+    
+    -- Eğer şifreleme uyuşmuyorsa kullanıcı silme sonlansın
+    IF encryptPassword != storedPassword THEN
+        SELECT 'Girilen Şifre İle Veritabanındaki Şifre Uyuşmuyor...' AS message;
+        LEAVE DeleteUser;
+    END IF;
+    
+    -- Kullanıcı bulunduğu ve şifre uyuştuğu için, kullanıcıyı silsin
+    DELETE FROM Users WHERE usersUsername = valueUsername OR usersEmail = valueEmail LIMIT 1;
+    
+    -- Eğer satıra işlem yapılmışsa silme başarılıdır, değilse başarısızdır
+    IF ROW_COUNT() > 0 THEN
+        SELECT 'Kullanıcı Başarıyla Silindi :)' AS result;
+    ELSE
+        SELECT 'Kullanıcı Silinemedi :(' AS result;
+    END IF;
+END ;;
+
+DELIMITER ;

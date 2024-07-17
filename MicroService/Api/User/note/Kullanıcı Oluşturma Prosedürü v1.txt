@@ -1,0 +1,72 @@
+DELIMITER ;;
+
+CREATE PROCEDURE ProcCreateUser_v1(
+    IN valueUsername VARCHAR(64),
+    IN valueFirstname VARCHAR(32),
+    IN valueLastname VARCHAR(32),
+    IN valueEmail VARCHAR(256),
+    IN valuePassword VARCHAR(512),
+    IN valueLanguage VARCHAR(32),
+    IN valueTheme VARCHAR(32)
+)
+CreateUser: 
+BEGIN
+    -- Değişken tanımlamaları
+    DECLARE language_id INT DEFAULT 1;
+    DECLARE theme_id INT DEFAULT 1;
+    
+    -- SHA 512 için şifreleme için değişken
+    DECLARE encrypted_password VARCHAR(128);
+    
+    -- Kontroller
+    IF valueUsername IS NULL OR valueEmail IS NULL OR valuePassword IS NULL THEN
+        SELECT 'Kullanıcı Adı, E-posta Adresi veya Şifre Boş Olamaz!' AS message;
+        LEAVE CreateUser;
+    END IF;
+    
+    -- SHA 512 ile kullanıcı şifresini şifrele
+    SET encrypted_password = SHA2(valuePassword, 512);
+    
+    -- Kullanıcı adı ve e-posta adresi var mı diye kontrol et
+    SELECT COUNT(*) INTO @count_username FROM Users WHERE usersUsername = valueUsername;
+    IF @count_username > 0 THEN
+        SELECT 'Kullanıcı Adı Zaten Kullanılıyor...' AS message;
+        LEAVE CreateUser;
+    END IF;
+    
+    SELECT COUNT(*) INTO @count_email FROM Users WHERE usersEmail = valueEmail;
+    IF @count_email > 0 THEN
+        SELECT 'E-posta Adresi Zaten Kullanılıyor...' AS message;
+        LEAVE CreateUser;
+    END IF;
+    
+    -- Dil ID değerini almak
+    IF valueLanguage IS NOT NULL THEN
+        SELECT languagesId INTO language_id FROM Languages WHERE languagesValue = valueLanguage LIMIT 1;
+        SET language_id = IFNULL(language_id, 1);
+    END IF;
+    
+    -- Tema ID değerini almak
+    IF valueTheme IS NOT NULL THEN
+        SELECT themesId INTO theme_id FROM Themes WHERE themesValue = valueTheme LIMIT 1;
+        SET theme_id = IFNULL(theme_id, 1);
+    END IF;
+    
+    -- Kullanıcıyı ekleme
+    INSERT INTO Users(
+        usersUsername, usersFirstname, usersLastname,
+        usersEmail, usersPassword, usersLanguageid, usersThemeid
+    ) VALUES (
+        valueUsername, valueFirstname, valueLastname,
+        valueEmail, encrypted_password, language_id, theme_id
+    );
+    
+    -- Sonuç döndürme
+    IF ROW_COUNT() > 0 THEN
+        SELECT 'Kullanıcı Başarıyla Oluşturuldu :)' AS result;
+    ELSE
+        SELECT 'Kullanıcı Oluşturulamadı :(' AS result;
+    END IF;
+END ;;
+
+DELIMITER ;
