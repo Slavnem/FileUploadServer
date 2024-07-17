@@ -4,34 +4,20 @@ namespace UserApi\Core\User\v1;
 
 // USER ABSTRACT FUNCTIONS
 abstract class UserFunctionsAbs {
-    abstract protected function procUserAuth(
-        ?string $argUsername,
-        ?string $argPassword,
-        ?string $argEmail
-    ): ?array;
-
-    abstract protected function procUserUsername(
-        ?string $argUsername
-    ): ?array;
-
-    abstract protected function procUserEmail(
-        ?string $argEmail
-    ): ?array;
-
-    abstract protected function UserFetch(
+    abstract protected function Fetch (
         ?array $argUserDatas
     ): ?array;
 
-    abstract protected function UserCreate(
+    abstract protected function Create (
         ?array $argUserDatas
     ): ?array;
 
-    abstract protected function UserUpdate(
+    abstract protected function Update (
         ?array $argUserDatas,
         ?array $argNewUserDatas
     ): ?array;
 
-    abstract protected function UserDelete(
+    abstract protected function Delete (
         ?array $argUserDatas
     ): ?array;
 }

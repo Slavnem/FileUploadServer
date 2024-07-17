@@ -2,10 +2,15 @@
 // Slavnem @2024-07-17
 namespace UserApi\Core\User\v1;
 
-// Gerekli Sınıflar
+// Varsayılan Sınıflar
 use PDO;
+
+// Gerekli Sınıflar
+use UserApi\Core\User\v1\UserFunctionsAbs as UserFunctionsAbs;
+use UserApi\Core\User\v1\UserFunctionsImpl as UserFunctionsImpl;
 use UserApi\Core\User\v1\UserError as UserError;
-use UserApi\Includes\Database\v1\Table\TableThemes;
+
+// Veritabanı, Sorgular ve Metodlar
 use UserApi\Includes\Database\v1\UserDatabase as UserDatabase;
 use UserApi\Core\User\v1\Methods as Methods;
 use UserApi\Includes\Database\v1\Param\UserParams as UserParams;
@@ -17,9 +22,10 @@ use UserApi\Includes\Database\v1\Table\TableUsers as TableUsers;
 use UserApi\Includes\Database\v1\Table\TableLanguages as TableLanguages;
 use UserApi\Includes\Database\v1\Table\TableMembership as TableMembership;
 use UserApi\Includes\Database\v1\Table\TableVerify as TableVerify;
+use UserApi\Includes\Database\v1\Table\TableThemes;
 
 // UserRequest Sınıfı
-final class UserRequest {
+final class UserRequest extends UserFunctionsAbs implements UserFunctionsImpl {
     // Değiştirilemez Değişkenler
     protected UserDatabase $userDatabase;
     protected PDO $userDatabaseConn;
@@ -33,7 +39,9 @@ final class UserRequest {
     }
 
     // Getir
-    final protected function Fetch(?array $argDatas) : ?array
+    final protected function Fetch (
+        ?array $argDatas
+    ) : ?array
     {
         // argüman verilerini depolamak
         $tempUsername = $argDatas[UserParams::getUsername()] ?? null;
@@ -70,7 +78,9 @@ final class UserRequest {
     }
 
     // Oluştur
-    final protected function Create(?array $argDatas) : ?array
+    final protected function Create (
+        ?array $argDatas
+    ) : ?array
     {
         // argüman verilerini depolamak
         $tempUsername = $argDatas[UserParams::getUsername()] ?? null;
@@ -144,7 +154,10 @@ final class UserRequest {
     }
 
     // Güncelle
-    final protected function Update(?array $argStoredDatas, ?array $argDatas) : ?array
+    final protected function Update (
+        ?array $argStoredDatas,
+        ?array $argDatas
+    ) : ?array
     {
         // depolanmış argüman verilerini depolamak
         $storedUsername = $argStoredDatas[UserParams::getUsername()] ?? null;
@@ -235,7 +248,9 @@ final class UserRequest {
     }
 
     // Sil
-    final protected function Delete(?array $argDatas) : ?array
+    final protected function Delete (
+        ?array $argDatas
+    ) : ?array
     {
         // argüman verilerini depolamak
         $tempUsername = $argDatas[UserParams::getUsername()] ?? null;
@@ -301,7 +316,11 @@ final class UserRequest {
     }
 
     // Kullanıcıdan Alınan Sorgu İle İşlem Yapma
-    final public function Request(?string $argRequestMethod, ?array $argUserDatas, ?array $argNewUserDatas): ?array
+    final public function Request (
+        ?string $argRequestMethod,
+        ?array $argUserDatas,
+        ?array $argNewUserDatas
+    ): ?array
     {
         // işlem metodu
         $requestMethod = strtoupper($argRequestMethod);
