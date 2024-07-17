@@ -11,75 +11,75 @@ trait UserError {
 
     // Başlangıçta varolan hata çeşitleri
     protected static array $AutoErrorNotFound = [
-        "code" => -1,
-        "message" => "Not Found",
-        "description" => "Requested Data Not Found"
+        self::$keyCode => -1,
+        self::$keyMsg => "Not Found",
+        self::$keyDesc => "Requested Data Not Found"
     ];
 
     protected static array $AutoErrorNonData = [
-        "code" => -1,
-        "message" => "No Valid Data",
-        "description" => "Lack of Valid Data Causes Error",
+        self::$keyCode => -1,
+        self::$keyMsg => "No Valid Data",
+        self::$keyDesc => "Lack of Valid Data Causes Error",
     ];
 
     protected static array $AutoErrorUsernameTaken = [
-        "code" => -1,
-        "message" => "Username Already Using",
-        "description" => "Try another username because this username has already been taken before",
+        self::$keyCode => -1,
+        self::$keyMsg => "Username Already Using",
+        self::$keyDesc => "Try another username because this username has already been taken before",
     ];
 
     protected static array $AutoErrorEmailTaken = [
-        "code" => -1,
-        "message" => "Username Already Using",
-        "description" => "Try another email address because this email address has already been taken before",
+        self::$keyCode => -1,
+        self::$keyMsg => "Username Already Using",
+        self::$keyDesc => "Try another email address because this email address has already been taken before",
     ];
 
     protected static array $AutoErrorCreateUserFail = [
-        "code" => -1,
-        "message" => "Failed To Create New User",
-        "description" => "Attempted to create a new user but failed with an error",
+        self::$keyCode => -1,
+        self::$keyMsg => "Failed To Create New User",
+        self::$keyDesc => "Attempted to create a new user but failed with an error",
     ];
 
     protected static array $AutoErrorUpdateUserFail = [
-        "code" => -1,
-        "message" => "Failed To Update a User",
-        "description" => "Attempted to update a user but failed with an error",
+        self::$keyCode => -1,
+        self::$keyMsg => "Failed To Update a User",
+        self::$keyDesc => "Attempted to update a user but failed with an error",
     ];
 
     protected static array $AutoErrorDeleteUserFail = [
-        "code" => -1,
-        "message" => "Failed To Delete a User",
-        "description" => "Attempted to delete a user but failed with an error",
+        self::$keyCode => -1,
+        self::$keyMsg => "Failed To Delete a User",
+        self::$keyDesc => "Attempted to delete a user but failed with an error",
     ];
 
     protected static array $AutoErrorNotFoundUsername = [
-        "code" => -1,
-        "message" => "Username Not Found",
-        "description" => "No Username parameter found. Make sure you have the parameters",
+        self::$keyCode => -1,
+        self::$keyMsg => "Username Not Found",
+        self::$keyDesc => "No Username parameter found. Make sure you have the parameters",
     ];
 
     protected static array $AutoErrorNotFoundEmail = [
-        "code" => -1,
-        "message" => "Email Not Found",
-        "description" => "No Email parameter found. Make sure you have the parameters",
+        self::$keyCode => -1,
+        self::$keyMsg => "Email Not Found",
+        self::$keyDesc => "No Email parameter found. Make sure you have the parameters",
     ];
 
     protected static array $AutoErrorNotFoundPassword = [
-        "code" => -1,
-        "message" => "Password Value Not Found",
-        "description" => "Password value not found, make sure you entered the parameter",
+        self::$keyCode => -1,
+        self::$keyMsg => "Password Value Not Found",
+        self::$keyDesc => "Password value not found, make sure you entered the parameter",
     ];
 
     protected static array $AutoErrorNotFoundLanguageid = [
-        "code" => -1,
-        "message" => "Language ID Value Not Found",
-        "description" => "Language ID value not found, make sure you entered the parameter",
+        self::$keyCode => -1,
+        self::$keyMsg => "Language ID Value Not Found",
+        self::$keyDesc => "Language ID value not found, make sure you entered the parameter",
     ];
 
     protected static array $AutoErrorNotFoundThemeid = [
-        "code" => -1,
-        "message" => "Theme ID Value Not Found",
-        "description" => "Theme ID value not found, make sure you entered the parameter",
+        self::$keyCode => -1,
+        self::$keyMsg => "Theme ID Value Not Found",
+        self::$keyDesc => "Theme ID value not found, make sure you entered the parameter",
     ];
 
     // Hata Bilgilerini Getirtme
@@ -135,12 +135,13 @@ trait UserError {
     final public static function ErrorReturn(
         ?int $argErrCode = -1,
         ?string $argErrMsg,
-        ?string $argErrDesc): ?array
+        ?string $argErrDesc
+    ): ?array
     {
         return [
-            "code" => $argErrCode,
-            "message" => $argErrMsg,
-            "description" => $argErrDesc,
+            self::$keyCode => $argErrCode,
+            self::$keyMsg => $argErrMsg,
+            self::$keyDesc => $argErrDesc,
         ];
     }
 }
