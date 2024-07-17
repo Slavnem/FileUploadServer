@@ -6,85 +6,98 @@ namespace UserApi\Core\User\v1;
 trait UserError {
     // Anahtar kelimeler
     protected static string $keyCode = "code";
-    protected static string $keyMsg = "message";
-    protected static string $keyDesc = "description";
+    protected static string $keyMessage = "message";
+    protected static string $keyDescription = "description";
 
     // Başlangıçta varolan hata çeşitleri
-    protected static array $AutoErrorNotFound = [
-        self::$keyCode => -1,
-        self::$keyMsg => "Not Found",
-        self::$keyDesc => "Requested Data Not Found"
+    protected static array $AutoErrorUserNotFound = [
+        "code" => -1,
+        "message" => "User Not Found",
+        "description" => "Requested User Not Found"
     ];
 
     protected static array $AutoErrorNonData = [
-        self::$keyCode => -1,
-        self::$keyMsg => "No Valid Data",
-        self::$keyDesc => "Lack of Valid Data Causes Error",
+        "code" => -1,
+        "message" => "No Valid Data",
+        "description" => "Lack of Valid Data Causes Error",
     ];
 
     protected static array $AutoErrorUsernameTaken = [
-        self::$keyCode => -1,
-        self::$keyMsg => "Username Already Using",
-        self::$keyDesc => "Try another username because this username has already been taken before",
+        "code" => -1,
+        "message" => "Username Already Using",
+        "description" => "Try another username because this username has already been taken before",
     ];
 
     protected static array $AutoErrorEmailTaken = [
-        self::$keyCode => -1,
-        self::$keyMsg => "Username Already Using",
-        self::$keyDesc => "Try another email address because this email address has already been taken before",
+        "code" => -1,
+        "message" => "Username Already Using",
+        "description" => "Try another email address because this email address has already been taken before",
     ];
 
     protected static array $AutoErrorCreateUserFail = [
-        self::$keyCode => -1,
-        self::$keyMsg => "Failed To Create New User",
-        self::$keyDesc => "Attempted to create a new user but failed with an error",
+        "code" => -1,
+        "message" => "Failed To Create New User",
+        "description" => "Attempted to create a new user but failed with an error",
     ];
 
     protected static array $AutoErrorUpdateUserFail = [
-        self::$keyCode => -1,
-        self::$keyMsg => "Failed To Update a User",
-        self::$keyDesc => "Attempted to update a user but failed with an error",
+        "code" => -1,
+        "message" => "Failed To Update a User",
+        "description" => "Attempted to update a user but failed with an error",
     ];
 
     protected static array $AutoErrorDeleteUserFail = [
-        self::$keyCode => -1,
-        self::$keyMsg => "Failed To Delete a User",
-        self::$keyDesc => "Attempted to delete a user but failed with an error",
+        "code" => -1,
+        "message" => "Failed To Delete a User",
+        "description" => "Attempted to delete a user but failed with an error",
     ];
 
     protected static array $AutoErrorNotFoundUsername = [
-        self::$keyCode => -1,
-        self::$keyMsg => "Username Not Found",
-        self::$keyDesc => "No Username parameter found. Make sure you have the parameters",
+        "code" => -1,
+        "message" => "Username Not Found",
+        "description" => "No Username parameter found. Make sure you have the parameters",
     ];
 
     protected static array $AutoErrorNotFoundEmail = [
-        self::$keyCode => -1,
-        self::$keyMsg => "Email Not Found",
-        self::$keyDesc => "No Email parameter found. Make sure you have the parameters",
+        "code" => -1,
+        "message" => "Email Not Found",
+        "description" => "No Email parameter found. Make sure you have the parameters",
     ];
 
     protected static array $AutoErrorNotFoundPassword = [
-        self::$keyCode => -1,
-        self::$keyMsg => "Password Value Not Found",
-        self::$keyDesc => "Password value not found, make sure you entered the parameter",
+        "code" => -1,
+        "message" => "Password Value Not Found",
+        "description" => "Password value not found, make sure you entered the parameter",
     ];
 
     protected static array $AutoErrorNotFoundLanguageid = [
-        self::$keyCode => -1,
-        self::$keyMsg => "Language ID Value Not Found",
-        self::$keyDesc => "Language ID value not found, make sure you entered the parameter",
+        "code" => -1,
+        "message" => "Language ID Value Not Found",
+        "description" => "Language ID value not found, make sure you entered the parameter",
     ];
 
     protected static array $AutoErrorNotFoundThemeid = [
-        self::$keyCode => -1,
-        self::$keyMsg => "Theme ID Value Not Found",
-        self::$keyDesc => "Theme ID value not found, make sure you entered the parameter",
+        "code" => -1,
+        "message" => "Theme ID Value Not Found",
+        "description" => "Theme ID value not found, make sure you entered the parameter",
     ];
 
+    // Anahtar Kelimeleri Getirtme
+    final public static function getCode(): ?string {
+        return self::$keyCode;
+    }
+
+    final public static function getMessage(): ?string {
+        return self::$keyMessage;
+    }
+
+    final public static function getDescription(): ?string {
+        return self::$keyDescription;
+    }
+
     // Hata Bilgilerini Getirtme
-    final public static function getAutoErrorNotFound(): ?array {
-        return self::$AutoErrorNotFound;
+    final public static function getAutoErrorUserNotFound(): ?array {
+        return self::$AutoErrorUserNotFound;
     }
 
     final public static function getAutoErrorNonData(): ?array {
@@ -139,9 +152,9 @@ trait UserError {
     ): ?array
     {
         return [
-            self::$keyCode => $argErrCode,
-            self::$keyMsg => $argErrMsg,
-            self::$keyDesc => $argErrDesc,
+            "code" => $argErrCode,
+            "message" => $argErrMsg,
+            "description" => $argErrDesc,
         ];
     }
 }

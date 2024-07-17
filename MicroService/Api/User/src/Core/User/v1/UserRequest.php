@@ -159,7 +159,7 @@ final class UserRequest {
 
         // hepsi boş ise kullanıcı yok demektir
         if($fetchUsername == null && $fetchEmail == null && $fetchPassword == null)
-            return UserError::getAutoErrorNotFound();
+            return UserError::getAutoErrorUserNotFound();
 
         // argüman verilerini depolamak
         $tempUsername = $argDatas[UpdateUserParams::getUsername()] ?? null;
@@ -273,7 +273,7 @@ final class UserRequest {
 
         // hepsi boş ise kullanıcı yok demektir
         if($fetchUsername == null || $fetchEmail == null || $fetchPassword == null)
-            return UserError::getAutoErrorNotFound();
+            return UserError::getAutoErrorUserNotFound();
 
         // sql sorgusunu ayarlamak
         $sqlQuery = UserProcedures::getDelete();
