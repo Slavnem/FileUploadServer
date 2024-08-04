@@ -6,8 +6,7 @@ trait Methods
 {
     // Anahtarlar
     protected static string $methodFetch = "FETCH";
-    protected static string $methodCreate = "CREATE";
-    protected static string $methodUpdate = "UPDATE";
+    protected static string $methodUpload = "UPLOAD";
     protected static string $methodDelete = "DELETE";
 
 
@@ -16,12 +15,8 @@ trait Methods
         return self::$methodFetch;
     }
 
-    final public static function getCreate(): ?string {
-        return self::$methodCreate;
-    }
-
-    final public static function getUpdate(): ?string {
-        return self::$methodUpdate;
+    final public static function getUpload(): ?string {
+        return self::$methodUpload;
     }
 
     final public static function getDelete(): ?string {
@@ -31,8 +26,7 @@ trait Methods
     final public static function getAll(): ?array {
         return array(
             self::getFetch(),
-            self::getCreate(),
-            self::getUpdate(),
+            self::getUpload(),
             self::getDelete()
         );
     }

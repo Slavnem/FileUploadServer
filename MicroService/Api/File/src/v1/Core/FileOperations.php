@@ -225,7 +225,7 @@ final class FileOperations extends FileOperationsAbs implements FileOperationsIm
             case (strtoupper(Methods::getFetch())):
                 return self::Fetch($argDatas);
             // Dosya Yükle
-            case (strtoupper(Methods::getUpdate())):
+            case (strtoupper(Methods::getUpload())):
                 return self::Upload($argDatas);
             // Dosya Sil
             case (strtoupper(Methods::getDelete())):
