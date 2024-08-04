@@ -1,5 +1,5 @@
 <!-- Başklık -->
-# 🚀 Main File Upload Server [Devel]
+# 🚀 File Upload Server [Devel]
 
 <!-- Gerekenler -->
 # Requirements
