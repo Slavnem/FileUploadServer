@@ -4,7 +4,7 @@
 // Dosyalar
 $IndexFiles = array(
     dirname(__DIR__) . "/vendor/autoload.php",
-    dirname(__DIR__) . "/src/Kernel/UserKernel.php"
+    dirname(__DIR__) . "/src/v1/Kernel/UserKernel.php"
 );
 
 // Dosya İşlemi
