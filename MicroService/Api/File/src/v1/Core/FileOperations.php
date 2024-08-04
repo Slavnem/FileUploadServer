@@ -45,14 +45,16 @@ final class FileOperations extends FileOperationsAbs implements FileOperationsIm
             return FileOperationsError::getAutoErrorSessionForUpload();
 
         // kullanıcı klasörü
-        $user_dir = FileConfig::getStorageDir() . $sesion_user_id . '/';
+        $user_dir = FileConfig::getStorageDir() . $sesion_user_id . "/";
 
-        // dosyaların varlığını kontrol etsin
-        // dosyalar yoksa boş dönsün
-        if(!file_exists($user_dir)) return null;
+        // dizinin mevcut olup olmadığını kontrol etme
+        if(!is_dir($user_dir)) return null;
 
         // dosyaların listeleyip getirsin
-        $user_files = scandir($user_dir);
+        $user_files = (array)scandir($user_dir);
+
+        // dosyalar bulunamadıysa boş dönsün
+        if(empty($user_files)) return null;
         
         // dosya bilgilerini düzenleyip depolamak için
         $file_datas = [];
@@ -64,7 +66,7 @@ final class FileOperations extends FileOperationsAbs implements FileOperationsIm
 
             // istenen dosyalar boşsa ya da dizin içinde varsa
             if($argFileDatas === null || in_array($file, $argFileDatas)) {
-                $filepath = $user_dir . $file; // dosya yolu
+                $filepath = ($user_dir . $file); // dosya yolu
 
                 $file_datas[] = [
                     "name" => $file, // dosya adı
@@ -137,7 +139,7 @@ final class FileOperations extends FileOperationsAbs implements FileOperationsIm
                 "path" => $tmp_destination
             ]
             : $response[] = [ // dosya yükleme işlemi başarısız oldu
-                "name" => $name,,
+                "name" => $name,
                 "status" => "Failed To Upload"
             ];
         }

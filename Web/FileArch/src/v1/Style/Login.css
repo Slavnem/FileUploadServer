@@ -1,6 +1,6 @@
 @import url("Sign.css");
 
 .loginarea {
-    width: clamp(140px, 80%, 500px);
+    width: 100%;
     height: auto;
 }

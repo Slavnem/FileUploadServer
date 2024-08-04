@@ -1,8 +1,12 @@
 {
+    "name": "yourvendor/session",
+    "description": "Session service for managing user sessions",
+    "type": "library",
     "autoload": {
         "psr-4": {
             "SessionApi\\": "src/",
             "UserApi\\": "../User/src/"
         }
-    }
+    },
+    "require": {}
 }

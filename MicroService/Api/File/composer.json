@@ -1,8 +1,12 @@
 {
+    "name": "yourvendor/file",
+    "description": "File service for managing files",
+    "type": "library",
     "autoload": {
         "psr-4": {
             "FileApi\\": "src/",
             "SessionApi\\": "../Session/src/"
         }
-    }
+    },
+    "require": {}
 }

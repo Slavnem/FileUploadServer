@@ -31,9 +31,9 @@ class IndexOperations {
 // Dosyalar
 $IndexFiles = array(
     dirname(__DIR__) . "/vendor/autoload.php",
-    dirname(__DIR__) . "/src/v1/Kernel/FileArchKernel.php",
-    "../../../MicroService/Api/User/src/v1/Core/UserRequest.php",
-    "../../../MicroService/Api/Session/src/v1/Core/SessionRequest.php"
+    "../../../MicroService/Api/Session/vendor/autoload.php",
+    "../../../MicroService/Api/File/vendor/autoload.php",
+    dirname(__DIR__) . "/src/v1/Kernel/FileArchKernel.php"
 );
 
 // Dosya Aktarması Durumu

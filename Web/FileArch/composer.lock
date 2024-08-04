@@ -4,13 +4,56 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d751713988987e9331980363e24189ce",
-    "packages": [],
+    "content-hash": "4ccd04ec4a24a43dd759e31d14c1dbc7",
+    "packages": [
+        {
+            "name": "yourvendor/file",
+            "version": "dev-devel",
+            "dist": {
+                "type": "path",
+                "url": "../../MicroService/Api/File",
+                "reference": "e3800eba73573fc9637ad5c61baa00d04ed39f98"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "FileApi\\": "src/",
+                    "SessionApi\\": "../Session/src/"
+                }
+            },
+            "description": "File service for managing files",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        },
+        {
+            "name": "yourvendor/session",
+            "version": "dev-devel",
+            "dist": {
+                "type": "path",
+                "url": "../../MicroService/Api/Session",
+                "reference": "ecb53c6ec60874e6aab76e370eb036c88f92b5e4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "SessionApi\\": "src/",
+                    "UserApi\\": "../User/src/"
+                }
+            },
+            "description": "Session service for managing user sessions",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
+        }
+    ],
     "packages-dev": [],
     "aliases": [],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "stability-flags": [],
-    "prefer-stable": false,
+    "prefer-stable": true,
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],

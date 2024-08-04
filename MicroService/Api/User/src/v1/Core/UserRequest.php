@@ -48,12 +48,10 @@ final class UserRequest extends UserFunctionsAbs implements UserFunctionsImpl {
         $tempEmail = $argDatas[UserParams::getEmail()] ?? null;
         $tempPassword = $argDatas[UserParams::getPassword()] ?? null;
 
-        // zorunlu verileri kontrol etsin, yoksa null dönsün
-        if($tempUsername == null)
-            return UserError::getAutoErrorNotFoundUsername();
-        else if($tempEmail == null)
-            return UserError::getAutoErrorNotFoundEmail();
-        else if($tempPassword == null)
+        // zorunlu verileri kontrol etsin, yoksa hata dönsün
+        if(empty($tempUsername) && empty($tempEmail))
+            return [UserError::getAutoErrorNotFoundUsername(), UserError::getAutoErrorNotFoundEmail()];
+        else if(empty($tempPassword))
             return UserError::getAutoErrorNotFoundPassword();
 
         // sql sorgusunu ayarlamak
@@ -261,12 +259,10 @@ final class UserRequest extends UserFunctionsAbs implements UserFunctionsImpl {
         $tempLanguage = $argDatas[UserParams::getLanguage()] ?? null;
         $tempTheme = $argDatas[UserParams::getTheme()] ?? null;
 
-        // zorunlu verileri kontrol etsin
-        if($tempUsername == null)
-            return UserError::getAutoErrorNotFoundUsername();
-        else if($tempEmail == null)
-            return UserError::getAutoErrorNotFoundEmail();
-        else if($tempPassword == null)
+        // zorunlu verileri kontrol etsin, yoksa hata dönsün
+        if(empty($tempUsername) && empty($tempEmail))
+            return [UserError::getAutoErrorNotFoundUsername(), UserError::getAutoErrorNotFoundEmail()];
+        else if(empty($tempPassword))
             return UserError::getAutoErrorNotFoundPassword();
 
         // kullanıcı verilerini veritabanından almayı deniyoruz,

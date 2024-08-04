@@ -18,21 +18,29 @@ class ComposerStaticInit0e47d60a674030ab3a0cc855fdcea82f
         'F' => 
         array (
             'FileArchWeb\\' => 12,
+            'FileApi\\' => 8,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
         'UserApi\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/../../MicroService/Api/User/src',
+            0 => __DIR__ . '/..' . '/yourvendor/User/src',
         ),
         'SessionApi\\' => 
         array (
             0 => __DIR__ . '/../..' . '/../../MicroService/Api/Session/src',
+            1 => __DIR__ . '/..' . '/yourvendor/Session/src',
+            2 => __DIR__ . '/..' . '/yourvendor/session/src',
         ),
         'FileArchWeb\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
+        ),
+        'FileApi\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/../../MicroService/Api/File/src',
+            1 => __DIR__ . '/..' . '/yourvendor/file/src',
         ),
     );
 

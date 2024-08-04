@@ -22,3 +22,4 @@ $logout_session = $SessionRequest->Request(
 
 // giriş sayfasına yönlendirsin
 header("Location: /auth/login");
+exit();

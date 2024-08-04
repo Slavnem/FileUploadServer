@@ -23,8 +23,8 @@
 }
 
 .signarea {
-    width: 100%;
-    height: 100dvh;
+    width: clamp(140px, 90%, 500px);
+    height: auto;
     display: flex;
     position: relative;
     flex-wrap: wrap;
@@ -33,9 +33,12 @@
     justify-content: center;
     text-align: center;
     color: var(--theme-hex-color-opposite);
-    background: transparent;
+    background: rgba(var(--theme-rgb-color-theme), 0.5);
     border: 0;
-    border-radius: 0;
+    border-radius: 1.25rem;
+    backdrop-filter: blur(1rem);
+    padding: clamp(0.5rem, 5dvh, 3rem) clamp(0.25rem, 5vw, 2rem);
+    margin: 0;
     overflow: hidden;
     z-index: 0;
 }
@@ -127,8 +130,8 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    color: var(--theme-hex-color-opposite);
-    background: rgba(var(--theme-rgb-color-theme-low), 1);
+    color: var(--theme-hex-color-theme-low);
+    background: rgba(var(--theme-rgb-color-opposite), 1);
     border: 0;
     border-radius: 1rem;
     font-size: clamp(0.8rem, 5vw, 0.9rem);
@@ -138,9 +141,9 @@
 }
 
 .input_submitbtn:hover {
-    color: var(--theme-hex-color-theme-low);
-    background: rgba(var(--theme-rgb-color-opposite), 1);
-    box-shadow: 0 0 10px 0px rgba(var(--theme-rgb-color-theme-low), 0.25);
+    color: var(--color-hex-light-white);
+    background: rgba(var(--color-rgb-base-red-v2), 1);
+    box-shadow: 0 0 10px 0px rgba(var(--color-rgb-light-red), 0.25);
     transition: 240ms linear;
 }
 

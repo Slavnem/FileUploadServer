@@ -2,17 +2,6 @@
 // Slavnem @2024-08-03
 namespace FileArchWeb\Src\v1\Kernel;
 
-// Durum Sınıfı
-final class Status {
-    // İsimlendirmeler
-    public static string $tag_status = "status";
-    public static string $tag_msg = "message";
-
-    // Durum mesajları
-    public static string $status_error = "error";
-    public static string $status_success = "success";
-}
-
 // Dosya Aktarıcı
 use FileArchWeb\Public\IndexOperations as PublicIndex;
 
@@ -36,8 +25,8 @@ switch(strtolower($UrlAddr))
         PublicIndex::Importer([dirname(__DIR__) . "/Page/Logout.php"]);
         exit();
     // ana sayfa
-    case "home":
-        PublicIndex::Importer([dirname(__DIR__) . "/Page/Home.php"]);
+    case "files":
+        PublicIndex::Importer([dirname(__DIR__) . "/Page/Files.php"]);
         exit();
 }
 
@@ -58,5 +47,5 @@ if(!is_null($result_session)) {
 }
 
 // ana sayfa
-header("Location: /home"); // ana sayfa
+header("Location: /files"); // ana sayfa
 exit();

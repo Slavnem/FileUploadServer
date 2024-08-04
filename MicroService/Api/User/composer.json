@@ -1,7 +1,11 @@
 {
+    "name": "yourvendor/user",
+    "description": "User service for managing database users",
+    "type": "library",
     "autoload": {
         "psr-4": {
             "UserApi\\": "src/"
         }
-    }
+    },
+    "require": {}
 }

@@ -1,5 +1,54 @@
 {
-    "packages": [],
+    "packages": [
+        {
+            "name": "yourvendor/file",
+            "version": "dev-devel",
+            "version_normalized": "dev-devel",
+            "dist": {
+                "type": "path",
+                "url": "../../MicroService/Api/File",
+                "reference": "e3800eba73573fc9637ad5c61baa00d04ed39f98"
+            },
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "FileApi\\": "src/",
+                    "SessionApi\\": "../Session/src/"
+                }
+            },
+            "description": "File service for managing files",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            },
+            "install-path": "../yourvendor/file"
+        },
+        {
+            "name": "yourvendor/session",
+            "version": "dev-devel",
+            "version_normalized": "dev-devel",
+            "dist": {
+                "type": "path",
+                "url": "../../MicroService/Api/Session",
+                "reference": "ecb53c6ec60874e6aab76e370eb036c88f92b5e4"
+            },
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "SessionApi\\": "src/",
+                    "UserApi\\": "../User/src/"
+                }
+            },
+            "description": "Session service for managing user sessions",
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            },
+            "install-path": "../yourvendor/session"
+        }
+    ],
     "dev": true,
     "dev-package-names": []
 }

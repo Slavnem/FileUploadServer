@@ -11,15 +11,27 @@ trait SessionParams {
     protected static string $lastname = "lastname";
     protected static string $email = "email";
     protected static string $password = "password";
-    protected static string $member = "member";
-    protected static string $language = "language";
-    protected static string $verify = "verify";
-    protected static string $theme = "theme";
     protected static string $created = "created";
-    protected static string $sessioncreate = "sessioncreate";
+    protected static string $session_created = "session_created";
+
+    protected static string $member = "member";
+    protected static string $member_id = "member_id";
+    protected static string $member_name = "member_name";
+
+    protected static string $language = "language";
+    protected static string $language_id = "language";
+    protected static string $language_name = "language_name";
+    
+    protected static string $verify = "verify";
+    protected static string $verify_id = "verify_id";
+    protected static string $verify_name = "verify_name";
+
+    protected static string $theme = "theme";
+    protected static string $theme_id = "theme_id";
+    protected static string $theme_name = "theme_name";
 
     // Değişkenleri Getirtme
-    // Kayıt Numarası parametresi
+    // Kayıt numarası parametresi
     final public static function getId(): ?string {
         return self::$id;
     }
@@ -49,9 +61,27 @@ trait SessionParams {
         return self::$password;
     }
 
+    // Kullanıcı Oluşturulma parametresi
+    final public static function getCreated(): ?string {
+        return self::$created;
+    }
+
+    // Oturum Oluşturulma parametresi
+    final public static function getSessionCreated(): ?string {
+        return self::$session_created;
+    }
+
     // Üye parametresi
     final public static function getMember(): ?string {
         return self::$member;
+    }
+
+    final public static function getMemberId(): ?string {
+        return self::$member_id;
+    }
+
+    final public static function getMemberName(): ?string {
+        return self::$member_name;
     }
 
     // Dil parametresi
@@ -59,9 +89,25 @@ trait SessionParams {
         return self::$language;
     }
 
+    final public static function getLanguageId(): ?string {
+        return self::$language_id;
+    }
+
+    final public static function getLanguageName(): ?string {
+        return self::$language_name;
+    }
+
     // Kullanıcı Doğrulama parametresi
     final public static function getVerify(): ?string {
         return self::$verify;
+    }
+
+    final public static function getVerifyId(): ?string {
+        return self::$verify_id;
+    }
+
+    final public static function getVerifyName(): ?string {
+        return self::$verify_name;
     }
 
     // Tema parametresi
@@ -69,14 +115,12 @@ trait SessionParams {
         return self::$theme;
     }
 
-    // Oluşturulma Tarihi parametresi
-    final public static function getCreated(): ?string {
-        return self::$created;
+    final public static function getThemeId(): ?string {
+        return self::$theme_id;
     }
 
-    // Oturum Oluşturulma Tarihi parametresi
-    final public static function getSessionCreate(): ?string {
-        return self::$sessioncreate;
+    final public static function getThemeName(): ?string {
+        return self::$theme_name;
     }
 
     // Tüm hepsini çağırma
@@ -88,12 +132,20 @@ trait SessionParams {
             self::getLastname(),
             self::getEmail(),
             self::getPassword(),
-            self::getMember(),
-            self::getLanguage(),
-            self::getVerify(),
-            self::getTheme(),
             self::getCreated(),
-            self::getSession()
+            self::getSessionCreated(),
+            self::getMember(),
+            self::getMemberId(),
+            self::getMemberName(),
+            self::getLanguage(),
+            self::getLanguageId(),
+            self::getLanguageName(),
+            self::getVerify(),
+            self::getVerifyId(),
+            self::getVerifyName(),
+            self::getTheme(),
+            self::getThemeId(),
+            self::getThemeName()
         ];
     }
 }

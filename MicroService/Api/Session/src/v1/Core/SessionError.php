@@ -94,6 +94,30 @@ trait SessionError {
         "description" => "New Update Datas Are Empty or Not Valid"
     ];
 
+    protected static array $AutoErrorSessionUserIdNotFound = [
+        "code" => -1,
+        "message" => "Session User ID Not Found",
+        "description" => "No data was found for the Session User. The user may have been deleted from the database or there may have been an error. It would be good to report it"
+    ];
+
+    protected static array $AutoErrorSessionUserUsernameNotFound = [
+        "code" => -1,
+        "message" => "Session User Username Not Found",
+        "description" => "No data was found for the Session User. The user may have been deleted from the database or there may have been an error. It would be good to report it"
+    ];
+
+    protected static array $AutoErrorSessionUserEmailNotFound = [
+        "code" => -1,
+        "message" => "Session User Email Not Found",
+        "description" => "No data was found for the Session User. The user may have been deleted from the database or there may have been an error. It would be good to report it"
+    ];
+
+    protected static array $AutoErrorSessionUserPasswordNotFound = [
+        "code" => -1,
+        "message" => "Session User Password Not Found",
+        "description" => "No data was found for the Session User. The user may have been deleted from the database or there may have been an error. It would be good to report it"
+    ];
+
     // Anahtar Kelimeleri Getirtme
     final public static function getCode(): ?string {
         return self::$keyCode;
@@ -162,6 +186,22 @@ trait SessionError {
 
     final public static function getAutoErrorUpdateDatasAreEmpty(): ?array {
         return self::$AutoErrorUpdateDatasAreEmpty;
+    }
+
+    final public static function getAutoErrorSessionUserIdNotFound(): ?array {
+        return self::$AutoErrorSessionUserIdNotFound;
+    }
+
+    final public static function getAutoErrorSessionUserUsernameNotFound(): ?array {
+        return self::$AutoErrorSessionUserUsernameNotFound;
+    }
+
+    final public static function getAutoErrorSessionUserEmailNotFound(): ?array {
+        return self::$AutoErrorSessionUserEmailNotFound;
+    }
+
+    final public static function getAutoErrorSessionUserPasswordNotFound(): ?array {
+        return self::$AutoErrorSessionUserPasswordNotFound;
     }
 
     // Özel Hata Döndürme

@@ -6,7 +6,8 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'UserApi\\' => array($baseDir . '/../../MicroService/Api/User/src'),
-    'SessionApi\\' => array($baseDir . '/../../MicroService/Api/Session/src'),
+    'UserApi\\' => array($vendorDir . '/yourvendor/User/src'),
+    'SessionApi\\' => array($baseDir . '/../../MicroService/Api/Session/src', $vendorDir . '/yourvendor/Session/src', $vendorDir . '/yourvendor/session/src'),
     'FileArchWeb\\' => array($baseDir . '/src'),
+    'FileApi\\' => array($baseDir . '/../../MicroService/Api/File/src', $vendorDir . '/yourvendor/file/src'),
 );

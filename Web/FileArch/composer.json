@@ -1,9 +1,34 @@
 {
+    "name": "yourvendor/filearch",
+    "description": "FileArch service to use File and Session services",
+    "type": "project",
+    "require": {
+        "yourvendor/session": "*",
+        "yourvendor/file": "*"
+    },
     "autoload": {
         "psr-4": {
             "FileArchWeb\\": "src/",
-            "UserApi\\": "../../MicroService/Api/User/src/",
-            "SessionApi\\": "../../MicroService/Api/Session/src/"
+            "SessionApi\\": "../../MicroService/Api/Session/src/",
+            "FileApi\\": "../../MicroService/Api/File/src/"
         }
-    }
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../MicroService/Api/Session",
+            "options": {
+                "symlink": true
+            }
+        },
+        {
+            "type": "path",
+            "url": "../../MicroService/Api/File",
+            "options": {
+                "symlink": true
+            }
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
