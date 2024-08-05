@@ -6,6 +6,5 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'UserApi\\' => array($baseDir . '/../User/src'),
     'SessionApi\\' => array($baseDir . '/src'),
 );

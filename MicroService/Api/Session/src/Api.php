@@ -1,9 +1,15 @@
 <?php
-// Slavnem @2024-08-03
-namespace FileArchWeb\Public;
+// Slavnem @2024-08-05
 
-// Dosya İşlemi Sınıfı
-class IndexOperations {
+// Dosyalar
+$IndexFiles = array(
+    dirname(__DIR__) . "/vendor/autoload.php",
+    "../../User/vendor/autoload.php", // User Api
+    dirname(__DIR__) . "/src/v1/Kernel/SessionKernel.php"
+);
+
+// Dosya İşlemi
+final class IndexOperations {
     public static function Importer(?array $argFiles): bool {
         // boşsa dosya hata dönsün
         if($argFiles === null || !is_array($argFiles)) {
@@ -13,7 +19,6 @@ class IndexOperations {
         // Dosyaların varlığı kontrolü
         foreach($argFiles as $File) {
             if(!file_exists($File)) {
-                echo $File;
                 return false;
             }
         }
@@ -28,20 +33,13 @@ class IndexOperations {
     }
 }
 
-// Dosyalar
-$IndexFiles = array(
-    dirname(__DIR__) . "/vendor/autoload.php",
-    "../../../MicroService/Api/User/vendor/autoload.php",
-    "../../../MicroService/Api/Session/vendor/autoload.php",
-    "../../../MicroService/Api/File/vendor/autoload.php",
-    dirname(__DIR__) . "/src/v1/Kernel/FileArchKernel.php"
-);
-
 // Dosya Aktarması Durumu
-switch(!IndexOperations::Importer($IndexFiles)) {
+switch(IndexOperations::Importer($IndexFiles)) {
+    // Dosya İçe Aktarma Başarılı
+    case true: break;
     // Hata yönlendirmesi
-    case true:
+    default:
         http_response_code(404);
         header("Message: File Not Found");
-        exit();
+        exit;
 }

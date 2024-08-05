@@ -4,9 +4,7 @@
     "type": "library",
     "autoload": {
         "psr-4": {
-            "SessionApi\\": "src/",
-            "UserApi\\": "../User/src/"
+            "SessionApi\\": "src/"
         }
-    },
-    "require": {}
+    }
 }

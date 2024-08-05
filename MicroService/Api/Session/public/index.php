@@ -3,12 +3,11 @@
 
 // Dosyalar
 $IndexFiles = array(
-    dirname(__DIR__) . "/vendor/autoload.php",
-    dirname(__DIR__) . "/src/v1/Kernel/SessionKernel.php"
+    dirname(__DIR__) . "/vendor/autoload.php"
 );
 
 // Dosya İşlemi
-class IndexOperations {
+final class IndexOperations {
     public static function Importer(?array $argFiles): bool {
         // boşsa dosya hata dönsün
         if($argFiles === null || !is_array($argFiles)) {

@@ -51,29 +51,68 @@ final class FileOperations extends FileOperationsAbs implements FileOperationsIm
         if(!is_dir($user_dir)) return null;
 
         // dosyaların listeleyip getirsin
-        $user_files = (array)scandir($user_dir);
+        $user_files = array_diff(scandir($user_dir), array('..', '.'));
+
+        // Dosya yollarını güvenli bir şekilde birleştirir
+        function safePath($dir, $file) {
+            return rtrim($dir, '/') . '/' . ltrim($file, '/');
+        }
+
+        // Dosyaları en son değiştirilme tarihine göre sıralar
+        usort($user_files, function($a, $b) use ($user_dir) {
+            $a_time = filemtime(safePath($user_dir, $a));
+            $b_time = filemtime(safePath($user_dir, $b));
+
+            return $b_time - $a_time; // En yeni dosyalar en başta
+        });
 
         // dosyalar bulunamadıysa boş dönsün
         if(empty($user_files)) return null;
         
         // dosya bilgilerini düzenleyip depolamak için
-        $file_datas = [];
+        $file_datas = null;
 
-        // döngüyle teker teker alsın
-        foreach($user_files as $file) {
-            // normal dosya değilse sonraki tura geçsin
-            if($file === "." || $file === "..") continue;
+        // eğer tek dosya ise
+        if(!empty($argFileDatas) && count($argFileDatas) == 1) {
+            // dosya adı
+            $argfile = $argFileDatas[0];
 
-            // istenen dosyalar boşsa ya da dizin içinde varsa
-            if($argFileDatas === null || in_array($file, $argFileDatas)) {
-                $filepath = ($user_dir . $file); // dosya yolu
+            // döngüyle teker teker alsın
+            foreach($user_files as $file) {
+                // normal dosya değilse sonraki tura geçsin
+                if($file === "." || $file === "..") continue;
 
-                $file_datas[] = [
-                    "name" => $file, // dosya adı
-                    "size" => filesize($filepath), // dosya boyutu
-                    "modified" => date("Y-m-d H:i:s", filemtime($filepath)), // dosya değiştirilme tarihi
-                    "path" => $filepath // dosya yolu
-                ];
+                // istenen dosyalar boşsa ya da dizin içinde varsa
+                if(stripos($file, $argfile) !== false) {
+                    $filepath = ($user_dir . $file); // dosya yolu
+
+                    $file_datas[] = [
+                        "name" => $file, // dosya adı
+                        "size" => filesize($filepath), // dosya boyutu
+                        "modified" => date("Y-m-d H:i:s", filemtime($filepath)), // dosya değiştirilme tarihi
+                        "path" => FileConfig::getStorageUrl() . $file // dosya yolu
+                    ];
+                }
+            }
+        }
+        // çoklu dosyalar için
+        else {
+            // döngüyle teker teker alsın
+            foreach($user_files as $file) {
+                // normal dosya değilse sonraki tura geçsin
+                if($file === "." || $file === "..") continue;
+            
+                // istenen dosyalar boşsa ya da dizin içinde varsa
+                if($argFileDatas === null || in_array($file, $argFileDatas)) {
+                    $filepath = ($user_dir . $file); // dosya yolu
+                
+                    $file_datas[] = [
+                        "name" => $file, // dosya adı
+                        "size" => filesize($filepath), // dosya boyutu
+                        "modified" => date("Y-m-d H:i:s", filemtime($filepath)), // dosya değiştirilme tarihi
+                        "path" => $filepath // dosya yolu
+                    ];
+                }
             }
         }
 

@@ -4,7 +4,13 @@ namespace FileApi\v1\Kernel;
 
 // Gerekli Sınıflar
 use FileApi\v1\Core\Methods as Methods;
-use FileApi\v1\Core\FileOperations as FileOperations;
+use FileApi\v1\Core\FileOperations as FileRequest;
+use FileApi\v1\Includes\Param\FileParams as FileParams;
+
+// Oturum Sınıflar
+use SessionApi\v1\Core\Methods as SessionMethods;
+use SessionApi\v1\Core\SessionRequest as SessionRequest;
+use SessionApi\v1\Core\SessionError as SessionError;
 
 // Geçerli saat dilimi
 date_default_timezone_set('Europe/Istanbul'); // Türkiye saati
@@ -41,18 +47,51 @@ if(!in_array($RequestMethod, $Methods)) {
     exit;
 }
 
+// Oturum sorgu
+$SessionRequest = new SessionRequest();
+
+// Oturum yoksa işlem yapılmasın
+if(empty($SessionRequest->Request(
+    SessionMethods::getFetch(),
+    NULL,
+    NULL))
+)
+{
+    // kullanıcıya ait oturum yok
+    die(json_encode(SessionError::getAutoErrorSessionUserIdNotFound(), JSON_UNESCAPED_UNICODE));
+}
+
 // Post verisi, Get verisi
 $PostData = (array)json_decode(file_get_contents("php://input"), true);
 
-// Dosya sorguları yaptıran sınıf nesnesi
-$FileOperations = new FileOperations();
+// Gelen verileri depolama
+$StoreData = $PostData[FileParams::getFilename()] ?? null;
 
-// Sorgu yaptırma
-$ResultRequest = $FileRequest->Request(
-    $RequestMethod,
-    $_FILES,
-    NULL
-);
+// Dosya sorguları yaptıran sınıf nesnesi
+$FileRequest = new FileRequest();
+
+// Türüne göre sorgu yaptırma
+switch($RequestMethod)
+{
+    // dosya yükleme
+    case Methods::getUpload():
+        $ResultRequest = $FileRequest->Request(
+            $RequestMethod,
+            $_FILES,
+            NULL
+        );
+    break;
+    // diğer
+    default:
+        $ResultRequest = $FileRequest->Request(
+            $RequestMethod,
+            !empty($StoreData) ? (array)$StoreData : NULL,
+            NULL
+        );
+}
+
+// boşsa null yapsın
+if(empty($ResultRequest)) $ResultRequest = null;
 
 // Sonucu Json objesi olarak döndür
 die(json_encode($ResultRequest, JSON_UNESCAPED_UNICODE));

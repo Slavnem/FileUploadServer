@@ -13,7 +13,7 @@ final class FileConfig {
 
     // Dosya URL Yolunu Getirtme
     final public static function getStorageUrl(): ?string {
-        return ($_SERVER['SERVER_NAME'] . "/Storage/");
+        return ($_SERVER['HTTP_HOST'] . "/Storage/");
     }
 
     // Dosya Boyutu

@@ -66,7 +66,7 @@ $user_files = $FileRequest->Request(
                         <p>Dosya Adı: $temp_name</p>
                         <p>Boyut: $temp_size</p>
                         <p>Son Değiştirilme: $temp_modified</p>
-                        <!-- <a href=\"$temp_url\" download>İndir</a> -->
+                        <p>Url: $temp_url</p>
                     </div>";
                 }
             }
