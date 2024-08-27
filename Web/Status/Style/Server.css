@@ -3,7 +3,7 @@
     /* ERROR PAGES -> 400 */
 
     --error-page-background:
-        url("/asset/background/wallpaper-cartoon-network-adventure-time-cartoon-d0-05-04-2024-19-30.webp");
+        url("/Asset/background/wallpaper-cartoon-network-adventure-time-cartoon-d0-05-04-2024-19-30.webp");
     --error-page-bgcolor: rgba(18,18,18, 1);
     --error-page-color: #fefefe;
     --error-page-font-family: sans-serif;
@@ -13,7 +13,7 @@
 
     /* SERVER ERROR PAGES -> 500 */
     --server-error-page-background:
-        url("/asset/background/wallpaper-scoobydoo-d0-04-08-2024-02-58.webp");
+        url("/Asset/background/wallpaper-scoobydoo-d0-04-08-2024-02-58.webp");
     --server-error-page-bgcolor: rgba(18,18,18, 1);
     --server-error-page-color: #fefefe;
     --server-error-page-font-family: sans-serif;
