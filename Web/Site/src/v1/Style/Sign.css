@@ -1,0 +1,243 @@
+/* Import */
+@import url("Root.css");
+
+.signmain {
+    width: 100%;
+    height: 100dvh;
+    display: flex;
+    position: relative;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+    /*background: rgba(var(--theme-rgb-color-theme), 1);*/
+    background:
+        linear-gradient(135deg, rgba(0,0,0, 0.9), rgba(36,36,36, 0.3)),
+        url("/Asset/background/wallpaper-ducks-d0-25-03-2024-14-46.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    font-family: var(--root-font-family-elite);
+}
+
+.signarea {
+    width: clamp(140px, 90%, 500px);
+    height: auto;
+    display: flex;
+    position: relative;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--theme-hex-color-theme);
+    background: rgba(var(--theme-rgb-color-opposite), 1);
+    border: 0;
+    border-radius: 0.25rem;
+    backdrop-filter: blur(1rem);
+    padding: clamp(0.5rem, 10dvh, 4rem) clamp(0.25rem, 5vw, 2rem);
+    margin: 0;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.titlearea,
+.inputarea,
+.submitarea,
+.redirectarea {
+    width: 100%;
+    height: auto;
+    display: flex;
+    position: relative;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: clamp(0.25rem, 5dvh, 0.75rem) 0;
+    margin: clamp(0.125rem, 2dvh, 0.125rem) 0 0 0;
+}
+
+.titlearea {
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border: 0;
+    border-radius: 1.25rem;
+    color: var(--theme-hex-color-theme);
+    background: rgba(var(--theme-rgb-color-theme), 0);
+}
+
+.titlearea_textarea {
+    display: flex;
+    position: relative;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.titlearea_textarea .textarea_title {
+    background: transparent;
+    font-size: clamp(1.5rem, 10vw, 2.5rem);
+    padding: 0;
+    margin: clamp(0.125rem, 5dvh, 0.25rem) 0;
+}
+
+.titlearea_textarea .textarea_description {
+    background: transparent;
+    font-size: clamp(0.9rem, 5vw, 1.1rem);
+    padding: 0;
+    margin: clamp(0.125rem, 5dvh, 0.25rem) 0;
+}
+
+.inputarea {
+    color: var(--theme-hex-color-theme);
+    background: transparent;
+}
+
+.inputarea .input_data {
+    width: 100%;
+    height: auto;
+    display: flex;
+    position: relative;
+    flex-wrap: wrap;
+    flex-direction: row;
+    color: var(--theme-hex-color-theme);
+    background: rgba(var(--theme-rgb-color-theme-low), 0.15);
+    outline: 0;
+    border: 0;
+    border-radius: 1rem;
+    font-size: clamp(0.8rem, 3vw, 0.9rem);
+    font-family: var(--root-font-family-elite);
+    outline: 2px solid rgba(var(--theme-rgb-color-theme-low), 0.25);
+    padding: clamp(0.25rem, 5dvh, 0.75rem) clamp(0.5rem, 10%, 1rem);
+    margin: clamp(0.125rem, 4dvh, 0.25rem) 0;
+}
+
+.input_data:not(:placeholder-shown):invalid {
+    outline-color: var(--color-hex-base-red);
+}
+
+.input_data:not(:placeholder-shown):valid {
+    outline-color: var(--color-hex-base-green);
+}
+
+.input_data:focus:invalid {
+    outline-color: var(--color-hex-base-orange);
+}
+
+.submitarea {
+    padding: 0;
+    margin: clamp(0.25rem, 5dvh, 0.75rem) 0 clamp(0.125rem, 2dvh, 0.125rem) 0;
+}
+
+.submitarea .input_submitbtn {
+    width: 100%;
+    height: auto;
+    display: block;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--theme-hex-color-opposite);
+    background: rgba(var(--theme-rgb-color-theme), 1);
+    border: 0;
+    border-radius: 1rem;
+    font-size: clamp(0.8rem, 5vw, 0.9rem);
+    font-family: var(--root-font-family-elite);
+    padding: clamp(0.25rem, 5dvh, 0.75rem) clamp(0.5rem, 10%, 2.5rem);
+    margin: 0;
+}
+
+.input_submitbtn:hover {
+    color: var(--color-hex-light-white);
+    background: rgba(var(--color-rgb-base-red-v2), 1);
+    box-shadow: 0 0 10px 0px rgba(var(--color-rgb-light-red), 0.25);
+    transition: 240ms linear;
+}
+
+.redirectarea .redirect_btn {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    color: var(--theme-hex-color-opposite);
+    background: transparent;
+    border: 0;
+    border-radius: 1rem;
+    font-size: clamp(0.8rem, 3vw, 0.9rem);
+    padding: clamp(0.25rem, 5dvh, 0.75rem) clamp(0.5rem, 10%, 2.5rem);
+    margin: 0;
+}
+
+.redirect_btn:hover {
+    color: var(--theme-hex-color-theme);
+    background: rgba(var(--theme-rgb-color-opposite), 1);
+    box-shadow: 0 0 10px 0px rgba(var(--theme-rgb-color-theme-low), 0.25);
+    transition: 240ms linear;
+}
+
+.statusarea {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0;
+    margin: clamp(0.25rem, 5dvh, 0.5rem) 0;
+}
+
+.statusarea .status-send {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border: 0;
+    border-radius: 1rem;
+    padding: clamp(0.25rem, 5dvh, 1rem) clamp(0.5rem, 5%, 1rem);
+    margin: 0.125rem 0;
+}
+
+.status-send h3 {
+    font-size: clamp(0.9rem, 3vw, 1.1rem);
+}
+
+.status-send p {
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    margin: 0.125rem 0 0 0;
+}
+
+.status-send[data-status-type="error"] {
+    color: var(--color-hex-light-white);
+    background: rgba(var(--color-rgb-base-red-v2), 1);
+    box-shadow: 0 0 10px 0px rgba(var(--color-rgb-base-red-v2), 0.25);
+}
+
+.status-send[data-status-type="warning"] {
+    color: var(--color-hex-light-white);
+    background: rgba(var(--color-rgb-dark-orange), 1);
+    box-shadow: 0 0 10px 0px rgba(var(--color-rgb-dark-orange), 0.25);
+}
+
+.status-send[data-status-type="success"] {
+    color: var(--color-hex-light-white);
+    background: rgba(var(--color-rgb-dark-green), 1);
+    box-shadow: 0 0 10px 0px rgba(var(--color-rgb-dark-green), 0.25);
+}
+
+.status-send[data-status-type="info"] {
+    color: var(--color-hex-light-white);
+    background: rgba(var(--color-rgb-light-navyblue), 1);
+    box-shadow: 0 0 10px 0px rgba(var(--color-rgb-light-navyblue), 0.25);
+}
