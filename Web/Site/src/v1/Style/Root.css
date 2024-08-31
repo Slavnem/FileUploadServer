@@ -1,6 +1,3 @@
-/* Import */
-@import url("Font.css");
-
 /* ROOT */
 :root {
     /* GLOBAL */
@@ -124,40 +121,12 @@
     --color-rgb-dark-yellow: 253,180,75;
     --color-rgb-base-yellow: 249,178,72;
 
-    /* STATIC */
-    --color-static-hex-primary: var(--color-hex-light-red-v2);
-    --color-static-hex-secondary: var(--color-hex-light-orange);
-    --color-static-hex-third: var(--color-hex-dark-green);
-    --color-static-hex-fourth: var(--color-hex-light-purple);
-    --color-static-hex-fifth: var(--color-hex-extra-light-navyblue);
-
-    --color-static-rgb-primary: var(--color-rgb-light-red-v2);
-    --color-static-rgb-secondary: var(--color-rgb-light-orange);
-    --color-static-rgb-third: var(--color-rgb-dark-green);
-    --color-static-rgb-fourth: var(--color-rgb-light-purple);
-    --color-static-rgb-fifth: var(--color-rgb-extra-light-navyblue);
-
     /* LINEAR */
     --color-linear-green-teal: linear-gradient(90deg, rgba(11,150,17,1) 0%, rgba(40,255,67,1) 100%);
     --color-linear-red-lightred: linear-gradient(90deg, rgba(228,0,0,1) 0%, rgba(255,59,59,1) 100%);
     --color-linear-orange-yellow: linear-gradient(90deg, rgba(255,104,0,1) 0%, rgba(255,156,0,1) 100%);
     --color-linear-gray-black: linear-gradient(90deg, rgba(23,23,23,1) 0%, rgba(44,44,44,1) 100%);
     --color-linear-white-gray: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(166,166,166,1) 100%);
-
-    /* GLOBAL FONTS */
-    --root-font-family-elite: "font-aeronaut";
-    --root-font-family-prime: "font-aeronaut";
-
-    /* THEME COLOR AUTO */
-    --theme-hex-color-theme: var(--color-hex-base-black);
-    --theme-hex-color-theme-low: var(--color-hex-extra-light-black);
-    --theme-hex-color-opposite: var(--color-hex-base-white-v2);
-    --theme-hex-color-opposite-low: var(--color-hex-light-white);
-
-    --theme-rgb-color-theme: var(--color-rgb-base-black);
-    --theme-rgb-color-theme-low: var(--color-rgb-extra-light-black);
-    --theme-rgb-color-opposite: var(--color-rgb-base-white-v2);
-    --theme-rgb-color-opposite-low: var(--color-rgb-light-white);
 }
 
 /* AUTO */
@@ -171,70 +140,12 @@
     color-scheme: dark light;
 }
 
-/* LIGHT THEME */
-@media(prefers-color-scheme: light) {
-    :root {
-        color-scheme: light;
-
-        /* THEME COLOR */
-        --theme-hex-color-theme: var(--color-hex-extra-light-white);
-        --theme-hex-color-theme-low: var(--color-hex-base-white-v2);
-        --theme-hex-color-opposite: var(--color-hex-light-black);
-        --theme-hex-color-opposite-low: var(--color-hex-light-black);
-
-        --theme-rgb-color-theme: var(--color-rgb-extra-light-white);
-        --theme-rgb-color-theme-low: var(--color-rgb-base-white-v2);
-        --theme-rgb-color-opposite: var(--color-rgb-light-black);
-        --theme-rgb-color-opposite-low: var(--color-rgb-light-black);
-    }
-}
-
 html[data-color-theme="light"] {
     color-scheme: light;
-
-    /* THEME COLOR */
-    --theme-hex-color-theme: var(--color-hex-extra-light-white);
-    --theme-hex-color-theme-low: var(--color-hex-base-white-v2);
-    --theme-hex-color-opposite: var(--color-hex-light-black);
-    --theme-hex-color-opposite-low: var(--color-hex-light-black);
-
-    --theme-rgb-color-theme: var(--color-rgb-extra-light-white);
-    --theme-rgb-color-theme-low: var(--color-rgb-base-white-v2);
-    --theme-rgb-color-opposite: var(--color-rgb-light-black);
-    --theme-rgb-color-opposite-low: var(--color-rgb-light-black);
-}
-
-/* DARK THEME */
-@media(prefers-color-scheme: dark) {
-    :root {
-        color-scheme: dark;
-
-        /* THEME COLOR */
-        --theme-hex-color-theme: var(--color-hex-dark-black);
-        --theme-hex-color-theme-low: var(--color-hex-base-black);
-        --theme-hex-color-opposite: var(--color-hex-base-white-v2);
-        --theme-hex-color-opposite-low: var(--color-hex-light-white);
-
-        --theme-rgb-color-theme: var(--color-rgb-dark-black);
-        --theme-rgb-color-theme-low: var(--color-rgb-base-black);
-        --theme-rgb-color-opposite: var(--color-rgb-base-white-v2);
-        --theme-rgb-color-opposite-low: var(--color-rgb-light-white);
-    }
 }
 
 html[data-color-theme="dark"] {
     color-scheme: dark;
-
-    /* THEME COLOR */
-    --theme-hex-color-theme: var(--color-hex-dark-black);
-    --theme-hex-color-theme-low: var(--color-hex-extra-light-black);
-    --theme-hex-color-opposite: var(--color-hex-base-white-v2);
-    --theme-hex-color-opposite-low: var(--color-hex-light-white);
-
-    --theme-rgb-color-theme: var(--color-rgb-dark-black);
-    --theme-rgb-color-theme-low: var(--color-rgb-extra-light-black);
-    --theme-rgb-color-opposite: var(--color-rgb-base-white-v2);
-    --theme-rgb-color-opposite-low: var(--color-rgb-light-white);
 }
 
 /* ALL */
@@ -247,18 +158,17 @@ html[data-color-theme="dark"] {
 
 /* BODY */
 body {
+    width: 100%;
+    height: auto;
     color: var(--color-hex-light-white);
-    background: rgba(var(--color-hex-base-black), 1);
+    background: rgba(var(--color-rgb-dark-black), 1);
     overflow-x: hidden;
 }
 
-a, button {
+a, button, select, label {
     text-decoration: none;
-    cursor: pointer;
-}
-
-a, button, select {
     outline: none;
+    cursor: pointer;
 }
 
 ul, li {

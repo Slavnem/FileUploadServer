@@ -1,5 +1,17 @@
-/* Import */
+/* Root */
 @import url("Root.css");
+
+/* Font */
+@import url("Fonts/OpenSans.css");
+
+/* Status */
+@import url("Status.css");
+
+/* ROOT */
+:root {
+    --signcss-font-family: "font-opensans-regular";
+    --signcss-font-family-bold: "font-opensans-bold";
+}
 
 .signmain {
     width: 100%;
@@ -21,7 +33,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    font-family: var(--root-font-family-elite);
+    font-family: var(--signcss-font-family);
 }
 
 .signarea {
@@ -34,15 +46,20 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    color: var(--theme-hex-color-theme);
-    background: rgba(var(--theme-rgb-color-opposite), 1);
+    color: var(--color-hex-light-white);
+    background: rgba(var(--color-rgb-dark-black), 1);
     border: 0;
-    border-radius: 0.25rem;
+    border-radius: 0.5rem;
     backdrop-filter: blur(1rem);
     padding: clamp(0.5rem, 10dvh, 4rem) clamp(0.25rem, 5vw, 2rem);
     margin: 0;
     overflow: hidden;
     z-index: 0;
+}
+
+.signmainarea {
+    width: 90%;
+    height: auto;
 }
 
 .titlearea,
@@ -58,7 +75,7 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: clamp(0.25rem, 5dvh, 0.75rem) 0;
+    padding: clamp(0.25rem, 2dvh, 0.5rem) 0;
     margin: clamp(0.125rem, 2dvh, 0.125rem) 0 0 0;
 }
 
@@ -67,10 +84,10 @@
     align-items: center;
     justify-content: center;
     text-align: center;
+    color: var(--color-hex-light-white);
+    background: rgba(var(--color-rgb-dark-black), 1);
     border: 0;
     border-radius: 1.25rem;
-    color: var(--theme-hex-color-theme);
-    background: rgba(var(--theme-rgb-color-theme), 0);
 }
 
 .titlearea_textarea {
@@ -95,8 +112,9 @@
 }
 
 .inputarea {
-    color: var(--theme-hex-color-theme);
+    color: var(--color-hex-light-white);
     background: transparent;
+    gap: 0.25rem;
 }
 
 .inputarea .input_data {
@@ -106,14 +124,13 @@
     position: relative;
     flex-wrap: wrap;
     flex-direction: row;
-    color: var(--theme-hex-color-theme);
-    background: rgba(var(--theme-rgb-color-theme-low), 0.15);
-    outline: 0;
+    color: var(--color-hex-base-white);
+    background: rgba(var(--color-rgb-light-black), 0.75);
+    outline: 2px solid rgba(var(--color-rgb-light-white), 0.25);
     border: 0;
     border-radius: 1rem;
-    font-size: clamp(0.8rem, 3vw, 0.9rem);
-    font-family: var(--root-font-family-elite);
-    outline: 2px solid rgba(var(--theme-rgb-color-theme-low), 0.25);
+    font-size: clamp(0.7rem, 3vw, 0.9rem);
+    font-family: var(--signcss-font-family-bold);
     padding: clamp(0.25rem, 5dvh, 0.75rem) clamp(0.5rem, 10%, 1rem);
     margin: clamp(0.125rem, 4dvh, 0.25rem) 0;
 }
@@ -143,101 +160,50 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    color: var(--theme-hex-color-opposite);
-    background: rgba(var(--theme-rgb-color-theme), 1);
+    color: var(--color-hex-base-black);
+    background: rgba(var(--color-rgb-light-white), 1);
     border: 0;
     border-radius: 1rem;
     font-size: clamp(0.8rem, 5vw, 0.9rem);
-    font-family: var(--root-font-family-elite);
+    font-family: var(--signcss-font-family-bold);
     padding: clamp(0.25rem, 5dvh, 0.75rem) clamp(0.5rem, 10%, 2.5rem);
     margin: 0;
 }
 
-.input_submitbtn:hover {
+.submitarea .input_submitbtn:hover {
     color: var(--color-hex-light-white);
     background: rgba(var(--color-rgb-base-red-v2), 1);
-    box-shadow: 0 0 10px 0px rgba(var(--color-rgb-light-red), 0.25);
-    transition: 240ms linear;
-}
-
-.redirectarea .redirect_btn {
-    width: 100%;
-    height: auto;
-    display: flex;
-    flex-wrap: wrap;
-    color: var(--theme-hex-color-opposite);
-    background: transparent;
-    border: 0;
-    border-radius: 1rem;
-    font-size: clamp(0.8rem, 3vw, 0.9rem);
-    padding: clamp(0.25rem, 5dvh, 0.75rem) clamp(0.5rem, 10%, 2.5rem);
-    margin: 0;
-}
-
-.redirect_btn:hover {
-    color: var(--theme-hex-color-theme);
-    background: rgba(var(--theme-rgb-color-opposite), 1);
-    box-shadow: 0 0 10px 0px rgba(var(--theme-rgb-color-theme-low), 0.25);
+    box-shadow: 0 0 10px 0px rgba(var(--color-rgb-base-red), 0.25);
     transition: 240ms linear;
 }
 
 .statusarea {
-    width: 100%;
-    height: auto;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 0;
-    margin: clamp(0.25rem, 5dvh, 0.5rem) 0;
+    position: relative;
+    top: 0;
+    transform: translateY(0);
 }
 
-.statusarea .status-send {
-    width: 100%;
-    height: auto;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    border: 0;
-    border-radius: 1rem;
-    padding: clamp(0.25rem, 5dvh, 1rem) clamp(0.5rem, 5%, 1rem);
-    margin: 0.125rem 0;
-}
+/* THEME: LIGHT */
+@media(prefers-color-scheme: light) {
+    .signarea,
+    .titlearea {
+        color: var(--color-hex-base-black);
+        background: rgba(var(--color-rgb-light-white), 1);
+    }
 
-.status-send h3 {
-    font-size: clamp(0.9rem, 3vw, 1.1rem);
-}
+    .inputarea {
+        color: var(--color-hex-base-black);
+        background: transparent;
+    }
 
-.status-send p {
-    font-size: clamp(0.9rem, 2vw, 1rem);
-    margin: 0.125rem 0 0 0;
-}
+    .inputarea .input_data {
+        color: var(--color-hex-base-black);
+        background: rgba(var(--color-rgb-base-black), 0.1);
+        outline-color: rgba(var(--color-rgb-base-black), 0.2);
+    }
 
-.status-send[data-status-type="error"] {
-    color: var(--color-hex-light-white);
-    background: rgba(var(--color-rgb-base-red-v2), 1);
-    box-shadow: 0 0 10px 0px rgba(var(--color-rgb-base-red-v2), 0.25);
-}
-
-.status-send[data-status-type="warning"] {
-    color: var(--color-hex-light-white);
-    background: rgba(var(--color-rgb-dark-orange), 1);
-    box-shadow: 0 0 10px 0px rgba(var(--color-rgb-dark-orange), 0.25);
-}
-
-.status-send[data-status-type="success"] {
-    color: var(--color-hex-light-white);
-    background: rgba(var(--color-rgb-dark-green), 1);
-    box-shadow: 0 0 10px 0px rgba(var(--color-rgb-dark-green), 0.25);
-}
-
-.status-send[data-status-type="info"] {
-    color: var(--color-hex-light-white);
-    background: rgba(var(--color-rgb-light-navyblue), 1);
-    box-shadow: 0 0 10px 0px rgba(var(--color-rgb-light-navyblue), 0.25);
+    .submitarea .input_submitbtn {
+        color: var(--color-hex-light-white);
+        background: rgba(var(--color-rgb-base-black), 1);
+    }
 }

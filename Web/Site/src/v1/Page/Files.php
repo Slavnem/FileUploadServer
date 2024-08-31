@@ -24,6 +24,7 @@ if(!$SessionRequest->isSession())
 }
 
 $SvgUpload = '<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 24 24" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path fill="none" d="M0 0h24v24H0z"></path><path d="M19.35 10.04A7.49 7.49 0 0 0 12 4C9.11 4 6.6 5.64 5.35 8.04A5.994 5.994 0 0 0 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"></path></svg>';
+$SvgLogout = '<svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M400 54.1c63 45 104 118.6 104 201.9 0 136.8-110.8 247.7-247.5 248C120 504.3 8.2 393 8 256.4 7.9 173.1 48.9 99.3 111.8 54.2c11.7-8.3 28-4.8 35 7.7L162.6 90c5.9 10.5 3.1 23.8-6.6 31-41.5 30.8-68 79.6-68 134.9-.1 92.3 74.5 168.1 168 168.1 91.6 0 168.6-74.2 168-169.1-.3-51.8-24.7-101.8-68.1-134-9.7-7.2-12.4-20.5-6.5-30.9l15.8-28.1c7-12.4 23.2-16.1 34.8-7.8zM296 264V24c0-13.3-10.7-24-24-24h-32c-13.3 0-24 10.7-24 24v240c0 13.3 10.7 24 24 24h32c13.3 0 24-10.7 24-24z"></path></svg>';
 ?>
 <!DOCTYPE html>
 <html>
@@ -38,7 +39,33 @@ $SvgUpload = '<svg stroke="currentColor" fill="currentColor" stroke-width="0" vi
         <link rel="stylesheet" href="/Site/src/v1/Style/Files.css">
     </head>
     <body>
-        <h1>Dosya İşlemleri</h1>
+        <!-- SEARCH -->
+        <div id="id_searcharea"
+            name="searcharea"
+            class="searcharea">
+                <a id="id_btnlogout"
+                    name="btnlogout"
+                    href="/auth/logout"
+                    class="btn btnlogout">
+                    <?php print($SvgLogout); ?>
+                </a>
+
+                <input type="text"
+                    autocomplete="on"
+                    id="id_filename"
+                    name="filename"
+                    class="input_data input_filename"
+                    placeholder="Abcd.txt"
+                    title="Dosyayı Ara" />
+
+            <button type="button"
+                id="id_btnfilesearch"
+                name="btnfilesearch"
+                data-dom-event-listen="true"
+                class="btnsearch btnfilesearch">
+                Araştır
+            </button>
+        </div>
 
         <!-- UPLOAD -->
         <div id="id_filesuploadarea"
@@ -59,10 +86,10 @@ $SvgUpload = '<svg stroke="currentColor" fill="currentColor" stroke-width="0" vi
                     class="labelfileupload">
                 </label>
 
-                <div id="id_filelist"
+                <ul id="id_filelist"
                     name="filelist"
                     class="list filelist">
-                </div>
+                </ul>
             </div>
 
             <div id="id_fileprogressbararea"
@@ -80,8 +107,9 @@ $SvgUpload = '<svg stroke="currentColor" fill="currentColor" stroke-width="0" vi
                 <button type="button"
                     id="id_btnfileupload"
                     name="btnfileupload"
-                    class="btnupload btnfilesupload">
-                    <span><?php print($SvgUpload); ?></span>Yükle
+                    class="btnfileupload btnuploadfiles">
+                    <?php print($SvgUpload); ?>
+                    <span name="btnfileupload_text">Yükle</span>
                 </button>
             </div>
         </div>
@@ -92,28 +120,16 @@ $SvgUpload = '<svg stroke="currentColor" fill="currentColor" stroke-width="0" vi
             class="statusarea">
         </div>
 
-        <!-- SEARCH -->
-        <input type="text"
-            autocomplete="on"
-            id="id_filename"
-            name="infilename"
-            class="input_data input_filename"
-            placeholder="Abcd.txt"
-            title="Dosyayı Ara"
-        />
-
-        <button type="button"
-        id="id_btnfilesearch"
-        name="btninfilesearch"
-        data-dom-event-listen="true"
-        class="btnsearch btnfilesearch">
-            Araştır
-        </button>
-
+        <!-- FILES -->
         <div id="id_filesarea"
             name="filesarea"
             class="files filesarea">
         </div>
+
+        <!-- FOOTER -->
+        <footer>
+            <p>&copy; Slavnem 2024. All rights reserved.</p>
+        </footer>
 
         <!-- JS -->
         <script nonce type="module" src="/Site/src/v1/Tool/Page/PageFiles.js"></script>

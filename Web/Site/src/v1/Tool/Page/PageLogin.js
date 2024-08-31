@@ -9,8 +9,8 @@ import {
 } from "../../Data/SessionData.js";
 
 // Başlık ve Karşılama metini
-const elementTitle = document.querySelector(`[name="title"]`) || null;
-const elementDescription = document.querySelector(`[name="description"]`) || null;
+const elementTitle = document.querySelector(`h1[name="title"]`) || null;
+const elementDescription = document.querySelector(`p[name="description"]`) || null;
 
 // Giriş yapma butonu
 const elementSubmitBtn = document.querySelector(`button[name="btnsubmit"]`) || null;
@@ -28,6 +28,8 @@ const elementInputPassword = document.querySelector(`input[name="inpassword"]`) 
 const elementStatusArea = document.querySelector(`div[name="statusarea"]`) || null;
 
 // metin ayarlamaları
+document.title = String(MyLanguageData.login || "Giriş Yap");
+
 if(elementTitle) elementTitle.textContent = String(MyLanguageData.login || "Giriş Yap");
 if(elementDescription) elementDescription.textContent = String(MyLanguageData.welcometoserver || "Dosya Sunucusuna Hoşgeldiniz!");
 

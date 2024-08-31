@@ -158,7 +158,7 @@ export class MyFiles {
 
         // buton oluştur ve sınıf ata
         const elementButtonAbort = document.createElement('button');
-        elementButtonAbort.setAttribute("class", "fileuploadbtn fileuploadbtn_abort");
+        elementButtonAbort.setAttribute("class", "btnfileupload btnuploadfiles_abort");
         elementButtonAbort.innerHTML = SvgCancel;
 
         // buton bölgesi varsa
@@ -175,6 +175,12 @@ export class MyFiles {
             });
         }
 
+        // yüzde değerini yazmak için element
+        const elementUploadText = document.createElement('span');
+
+        // elementi içe aktar
+        progressbar.appendChild(elementUploadText);
+
         // tamamlanmış yüzde
         var percentCompleted = 0;
 
@@ -182,20 +188,25 @@ export class MyFiles {
         request.upload.addEventListener('progress', (event) => {
             percentCompleted = Math.round((event.loaded / event.total) * 100);
             progressbar.style.width = percentCompleted + '%';
-            progressbar.innerHTML = percentCompleted + `% ${String(MyLanguageData.percentcompleted) || "Tamamlandı"}`;
+            elementUploadText.textContent = percentCompleted + '%';
+
+            // elementUploadText.textContent = percentCompleted + `% ${String(MyLanguageData.percentcompleted) || "Tamamlandı"}`;
         });
 
         // gönder
         request.send(formData);
 
-        // yükleme barını sıfırlasın
-        setTimeout(function() {
-            progressbar.style.display = "none";
-        }, 1500);
-
         return new Promise((resolve) => {
             // işlem sonlanması
             request.onloadend = function() {
+                // yüzde değerini sil ve yükleyiciyi sıfırla
+                setTimeout(function() {
+                    progressbar.style.width = "0%";
+                    progressbar.style.display = "none";
+                    
+                    elementUploadText.remove();
+                }, 1500);
+
                 // tamamı yüklendi
                 if(percentCompleted >= 100) {
                     elementButtonAbort.remove(); // butonu sil
@@ -249,30 +260,48 @@ export class MyFiles {
         // döngüyle dosyalar bitene kadar eklesin
         files.forEach(element => {
             // elementler
-            const elementFile = document.createElement("div");
+            const elementFile = document.createElement('div');
+            const elementFileInfoArea = document.createElement('div');
+            const elementFileTextArea = document.createElement('div');
+            const elementFileBtnArea = document.createElement('div');
+
             const elementFileName = document.createElement('h3');
-            const elementFilePath = document.createElement('p');
             const elementFileModified = document.createElement('span');
             const elementFileSize = document.createElement('span');
             
             // elementlere sınıf ata
             elementFile.setAttribute("class", "files_file");
             elementFileName.setAttribute("class", "files_filename");
-            elementFilePath.setAttribute("class", "files_filepath");
             elementFileModified.setAttribute("class", "files_filemodified");
             elementFileSize.setAttribute("class", "files_filesize");
 
+            // dosya yolu
+            elementFile.setAttribute("data-file-path", String(element.path || ""));
+
+            // bölümler
+            elementFileInfoArea.setAttribute("class", "file_infoarea");
+            elementFileTextArea.setAttribute("class", "file_textarea");
+            elementFileBtnArea.setAttribute("class", "file_btnarea");
+
             // elementlere değer ata
             elementFileName.textContent = String(element.name) || null;
-            elementFilePath.textContent = String(element.path) || null;
             elementFileModified.textContent = String(element.modified) || null;
             elementFileSize.textContent = String(Global.getFileSize(element.size)) || null;
 
-            // diğer elementleri ana elemanın içine ata
-            elementFile.appendChild(elementFileName);
-            elementFile.appendChild(elementFilePath);
-            elementFile.appendChild(elementFileModified);
-            elementFile.appendChild(elementFileSize);
+            // bölümleri ana elementin içine aktar
+            elementFile.appendChild(elementFileInfoArea);
+            elementFile.appendChild(elementFileTextArea);
+            elementFile.appendChild(elementFileBtnArea);
+
+            // dosya zamanı ve boyutu
+            elementFileInfoArea.appendChild(elementFileModified);
+            elementFileInfoArea.appendChild(elementFileSize);
+
+            // dosya adı
+            elementFileTextArea.appendChild(elementFileName);
+
+            // elemanı ana objenin içine ekle
+            elementFilesArea.appendChild(elementFile);
 
             // indirme butonu istenip istenmeme durumu
             switch(downloadbtn) {
@@ -286,14 +315,15 @@ export class MyFiles {
 
                     elementFileDownloadBtn.innerHTML = SvgDownload; // indirme metini
                     elementFileDownloadBtn.title = String(MyLanguageData.download || "İndir"); // indirme metini
-                    elementFileDownloadBtn.setAttribute("class", "files_filedownloadbtn"); // sınıf ata
-                    elementFile.appendChild(elementFileDownloadBtn); // ana elementin içine aktar
+                    elementFileDownloadBtn.setAttribute("class", "filesbtn files_filedownloadbtn"); // sınıf ata
+                    elementFileBtnArea.appendChild(elementFileDownloadBtn); // ana elementin içine aktar
 
                     // butona tıklama
                     elementFileDownloadBtn.addEventListener("click", async () => {
                         try {
-                            // mesaj kutusu versin
-                            const resultChoice = await Global.getMessageBox(
+                            /*
+                                // mesaj kutusu versin
+                                const resultChoice = await Global.getMessageBox(
                                 String(MyLanguageData.download || "İndir"),
                                 String(MyLanguageData.downloadfilequestion || "Dosyayı İndirmek İstiyor musunuz?")
                             );
@@ -303,6 +333,10 @@ export class MyFiles {
                                 // dosyayı indir
                                 await MyFiles.Download(element.name);
                             }
+                            */
+
+                            // direk dosyayı indirsin
+                            await MyFiles.Download(element.name);
                         } catch(error) {
                             throw new Error("File Download Task Failed");
                         }
@@ -322,8 +356,8 @@ export class MyFiles {
 
                     elementFileDeleteBtn.innerHTML = SvgDelete; // indirme metini
                     elementFileDeleteBtn.title = String(MyLanguageData.delete || "Sil"); // indirme metini
-                    elementFileDeleteBtn.setAttribute("class", "files_filedeletebtn"); // sınıf ata
-                    elementFile.appendChild(elementFileDeleteBtn); // ana elementin içine aktar
+                    elementFileDeleteBtn.setAttribute("class", "filesbtn files_filedeletebtn"); // sınıf ata
+                    elementFileBtnArea.appendChild(elementFileDeleteBtn); // ana elementin içine aktar
 
                     // butona tıklama
                     elementFileDeleteBtn.addEventListener("click", async () => {
@@ -337,6 +371,9 @@ export class MyFiles {
                             // eğer evet seçilmişse dosyayı silsin
                             if(resultChoice) {
                                 await MyFiles.Delete(element.name); // dosyayı sil
+                                
+                                // nesneyi kaldırsın
+                                elementFile.remove();
                             }
                         } catch(error) {
                             throw new Error("File Delete Task Failed");
@@ -344,25 +381,22 @@ export class MyFiles {
                     });
                 break;
             }
-
-            // elemanı ana objenin içine ekle
-            elementFilesArea.appendChild(elementFile);
         });
     }
 
     // Durum Temizle
     static StatusClear(
-        statusarea // durumların tutulduğu yer
+        element // durumu silinmek istenen element
     )
     {
         // element yoksa hata
-        if(!statusarea) {
-            console.error("Status Area Element Not Found");
+        if(!element) {
+            console.error("Element Not Found");
             return false;
         }
 
         // içini temizle
-        statusarea.innerHTML = null;
+        element.innerHTML = null;
     }
 
     // Durum Ekle
@@ -385,13 +419,6 @@ export class MyFiles {
             return false;
         }
 
-        // önceki durumları temizlesin
-        if(statusclear) {
-            setTimeout(function() {
-                MyFiles.StatusClear(statusarea);
-            }, 2000);
-        }
-
         // element oluştursun
         const elementNewStatus = document.createElement("div");
         const elementStatusTitle = document.createElement("h3");
@@ -411,5 +438,12 @@ export class MyFiles {
 
         // içine veriyi eklesin
         statusarea.appendChild(elementNewStatus);
+
+        // belirli süre sonra silsin
+        if(statusclear) {
+            setTimeout(function() {
+                elementNewStatus.remove();
+            }, 2400);
+        }
     }
 }

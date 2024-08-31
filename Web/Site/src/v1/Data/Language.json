@@ -5,6 +5,7 @@
         "email": "E-Posta",
         "password": "Şifre",
         "login": "Giriş Yap",
+        "logout": "Çıkış Yap",
         "download": "İndir",
         "upload": "Yükle",
         "delete": "Sil",
@@ -29,10 +30,13 @@
         "redirectinfo": "Gerekli Sayfaya Yönlendiriliyorsunuz...",
         "sessionerror": "Oturum Hatası",
         "sessionverifyerror": "Giriş yapıldı fakat oturum doğrulanamadı",
+        "files": "Dosyalar",
         "fileuploadsuccess": "Yükleme Tamamlandı",
         "fileuploadsuccessinfo": "Dosyalarınız sunucuya başarıyla yüklendi",
         "fileuploaderror": "Yükleme Başarısız",
-        "fileuploaderrorinfo": "Dosyalarınız bir hata sonucu ya da istemli olarak yüklenmedi"
+        "fileuploaderrorinfo": "Dosyalarınız bir hata sonucu ya da istemli olarak yüklenmedi",
+        "filenotselected": "Dosya Seçilmedi",
+        "filenotselectedinfo": "Dosya İşlemleri İçin Dosya Seçmeniz Şart"
     },
     "en": {
         "welcometoserver": "Welcome To The File Server!",
@@ -40,6 +44,7 @@
         "email": "Email",
         "password": "Password",
         "login": "Login",
+        "logout": "Logout",
         "download": "Download",
         "upload": "Upload",
         "delete": "Delete",
@@ -64,10 +69,13 @@
         "redirectinfo": "You Are Being Redirected To The Required Page...",
         "sessionerror": "Session Error",
         "sessionverifyerror": "Login was made but session could not be verified",
+        "files": "Files",
         "fileuploadsuccess": "Upload Completed",
         "fileuploadsuccessinfo": "Your files have been successfully uploaded to the server",
         "fileuploaderror": "Upload Failed",
-        "fileuploaderrorinfo": "Your files were not uploaded due to an error or on purpose"
+        "fileuploaderrorinfo": "Your files were not uploaded due to an error or on purpose",
+        "filenotselected": "File Not Selected",
+        "filenotselectedinfo": "File Selection Required for File Operations"
     },
     "ru": {
         "welcometoserver": "Добро Пожаловать На Файловый Сервер!",
@@ -75,6 +83,7 @@
         "email": "Электронная почта",
         "password": "Пароль",
         "login": "Авторизоваться",
+        "logout": "Выход",
         "download": "Скачать",
         "upload": "Загружать",
         "delete": "Удалить",
@@ -99,9 +108,12 @@
         "redirectinfo": "Вы Будете Перенаправлены На Нужную Страницу...",
         "sessionerror": "Ошибка сеанса",
         "sessionverifyerror": "Вход в систему был выполнен, но сеанс не удалось подтвердить",
+        "files": "Файлы",
         "fileuploadsuccess": "Загрузка завершена",
         "fileuploadsuccessinfo": "Ваши файлы были успешно загружены на сервер",
         "fileuploaderror": "Ошибка загрузки",
-        "fileuploaderrorinfo": "Ваши файлы не были загружены из-за ошибки или намеренно"
+        "fileuploaderrorinfo": "Ваши файлы не были загружены из-за ошибки или намеренно",
+        "filenotselected": "Файл не выбран",
+        "filenotselectedinfo": "Выбор файла, необходимого для файловых операций"
     }
 }

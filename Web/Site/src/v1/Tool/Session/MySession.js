@@ -1,16 +1,26 @@
 // Methods
-import * as QueryMethods from "/Site/src/v1/Tool/Global/Methods.js";
+import * as QueryMethods from "../Global/Methods.js";
 
 // URL
-import * as URLs from "/Site/src/v1/Tool/Global/URL.js";
+import * as URLs from "../Global/URL.js";
 
 // Fetch Api JS Service
 import {
     ApiService
-} from "/Site/src/v1/Tool/Global/API.js";
+} from "../Global/API.js";
 
 // Session
 export class MySession {
+    // Oturum değişkenleri
+    static sessionID = "id";
+    static sessionUsername = "username";
+    static sessionEmail = "email";
+    static sessionPassword = "password";
+    static sessionMember = "member";
+    static sessionVerify = "verify";
+    static sessionTheme = "theme";
+    static sessionLanguage = "language";
+
     // Oturum Getirme
     static async Fetch() {
         // oturum verilerini alsın ve döndürsün

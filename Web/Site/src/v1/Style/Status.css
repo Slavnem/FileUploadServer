@@ -1,0 +1,79 @@
+/* Root */
+@import url("Root.css");
+
+/* Open Sans */
+@import url("Fonts/OpenSans.css");
+
+/* ROOT */
+:root {
+    --status_css-font-family: "font-opensans-regular";
+    --status_css-font-family-bold: "font-opensans-bold";
+}
+
+/* Status */
+.statusarea {
+    width: auto;
+    height: auto;
+    position: fixed;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0;
+    margin: 0 clamp(0.25rem, 5dvh, 1rem);
+    right: 0;
+    top: 99%;
+    transform: translate(0%, -99%);
+    z-index: 1;
+}
+
+.statusarea .status-send {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border: 0;
+    border-radius: 1rem;
+    font-family: var(--status_css-font-family-bold);
+    padding: clamp(0.25rem, 5dvh, 1rem) clamp(0.5rem, 5%, 1rem);
+    margin: 0.125rem 0;
+}
+
+.status-send h3 {
+    font-size: clamp(0.9rem, 3vw, 1.1rem);
+}
+
+.status-send p {
+    font-size: clamp(0.8rem, 2vw, 0.9rem);
+    margin: 0.125rem 0 0 0;
+}
+
+.status-send[data-status-type="error"] {
+    color: var(--color-hex-light-white);
+    background: rgba(var(--color-rgb-base-red-v2), 1);
+    box-shadow: 0 0 10px 0px rgba(var(--color-rgb-base-red-v2), 0.25);
+}
+
+.status-send[data-status-type="warning"] {
+    color: var(--color-hex-light-white);
+    background: rgba(var(--color-rgb-dark-orange), 1);
+    box-shadow: 0 0 10px 0px rgba(var(--color-rgb-dark-orange), 0.25);
+}
+
+.status-send[data-status-type="success"] {
+    color: var(--color-hex-light-white);
+    background: rgba(var(--color-rgb-dark-green), 1);
+    box-shadow: 0 0 10px 0px rgba(var(--color-rgb-dark-green), 0.25);
+}
+
+.status-send[data-status-type="info"] {
+    color: var(--color-hex-light-white);
+    background: rgba(var(--color-rgb-light-navyblue), 1);
+    box-shadow: 0 0 10px 0px rgba(var(--color-rgb-light-navyblue), 0.25);
+}

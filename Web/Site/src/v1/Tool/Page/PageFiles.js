@@ -1,3 +1,8 @@
+// Genel
+import {
+    Global
+} from "../Global/Global.js";
+
 // Dosya İşlemleri Sınıfı
 import {
     MyFiles
@@ -12,20 +17,28 @@ import {
 const elementFilesArea = document.querySelector(`div[name="filesarea"]`) || null;
 
 // dosya isim metini
-const elementFileNameInput = document.querySelector(`input[name="infilename"]`) || null;
+const elementFileNameInput = document.querySelector(`input[name="filename"]`) || null;
+
+// kullanıcı çıkış butonu
+const elementLogoutBtn = document.querySelector(`[name="btnlogout"]`) || null;
 
 // dosya araştırma butonu
-const elementFileSearchBtn = document.querySelector(`button[name="btninfilesearch"]`) || null;
+const elementFileSearchBtn = document.querySelector(`button[name="btnfilesearch"]`) || null;
 
 // dosya seçme elementi
+const elementFileUploadArea = document.querySelector(`div[name="filesuploadarea"]`) || null;
 const elementLabelInputFileUpload = document.querySelector(`label[name="labelfileupload"]`) || null;
 const elementInputFileUpload = document.querySelector(`input[type="file"]`) || null;
+
+// dosya listeleme elementi
+const elementFileList = document.querySelector(`ul[name="filelist"]`) || null;
 
 // dosya yükleme işlem buton bölgesi
 const elementFileUploadBtnArea = document.querySelector(`div[name="fileuploadbtnarea"]`) || null;
 
 // dosya yükleme butonu
 const elementFileUploadBtn = document.querySelector(`button[name="btnfileupload"]`) || null;
+const elementFileUploadBtnText = document.querySelector(`button[name="btnfileupload"] span[name="btnfileupload_text"]`) || null;
 
 // dosya yükleme durumu bölgesi elementi
 const elementFileProgressBarArea = document.querySelector(`div[name="uploadprogressbararea"]`) || null;
@@ -37,16 +50,48 @@ const elementFileProgressBar = document.querySelector(`div[name="uploadprogressb
 const elementFileStatusArea = document.querySelector(`div[name="statusarea"]`) || null;
 
 // metin ayarlamaları
+document.title = String(MyLanguageData.files || "Dosyalar");
+
+elementLogoutBtn.title = String(MyLanguageData.logout || "Çıkış Yap");
+
 elementFileSearchBtn.textContent = String(MyLanguageData.search || "Araştır");
 elementFileSearchBtn.title = String(MyLanguageData.search || "Araştır");
 
-elementFileUploadBtn.textContent = String(MyLanguageData.upload || "Yükle");
 elementFileUploadBtn.title = String(MyLanguageData.upload || "Yükle");
+elementFileUploadBtnText.textContent = String(MyLanguageData.upload || "Yükle");
 
 elementFileNameInput.title = String(MyLanguageData.searchfiles || "Dosyaları Araştır");
 
 elementLabelInputFileUpload.innerText = String(MyLanguageData.selectfiles || "Dosyaları Seç");
 elementLabelInputFileUpload.title = String(MyLanguageData.selectfiles || "Dosyaları Seç");
+
+// seçilen dosyaları al
+if(elementInputFileUpload && elementFileList) {
+    elementInputFileUpload.addEventListener("change", () => {
+        // önceki listeyi temizle
+        elementFileList.innerHTML = null;
+
+        // seçilen dosyaları al
+        const selectedfiles = elementInputFileUpload.files;
+
+        for(let fcount = 0; fcount < selectedfiles.length; fcount++) {
+            // elementi oluştur
+            const element_selectfile = document.createElement('li');
+
+            // dosya
+            const file = selectedfiles[fcount];
+
+            // elementin içini düzenle
+            element_selectfile.textContent =
+                String((fcount + 1) + ") ")
+                + String(Global.getFileSize(file.size) + " | " || "")
+                + String(file.name || "");
+
+            // içe aktar
+            elementFileList.appendChild(element_selectfile);
+        }
+    });
+}
 
 // kullanıcıya ait dosyalar
 var userFiles = null;
@@ -110,14 +155,28 @@ switch(!elementFileUploadBtn) {
                     // dosyaları alsın
                     const files = elementInputFileUpload.files;
 
+                    // eski listeyi temizle
+                    if(elementFileList) {
+                        elementFileList.innerHTML = null;
+                    }
+
                     // dosya isimleri boşsa
                     switch(!files || files.length < 1) {
                         case true: // dosya seçilmedi
-                            console.error("Not Any File Selected");
+                            MyFiles.StatusAdd(elementFileStatusArea,
+                                String(MyLanguageData.filenotselected),
+                                String(MyLanguageData.filenotselectedinfo),
+                                "warning"
+                            );
                         break;
                         default: // dosya seçildi
                             // dosyaları yükle
-                            const uploadResult = await MyFiles.Upload(files, elementFileProgressBar, elementFileUploadBtnArea);
+                            const uploadResult = await MyFiles.Upload(
+                                files,
+                                elementFileProgressBar,
+                                elementFileUploadBtnArea,
+                                elementFileList
+                            );
 
                             // dosya seçimini temizle
                             elementInputFileUpload.value = null;

@@ -57,16 +57,32 @@ final class FileOperations extends FileOperationsAbs implements FileOperationsIm
         // dosyaların listeleyip getirsin
         $user_files = array_diff(scandir($user_dir), ['..', '.']);
 
-        // Dosyaları en son değiştirilme tarihine göre sıralar
-        usort($user_files, function($a, $b) use ($user_dir) {
-            $a_time = filemtime(rtrim($user_dir, '/') . '/' . ltrim($a, '/'));
-            $b_time = filemtime(rtrim($user_dir, '/') . '/' . ltrim($a, '/'));
+        // dosyaları dizsin
+        $file_list = null;
 
-            return $b_time - $a_time; // En yeni dosyalar en başta
-        });
+        // tüm dosyaları alsın
+        foreach($user_files as $file) {
+            // dosya yolu
+            $file_path = rtrim($user_dir, '/') . '/' .$file;
+
+            // eğer öğe klasörse sonraki tura geçsin
+            if(is_dir($file_path)) continue;
+
+            // listeye eklesin
+            $file_list[] = $file;
+        }
+
+        // kullanıcı dosyaları değişkenini serbest bırak
+        unset($user_files);
+
+        // eğer boşsa boş dönsün
+        if(empty($file_list)) return null;
+
+        // dosyaları alfabetik sıralasın
+        natsort($file_list);
 
         // dosyalar bulunamadıysa boş dönsün
-        if(empty($user_files)) return null;
+        if(empty($file_list)) return null;
         
         // dosya bilgilerini düzenleyip depolamak için
         $file_datas = null;
@@ -77,7 +93,7 @@ final class FileOperations extends FileOperationsAbs implements FileOperationsIm
             $argfile = $argFileDatas[0];
 
             // döngüyle teker teker alsın
-            foreach($user_files as $file) {
+            foreach($file_list as $file) {
                 // normal dosya değilse sonraki tura geçsin
                 if($file === "." || $file === "..") continue;
 
@@ -98,7 +114,7 @@ final class FileOperations extends FileOperationsAbs implements FileOperationsIm
         // çoklu dosyalar için
         else {
             // döngüyle teker teker alsın
-            foreach($user_files as $file) {
+            foreach($file_list as $file) {
                 // normal dosya değilse sonraki tura geçsin
                 if($file === "." || $file === "..") continue;
             

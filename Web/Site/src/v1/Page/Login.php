@@ -5,6 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="color-scheme" content="dark light">
+        <meta name="description" content="Login Now The File Server">
         <title>Giriş Yap</title>
         <link rel="icon" href="/Asset/logo/slavnem.ico">
         <link rel="apple-touch-icon" href="/Asset/logo/slavnem.png">
@@ -16,7 +17,7 @@
 
         <main id="id_signmain" class="signmain">
             <section id="id_signarea" class="signarea">
-                <div id="id_loginarea" class="loginarea">
+                <div id="id_signmainarea" class="signmainarea">
                     <div class="hidden-field">
                         <input type="hidden" name="botcheck" id="botcheck">
                     </div>

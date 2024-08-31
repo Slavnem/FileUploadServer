@@ -72,33 +72,93 @@ export class Global {
         elementMsg.textContent = String(msg ? msg : "");
         elementBtnOkYes.textContent = String(onlytrue ? (MyLanguageData.ok || "Tamam") : (MyLanguageData.yes || "Evet"));
 
+        // stiller
+        const styleBody = `overflow-y: hidden;`;
+
+        const styleMessageBoxArea = `width: 100vw;
+            height: 100dvh;
+            z-index: 998;
+            display: flex;
+            position: fixed;
+            flex-direction: column;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            background: rgba(0,0,0, 0.5);
+            backdrop-filter: blur(1rem);
+            left: 0%;
+            top: 0%;
+            transform: translate(0%, 0%);
+            z-index: 998;`;
+
+        const styleMessageBox = `width: clamp(auto, auto, 400px);
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            position: relative;
+            color: #ffffff;
+            background: rgba(0,0,0, 0.25);
+            border: 0;
+            border-radius: 0.5rem;
+            padding: clamp(0.25rem, 5dvh, 1.5rem) clamp(0.25rem, 5vw, 2.5rem);
+            margin: 0;
+            z-index: 999;`;
+
+        const styleMessageBoxTextArea = `
+            width: 100%;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            align-items: center;
+            text-align: center;
+            gap: 0.25rem;`;
+
+        const styleMessageBoxBtnArea = `
+            width: 100%;
+            height: auto;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            gap: 0.5rem;
+            padding: clamp(0.125rem, 5dvh, 0.5rem);
+            margin: clamp(0.125rem, 5dvh, 0.75rem) 0 0 0`;
+
+        const styleMessageBoxBtn = `
+            width: auto;
+            height: auto;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            border: 0;
+            border-radius: 0.5rem;
+            outline: 0;
+            font-size: clamp(0.8rem, 5vw, 0.9rem);
+            color: #ffffff;
+            background: #111111;
+            padding: clamp(0.125rem, 5dvh, 0.5rem) clamp(0.125rem, 5vw, 1.5rem);
+            margin: 0;
+        `;
+
         // sayfa kaydırmayı iptal et
-        document.body.style.overflowY = "hidden";
+        document.body.style.cssText = styleBody;
 
         // still ayarlasın
-        elementMessageBoxArea.style.width = "100vw";
-        elementMessageBoxArea.style.height = "100dvh";
-        elementMessageBoxArea.style.zIndex = "998";
-        elementMessageBoxArea.style.display = "flex";
-        elementMessageBoxArea.style.flexDirection = "column";
-        elementMessageBoxArea.style.flexWrap = "wrap";
-        elementMessageBoxArea.style.position = "fixed";
-        elementMessageBoxArea.style.alignItems = "center";
-        elementMessageBoxArea.style.justifyContent = "center";
-        elementMessageBoxArea.style.left = "0";
-        elementMessageBoxArea.style.top = "0";
-        elementMessageBoxArea.style.background = "rgba(0,0,0,0.5)";
-        elementMessageBoxArea.style.backdropFilter = "blur(1rem)";
+        elementMessageBoxArea.style.cssText = styleMessageBoxArea;
+        elementMessageBox.style.cssText = styleMessageBox;
+        elementTextArea.style.cssText = styleMessageBoxTextArea;
+        elementBtnArea.style.cssText = styleMessageBoxBtnArea;
 
-        elementMessageBox.style.width = "auto";
-        elementMessageBox.style.maxWidth = "400px";
-        elementMessageBox.style.height = "auto";
-        elementMessageBox.style.display = "flex";
-        elementMessageBox.style.flexDirection = "column";
-        elementMessageBox.style.flexWrap = "wrap";
-        elementMessageBox.style.position = "relative";
-        elementMessageBox.style.background = "rgba(0,0,0,0.25)";
-        elementMessageBox.style.zIndex = "999";
+        elementBtnOkYes.style.cssText = styleMessageBoxBtn;
+        elementBtnOkYes.style.background = "rgba(0,230,15, 1)";
 
         // elementleri içe aktar
         document.body.appendChild(elementMessageBoxArea);
@@ -107,7 +167,7 @@ export class Global {
         elementMessageBox.appendChild(elementBtnArea);
         elementTextArea.appendChild(elementTitle);
         elementTextArea.appendChild(elementMsg);
-        elementBtnArea.appendChild(elementBtnOkYes);
+        elementBtnArea.appendChild(elementBtnOkYes);   
 
         // sonuç bekleme
         return new Promise((resolve) => {
@@ -129,6 +189,10 @@ export class Global {
                 // metinleri ayarla
                 elementBtnNo.textContent = String(MyLanguageData.no || "Hayır");
 
+                // still
+                elementBtnNo.style.cssText = styleMessageBoxBtn;
+                elementBtnNo.style.background = "rgba(238,14,37, 1)";
+
                 // içe aktar
                 elementBtnArea.appendChild(elementBtnNo);
 
@@ -138,6 +202,8 @@ export class Global {
                     elementMessageBoxArea.remove(); // mesaj kutusunu sil
                     resolve(false);
                 });
+            } else {
+                elementBtnOkYes.style.background = "rgba(0,189,255, 1)";
             }
         });
     }
