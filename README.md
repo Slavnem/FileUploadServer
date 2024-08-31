@@ -15,6 +15,7 @@ SSL Certificate
 
 <!-- Özellikler -->
 # Features
++ [Secure] HTTP 2.0
 + [Secure] User: Auth/Create/Update/Fetch/Delete
 + [Secure] Session: Create/Update/Fetch/Delete
 + [Secure] File: Upload/Fetch/Delete/Update
