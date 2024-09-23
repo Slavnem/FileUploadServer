@@ -1,5 +1,5 @@
 <!-- Başklık -->
-# 🚀 File Upload Server v1.0
+# 🚀 File Upload Server v1.1
 
 <!-- Gerekenler -->
 # Requirements
@@ -14,7 +14,16 @@ SSL Certificate
 </pre>
 
 <!-- Özellikler -->
-# Features
+# Features v1.1
++ [Language] API -> English/Türkçe/Русский/Deutsch
++ [Optimization] JavaScript & Php Code Optimization
++ [Patch] More Than 1 Upload Task at the Same Time Bug Fixed
++ [Code] Some Code Libs And Files Re-designed
++ [Server] Errors and optimization problems that may occur for the server have been fixed.
++ [Database] German Language (Deutsch) Added
++ [Design] Minor adjustments were made to the design
+
+# Features v1.0
 + [Language] Türkçe/English/Русский
 + [Secure] HTTP 2.0
 + [Secure] User: Auth/Create/Update/Fetch/Delete
@@ -22,22 +31,3 @@ SSL Certificate
 + [Secure] File: Upload/Fetch/Delete/Update
 + [Secure] Page: Login/Logout/Files
 + [Auto] Theme: Dark/Light
-
-<!-- Mikro Servis Komutları -->
-# Micro Service | Auth
-<pre>
-Method: FETCH, CREATE, UPDATE, DELETE
-Request: curl -i -X FETCH http://localhost/api/auth --data '{"username":"<username>","email":"<email>","password":"<password>"}'
-</pre>
-
-# Micro Service | Session
-<pre>
-Method: FETCH, CREATE, UPDATE, DELETE
-Request: curl -i -X CREATE http://localhost/api/session --data '{"username":"<username>" "email":"<email>","password":"<password>"}'
-</pre>
-
-# Micro Service | File
-<pre>
-Method: FETCH, POST, DELETE
-Request: curl -i -X FETCH https://localhost/api/file --data '{"filename":["test.c","bla.php"]}'
-</pre>
