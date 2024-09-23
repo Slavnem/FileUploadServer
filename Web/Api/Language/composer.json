@@ -1,0 +1,10 @@
+{
+    "name": "yourvendor/language",
+    "description": "Language service for multi language support",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "LanguageApi\\": "src/"
+        }
+    }
+}

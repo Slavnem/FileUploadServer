@@ -3,41 +3,52 @@ import {
     MyLogin
 } from "../Auth/MyLogin.js";
 
-// Dil Bilgileri
+// Dil Bilgisi İçin
 import {
-    MyLanguageData
-} from "../../Data/SessionData.js";
+    MyLanguage
+} from "../Language/MyLanguage.js";
+
+// Oturum Bilgileri
+import {
+    _SessionLanguage
+} from "../Data/SessionData.js";
+
+// Dil
+const _LanguageData = await MyLanguage.Fetch(
+    _SessionLanguage ?? "en",
+    MyLanguage.PageAuthLogin // giriş yap
+);
 
 // Başlık ve Karşılama metini
-const elementTitle = document.querySelector(`h1[name="title"]`) || null;
-const elementDescription = document.querySelector(`p[name="description"]`) || null;
+const elementTitle = document.querySelector(`[name="main_title"]`) || null;
+const elementDescription = document.querySelector(`[name="main_description"]`) || null;
 
 // Giriş yapma butonu
-const elementSubmitBtn = document.querySelector(`button[name="btnsubmit"]`) || null;
+const elementSubmitBtn = document.querySelector(`[name="btnsubmit"]`) || null;
 
 // Kullanıcı adı giriş elementi
-const elementInputUsername = document.querySelector(`input[name="inusername"]`) || null;
+const elementInputUsername = document.querySelector(`[name="username"]`) || null;
 
 // E-posta giriş elementi
 const elementInputEmail = null;
 
 // Şifre giriş elementi
-const elementInputPassword = document.querySelector(`input[name="inpassword"]`) || null;
+const elementInputPassword = document.querySelector(`[name="password"]`) || null;
 
 // Durum bilgileri elementi
-const elementStatusArea = document.querySelector(`div[name="statusarea"]`) || null;
+const elementStatusArea = document.querySelector(`[name="statusarea"]`) || null;
 
 // metin ayarlamaları
-document.title = String(MyLanguageData.login || "Giriş Yap");
+document.title = String(_LanguageData?.login ?? "Giriş Yap");
 
-if(elementTitle) elementTitle.textContent = String(MyLanguageData.login || "Giriş Yap");
-if(elementDescription) elementDescription.textContent = String(MyLanguageData.welcometoserver || "Dosya Sunucusuna Hoşgeldiniz!");
+if(elementTitle) elementTitle.textContent = String(_LanguageData?.login ?? "Giriş Yap");
+if(elementDescription) elementDescription.textContent = String(_LanguageData?.welcometoserver ?? "Dosya Sunucusuna Hoşgeldiniz!");
 
-if(elementInputUsername) elementInputUsername.title = String(MyLanguageData.username || "Kullanıcı Adı");
-if(elementInputPassword) elementInputPassword.title = String(MyLanguageData.password || "Kullanıcı Adı");
+if(elementInputUsername) elementInputUsername.title = String(_LanguageData?.username ?? "Kullanıcı Adı");
+if(elementInputPassword) elementInputPassword.title = String(_LanguageData?.password ?? "Kullanıcı Adı");
 
-if(elementSubmitBtn) elementSubmitBtn.textContent = String(MyLanguageData.login || "Giriş Yap");
-if(elementSubmitBtn) elementSubmitBtn.title = String(MyLanguageData.login || "Giriş Yap");
+if(elementSubmitBtn) elementSubmitBtn.textContent = String(_LanguageData?.login ?? "Giriş Yap");
+if(elementSubmitBtn) elementSubmitBtn.title = String(_LanguageData?.login ?? "Giriş Yap");
 
 // Şifre giriş elementi için şifre metini gösterme ve gizleme
 switch(!elementInputPassword) {

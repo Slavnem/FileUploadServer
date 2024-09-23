@@ -5,6 +5,7 @@ export const BaseURL = (window.location.hostname);
 export const ApiAuthURL = "/api/auth";
 export const ApiSessionURL = "/api/session";
 export const ApiFileURL = "/api/file";
+export const ApiLanguageURL = "/api/language";
 
 // URL PAGE
 export const PageLogin = "/auth/login";

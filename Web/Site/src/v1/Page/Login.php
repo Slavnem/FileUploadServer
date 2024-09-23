@@ -7,8 +7,8 @@
         <meta name="color-scheme" content="dark light">
         <meta name="description" content="Login Now The File Server">
         <title>Giriş Yap</title>
-        <link rel="icon" href="/Asset/logo/slavnem.ico">
-        <link rel="apple-touch-icon" href="/Asset/logo/slavnem.png">
+        <link rel="icon" href="/Asset/logo/offical-logo.ico">
+        <link rel="apple-touch-icon" href="/Asset/logo/offical-logo.png">
         <!-- CSS -->
         <link rel="stylesheet" href="/Site/src/v1/Style/Login.css">
     </head>
@@ -26,13 +26,13 @@
                         <div id="id_titlearea_textarea"
                             name="textarea"
                             class="titlearea_textarea">
-                            <h1 id="id_textarea_title"
-                                name="title"
+                            <h2 id="id_textarea_title"
+                                name="main_title"
                                 class="textarea_title">
                                 Giriş Yap
-                            </h1>
+                            </h2>
                             <p id="id_textarea_description"
-                                name="description"
+                                name="main_description"
                                 class="textarea_description">
                                 Dosya Sunucusuna Hoşgeldiniz!
                             </p>
@@ -45,7 +45,7 @@
                     <div id="id_inputarea" class="inputarea">
                         <input type="text"
                             autocomplete="off"
-                            name="inusername"
+                            name="username"
                             id="id_username"
                             class="input_data input_username"
                             placeholder="Abcd"
@@ -54,7 +54,7 @@
                         />
                         <input type="password"
                             autocomplete="off"
-                            name="inpassword"
+                            name="password"
                             id="id_password"
                             class="input_data input_password"
                             placeholder="****"

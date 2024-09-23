@@ -4,30 +4,50 @@ import * as URLs from "../Global/URL.js";
 // Gerekli Metodlar
 import * as QueryMethods from "../Global/Methods.js";
 
-// SVG Resimler
-import {
-    SvgDownload, SvgDelete, SvgCancel
-} from "../Global/Svg.js";
-
 // Genel İşler İçin
 import {
     Global
 } from "../Global/Global.js";
-
-// MySession Sınıfı
-import {
-    MySession
-} from "../Session/MySession.js";
 
 // Veri Çekme
 import {
     ApiService
 } from "../Global/API.js";
 
-// Dil Bilgileri
+// SVG Resimler
 import {
-    MyLanguageData
-} from "../../Data/SessionData.js";
+    SvgDownload, SvgDelete, SvgCancel
+} from "../Global/Svg.js";
+
+// Durum Mesajları İçin
+import {
+    Status
+} from "../Global/Status.js";
+
+// MySession Sınıfı
+import {
+    MySession
+} from "../Session/MySession.js";
+
+// Dil Bilgisi İçin
+import {
+    MyLanguage
+} from "../Language/MyLanguage.js";
+
+// Oturum Bilgileri
+import {
+    _SessionData,
+    _SessionLanguage
+} from "../Data/SessionData.js";
+
+// Dil
+const _LanguageData = await MyLanguage.Fetch(
+    _SessionLanguage ?? "en",
+    MyLanguage.PageFiles // dosyalar
+);
+
+// yükleme isteklerini tutmak için
+const uploadRequests = [];
 
 // MyFiles Sınıfı
 export class MyFiles {
@@ -133,11 +153,13 @@ export class MyFiles {
     )
     {
         // oturum kontrolü başarısızsa boş dönsün
-        if(MySession.Fetch() === null)
+        if(MySession.Fetch() === null) {
             return false;
+        }
         // dosyalar boşsa hata dönsün
-        else if(!files || files.length < 1)
+        else if(!files || files.length < 1) {
             return false;
+        }
 
         // yeni form
         const formData = new FormData();
@@ -147,11 +169,51 @@ export class MyFiles {
             formData.append("files[]", file);
         }
 
+        // varolan yükleme isteklerini iptal etsin
+        if(uploadRequests && uploadRequests.length > 0) {
+            uploadRequests.forEach((xhr) => {
+                // XMLHttp objesi ise silsin
+                xhr instanceof XMLHttpRequest ?
+                    xhr.abort() // iptal etsin
+                    : null;
+            });
+            
+            // işlemerin iptal edildiğine dair mesaj
+            Status.Add(
+                document.body, // <body>
+                _SessionLanguage?.otherfileuploadscancel ?? "Dosya Yükleme İptali",
+                _SessionLanguage?.otherfileuploadscancelinfo ??
+                    "Diğer Dosya Yükleme İşlemleri İptal Edildi, Aynı Anda Sadece 1 Tane Dosya Yükleme İşlemi Yapılabilir",
+                Status.Error,
+                true
+            );
+
+            // yükleme barı kapalı dursun
+            progressbar.style.display = "none";
+
+            // işlemi sonlandırsın
+            return false;
+        }
+
+        // zaman etiketini alsın
+        const dateTime = Date.now();
+
         // yükleme barı stili
         progressbar.style.display = "flex";
 
         // sorgu objesi oluştursun
         const request = new XMLHttpRequest();
+
+        // isteği küresel nesneye eklesin
+        // zaman etiketine göre sonrasında silme işlemi rahat olur
+        if(uploadRequests.length < 1) {
+            uploadRequests.push({ dateTime, request });
+        } else {
+            return false; // sonlandırsın
+        }
+
+        // yükleme index numarasını bulsun
+        const requestIndex = uploadRequests.findIndex(item => item.dateTime == dateTime);
 
         // çalıştır
         request.open(QueryMethods.MethodPost, URLs.ApiFileURL);
@@ -168,6 +230,12 @@ export class MyFiles {
 
             // butona tıklanırsa iptal et
             elementButtonAbort.addEventListener("click", function() {
+                // işlem kaydedilmişse ve listede bulunursa silsin
+                if(requestIndex !== -1) {
+                    uploadRequests.splice(requestIndex, 1);
+                }
+
+                // işlem varsa
                 if(request) {
                     request.abort(); // yüklemeyi iptal et
                     elementButtonAbort.remove(); // butonu sil
@@ -184,13 +252,33 @@ export class MyFiles {
         // tamamlanmış yüzde
         var percentCompleted = 0;
 
+        // işlem sonu yapılacak
+        const handleEnd = () => {
+            // butonu sil
+            elementButtonAbort?.remove();
+
+            // güncelleme metinini sil
+            elementUploadText?.remove();
+
+            // işlem kaydedilmişse ve listede bulunursa silsin
+            requestIndex !== -1 ? 
+                uploadRequests.splice(requestIndex, 1)
+                : null;
+
+            // yüzde değerini sil ve yükleyiciyi sıfırla
+            if(progressbar.style.display != "none") {
+                setTimeout(function() {
+                    progressbar.style.width = "0%";
+                    progressbar.style.display = "none";
+                }, 1000);
+            }
+        };
+
         // yükleniyor
         request.upload.addEventListener('progress', (event) => {
             percentCompleted = Math.round((event.loaded / event.total) * 100);
             progressbar.style.width = percentCompleted + '%';
             elementUploadText.textContent = percentCompleted + '%';
-
-            // elementUploadText.textContent = percentCompleted + `% ${String(MyLanguageData.percentcompleted) || "Tamamlandı"}`;
         });
 
         // gönder
@@ -199,23 +287,12 @@ export class MyFiles {
         return new Promise((resolve) => {
             // işlem sonlanması
             request.onloadend = function() {
-                // yüzde değerini sil ve yükleyiciyi sıfırla
-                setTimeout(function() {
-                    progressbar.style.width = "0%";
-                    progressbar.style.display = "none";
-                    
-                    elementUploadText.remove();
-                }, 1500);
+                handleEnd(); // sonlandırıcı
 
                 // tamamı yüklendi
-                if(percentCompleted >= 100) {
-                    elementButtonAbort.remove(); // butonu sil
-                    resolve(true); // yükleme başarılı
-                }
-
-                // yükleme başarısız
-                elementButtonAbort.remove(); // butonu sil
-                resolve(false);
+                percentCompleted >= 100 ?
+                    resolve(true) // yükleme başarılı
+                    : resolve(false); // yükleme başarısız
             }
         });
     }
@@ -265,7 +342,7 @@ export class MyFiles {
             const elementFileTextArea = document.createElement('div');
             const elementFileBtnArea = document.createElement('div');
 
-            const elementFileName = document.createElement('h3');
+            const elementFileName = document.createElement('p');
             const elementFileModified = document.createElement('span');
             const elementFileSize = document.createElement('span');
             
@@ -276,7 +353,7 @@ export class MyFiles {
             elementFileSize.setAttribute("class", "files_filesize");
 
             // dosya yolu
-            elementFile.setAttribute("data-file-path", String(element.path || ""));
+            elementFile.setAttribute("data-file-path", String(element.path ?? ""));
 
             // bölümler
             elementFileInfoArea.setAttribute("class", "file_infoarea");
@@ -314,7 +391,7 @@ export class MyFiles {
                     const elementFileDownloadBtn = document.createElement('button');
 
                     elementFileDownloadBtn.innerHTML = SvgDownload; // indirme metini
-                    elementFileDownloadBtn.title = String(MyLanguageData.download || "İndir"); // indirme metini
+                    elementFileDownloadBtn.title = String(_LanguageData?.download ?? "İndir"); // indirme metini
                     elementFileDownloadBtn.setAttribute("class", "filesbtn files_filedownloadbtn"); // sınıf ata
                     elementFileBtnArea.appendChild(elementFileDownloadBtn); // ana elementin içine aktar
 
@@ -324,8 +401,8 @@ export class MyFiles {
                             /*
                                 // mesaj kutusu versin
                                 const resultChoice = await Global.getMessageBox(
-                                String(MyLanguageData.download || "İndir"),
-                                String(MyLanguageData.downloadfilequestion || "Dosyayı İndirmek İstiyor musunuz?")
+                                String(_LanguageData?.download ?? "İndir"),
+                                String(_LanguageData?.downloadfilequestion ?? "Dosyayı İndirmek İstiyor musunuz?")
                             );
 
                             // eğer evet seçilmişse dosyayı indirsin
@@ -355,7 +432,7 @@ export class MyFiles {
                     const elementFileDeleteBtn = document.createElement('button');
 
                     elementFileDeleteBtn.innerHTML = SvgDelete; // indirme metini
-                    elementFileDeleteBtn.title = String(MyLanguageData.delete || "Sil"); // indirme metini
+                    elementFileDeleteBtn.title = String(_LanguageData?.delete ?? "Sil"); // indirme metini
                     elementFileDeleteBtn.setAttribute("class", "filesbtn files_filedeletebtn"); // sınıf ata
                     elementFileBtnArea.appendChild(elementFileDeleteBtn); // ana elementin içine aktar
 
@@ -364,8 +441,8 @@ export class MyFiles {
                         try {
                             // mesaj kutusu versin
                             const resultChoice = await Global.getMessageBox(
-                                String(MyLanguageData.delete || "Sil"),
-                                String(MyLanguageData.deletefilequestion || "Dosyayı silmek istiyor musunuz?")
+                                String(_LanguageData?.delete ?? "Sil"),
+                                String(_LanguageData?.deletefilequestion ?? "Dosyayı silmek istiyor musunuz?")
                             );
 
                             // eğer evet seçilmişse dosyayı silsin
@@ -382,68 +459,5 @@ export class MyFiles {
                 break;
             }
         });
-    }
-
-    // Durum Temizle
-    static StatusClear(
-        element // durumu silinmek istenen element
-    )
-    {
-        // element yoksa hata
-        if(!element) {
-            console.error("Element Not Found");
-            return false;
-        }
-
-        // içini temizle
-        element.innerHTML = null;
-    }
-
-    // Durum Ekle
-    static StatusAdd(
-        statusarea, // durumların tutulduğu yer
-        title = null, // başlık metini
-        msg = null, // mesaj metini
-        type = null, // durum türü (hata, uyarı, başarı, bilgi)
-        statusclear = true // durum temizle
-    )
-    {
-        // element yoksa hata
-        if(!statusarea) {
-            console.error("Status Area Element Not Found");
-            return false;
-        }
-        // gerekli metinler yoksa
-        else if(title === null && msg === null) {
-            console.error("Status Title Or Message Has To Be");
-            return false;
-        }
-
-        // element oluştursun
-        const elementNewStatus = document.createElement("div");
-        const elementStatusTitle = document.createElement("h3");
-        const elementStatusMsg = document.createElement("p");
-
-        // verileri ayarla
-        elementNewStatus.setAttribute("data-status-type", type);
-        elementNewStatus.setAttribute("class", "status-send");
-
-        // iç metini ayarla
-        elementStatusTitle.textContent = title ? String(title) : "";
-        elementStatusMsg.textContent = msg ? String(msg) : "";
-
-        // iç içe elementler
-        elementNewStatus.appendChild(elementStatusTitle);
-        elementNewStatus.appendChild(elementStatusMsg);
-
-        // içine veriyi eklesin
-        statusarea.appendChild(elementNewStatus);
-
-        // belirli süre sonra silsin
-        if(statusclear) {
-            setTimeout(function() {
-                elementNewStatus.remove();
-            }, 2400);
-        }
     }
 }

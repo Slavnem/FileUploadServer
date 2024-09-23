@@ -8,15 +8,26 @@ import {
     MyAuth
 } from "./MyAuth.js";
 
-// MySession Sınıfı
+// MySession
 import {
     MySession
 } from "../Session/MySession.js";
 
-// Dil Bilgileri
+// Dil Bilgisi İçin
 import {
-    MyLanguageData
-} from "../../Data/SessionData.js";
+    MyLanguage
+} from "../Language/MyLanguage.js";
+
+// Oturum Bilgileri
+import {
+    _SessionLanguage
+} from "../Data/SessionData.js";
+
+// Dil
+const _LanguageData = await MyLanguage.Fetch(
+    _SessionLanguage ?? "en",
+    MyLanguage.PageAuthLogin // giriş yap
+);
 
 // MyLogin Sınıfı
 export class MyLogin {
@@ -92,14 +103,14 @@ export class MyLogin {
         // buton yoksa hata dönsün
         if(!btn) {
             this.StatusAdd(statusarea,
-                String(MyLanguageData.notenoughdata || "Yetersiz Veri"),
-                String(MyLanguageData.hastobeusernameandpassword || "Kullanıcı Adı veya Şifre Olmak Zorunda"),
+                String(_LanguageData?.notenoughdata ?? "Yetersiz Veri"),
+                String(_LanguageData?.hastobeusernameandpassword ?? "Kullanıcı Adı veya Şifre Olmak Zorunda"),
                 "error"
             );
 
             this.StatusAdd(statusarea,
-                String(MyLanguageData.missingelement || "Eksik Element"),
-                String(MyLanguageData.hastobesubmitbtn || "Giriş kontrolü için buton olmak zorunda"),
+                String(_LanguageData?.missingelement ?? "Eksik Element"),
+                String(_LanguageData?.hastobesubmitbtn ?? "Giriş kontrolü için buton olmak zorunda"),
                 "error"
             );
 
@@ -119,8 +130,8 @@ export class MyLogin {
             if((!dataParams.username && !dataParams.email) || (!dataParams.password)) {
                 // geçerli verilerin hepsi girilmemiş
                 this.StatusAdd(statusarea,
-                    String(MyLanguageData.notenoughdata || "Yetersiz Veri"),
-                    String(MyLanguageData.hastobeusernameandpassword || "Kullanıcı Adı veya Şifre Olmak Zorunda"),
+                    String(_LanguageData?.notenoughdata ?? "Yetersiz Veri"),
+                    String(_LanguageData?.hastobeusernameandpassword ?? "Kullanıcı Adı veya Şifre Olmak Zorunda"),
                     "warning"
                 );
 
@@ -133,8 +144,8 @@ export class MyLogin {
             // veri boşsa hata oluştursun
             if(!authVerifyData || authVerifyData === null) {
                 this.StatusAdd(statusarea,
-                    String(MyLanguageData.loginfailed || "Giriş Başarısız"),
-                    String(MyLanguageData.loginfailedinfo || "Kullanıcı Adı veya Şifre Hatalı"),
+                    String(_LanguageData?.loginfailed ?? "Giriş Başarısız"),
+                    String(_LanguageData?.loginfailedinfo ?? "Kullanıcı Adı veya Şifre Hatalı"),
                     "error"
                 );
 
@@ -163,8 +174,8 @@ export class MyLogin {
 
                 // hata durumu
                 this.StatusAdd(statusarea,
-                    String(MyLanguageData.sessionerror || "Oturum Hatası"),
-                    String(MyLanguageData.sessionverifyerror || "Giriş yapıldı fakat oturum doğrulanamadı"),
+                    String(_LanguageData?.sessionerror ?? "Oturum Hatası"),
+                    String(_LanguageData?.sessionverifyerror ?? "Giriş yapıldı fakat oturum doğrulanamadı"),
                     "error"
                 );
 
@@ -179,16 +190,16 @@ export class MyLogin {
 
             // oturum başarıyla doğrulandı
             this.StatusAdd(statusarea,
-                String(MyLanguageData.loginsuccess || "Giriş Başarılı"),
-                String(MyLanguageData.loginsuccessinfo || "Tebrikler! Bilgiler doğrulandı"),
+                String(_LanguageData?.loginsuccess ?? "Giriş Başarılı"),
+                String(_LanguageData?.loginsuccessinfo ?? "Tebrikler! Bilgiler doğrulandı"),
                 "success"
             );
 
             setTimeout(function() {
                 // yönlendirme bilgisi
                 MyLogin.StatusAdd(statusarea,
-                    String(MyLanguageData.redirect || "Yönlendiriliyor"),
-                    String(MyLanguageData.redirectinfo || "Diğer sayfaya yönlendiriliyorsunuz..."),
+                    String(_LanguageData?.redirect ?? "Yönlendiriliyor"),
+                    String(_LanguageData?.redirectinfo ?? "Diğer sayfaya yönlendiriliyorsunuz..."),
                     "info"
                 );
 

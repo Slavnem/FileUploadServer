@@ -7,6 +7,9 @@ use SessionApi\v1\Core\Methods as SessionMethods;
 use SessionApi\v1\Includes\Param\SessionParams as SessionParams;
 use SessionApi\v1\Core\SessionRequest as SessionRequest;
 
+// Sayfa
+use const Site\Src\v1\Kernel\__PAGE_AUTH_LOGIN__;
+
 // oturum sorgu nesnesi
 $SessionRequest = new SessionRequest();
 
@@ -23,5 +26,5 @@ $logout_session = $SessionRequest->Request(
 );
 
 // giriş sayfasına yönlendirsin
-header("Location: /auth/login");
+header("Location: /" . __PAGE_AUTH_LOGIN__);
 exit();

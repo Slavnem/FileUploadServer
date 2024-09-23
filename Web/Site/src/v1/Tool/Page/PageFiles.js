@@ -1,17 +1,36 @@
+// Slavnem @2024-09-21
+// PageFiles.JS
+
 // Genel
 import {
     Global
 } from "../Global/Global.js";
+
+// Durum Mesajları İçin
+import {
+    Status
+} from "../Global/Status.js";
 
 // Dosya İşlemleri Sınıfı
 import {
     MyFiles
 } from "../File/MyFiles.js";
 
-// Dil Bilgileri
+// Dil Bilgisi İçin
 import {
-    MyLanguageData
-} from "../../Data/SessionData.js";
+    MyLanguage
+} from "../Language/MyLanguage.js";
+
+// Oturum Bilgileri
+import {
+    _SessionLanguage
+} from "../Data/SessionData.js";
+
+// Dil
+const _LanguageData = await MyLanguage.Fetch(
+    _SessionLanguage ?? "en",
+    MyLanguage.PageFiles // dosyalar
+);
 
 // dosya gösterme ekranı
 const elementFilesArea = document.querySelector(`div[name="filesarea"]`) || null;
@@ -50,20 +69,20 @@ const elementFileProgressBar = document.querySelector(`div[name="uploadprogressb
 const elementFileStatusArea = document.querySelector(`div[name="statusarea"]`) || null;
 
 // metin ayarlamaları
-document.title = String(MyLanguageData.files || "Dosyalar");
+document.title = String(_LanguageData?.files ?? "Dosyalar");
 
-elementLogoutBtn.title = String(MyLanguageData.logout || "Çıkış Yap");
+elementLogoutBtn.title = String(_LanguageData?.logout ?? "Çıkış Yap");
 
-elementFileSearchBtn.textContent = String(MyLanguageData.search || "Araştır");
-elementFileSearchBtn.title = String(MyLanguageData.search || "Araştır");
+elementFileSearchBtn.textContent = String(_LanguageData?.search ?? "Araştır");
+elementFileSearchBtn.title = String(_LanguageData?.search ?? "Araştır");
 
-elementFileUploadBtn.title = String(MyLanguageData.upload || "Yükle");
-elementFileUploadBtnText.textContent = String(MyLanguageData.upload || "Yükle");
+elementFileUploadBtn.title = String(_LanguageData?.upload ?? "Yükle");
+elementFileUploadBtnText.textContent = String(_LanguageData?.upload ?? "Yükle");
 
-elementFileNameInput.title = String(MyLanguageData.searchfiles || "Dosyaları Araştır");
+elementFileNameInput.title = String(_LanguageData?.searchfiles ?? "Dosyaları Araştır");
 
-elementLabelInputFileUpload.innerText = String(MyLanguageData.selectfiles || "Dosyaları Seç");
-elementLabelInputFileUpload.title = String(MyLanguageData.selectfiles || "Dosyaları Seç");
+elementLabelInputFileUpload.innerText = String(_LanguageData?.selectfiles ?? "Dosyaları Seç");
+elementLabelInputFileUpload.title = String(_LanguageData?.selectfiles ?? "Dosyaları Seç");
 
 // seçilen dosyaları al
 if(elementInputFileUpload && elementFileList) {
@@ -84,8 +103,8 @@ if(elementInputFileUpload && elementFileList) {
             // elementin içini düzenle
             element_selectfile.textContent =
                 String((fcount + 1) + ") ")
-                + String(Global.getFileSize(file.size) + " | " || "")
-                + String(file.name || "");
+                + String(Global.getFileSize(file.size) + " | " ?? "")
+                + String(file.name ?? "");
 
             // içe aktar
             elementFileList.appendChild(element_selectfile);
@@ -156,20 +175,29 @@ switch(!elementFileUploadBtn) {
                     const files = elementInputFileUpload.files;
 
                     // eski listeyi temizle
-                    if(elementFileList) {
-                        elementFileList.innerHTML = null;
-                    }
+                    elementFileList ? elementFileList.innerHTML = null : null;
 
                     // dosya isimleri boşsa
                     switch(!files || files.length < 1) {
                         case true: // dosya seçilmedi
-                            MyFiles.StatusAdd(elementFileStatusArea,
-                                String(MyLanguageData.filenotselected),
-                                String(MyLanguageData.filenotselectedinfo),
-                                "warning"
+                            Status.Add(elementFileStatusArea,
+                                String(_LanguageData?.filenotselected),
+                                String(_LanguageData?.filenotselectedinfo),
+                                Status?.Warning ?? "warning"
                             );
                         break;
                         default: // dosya seçildi
+                            // dosyaları yüklemeden önce butonun kullanımını iptal etsin
+                            elementFileUploadBtn.style.display = "none";
+                            elementFileUploadBtn.disabled = true;
+
+                            // önceki işlemden kalma şeyleri temizlesin
+                            elementFileProgressBar.innerHTML = null;
+
+                            // dosya seçimini durdursun
+                            elementInputFileUpload.disabled = true;
+                            elementInputFileUpload.display = "none";
+
                             // dosyaları yükle
                             const uploadResult = await MyFiles.Upload(
                                 files,
@@ -180,6 +208,14 @@ switch(!elementFileUploadBtn) {
 
                             // dosya seçimini temizle
                             elementInputFileUpload.value = null;
+
+                            // dosya seçimini aktifleştirsin
+                            elementInputFileUpload.disabled = false;
+                            elementInputFileUpload.display = null;
+
+                            // dosyaları yükleme butonunu göstersin
+                            elementFileUploadBtn.style.display = "flex";
+                            elementFileUploadBtn.disabled = false;
 
                             // yüklenme sonucuna göre
                             switch(uploadResult) {
@@ -194,17 +230,17 @@ switch(!elementFileUploadBtn) {
                                     MyFiles.AddScreen(userFiles, elementFilesArea);
 
                                     // durum çıktısı
-                                    MyFiles.StatusAdd(elementFileStatusArea,
-                                        String(MyLanguageData.fileuploadsuccess || "Yüklenme Tamamlandı"),
-                                        String(MyLanguageData.fileuploadsuccessinfo || "Dosyalarınız sunucuya başarıyla yüklendi"),
-                                        "success"
+                                    Status.Add(elementFileStatusArea,
+                                        String(_LanguageData?.fileuploadsuccess ?? "Yüklenme Tamamlandı"),
+                                        String(_LanguageData?.fileuploadsuccessinfo ?? "Dosyalarınız sunucuya başarıyla yüklendi"),
+                                        Status?.Success ?? "success"
                                     );
                                 break;
                                 default: // hata
-                                    MyFiles.StatusAdd(elementFileStatusArea,
-                                        String(MyLanguageData.fileuploaderror || "Yükleme Başarısız"),
-                                        String(MyLanguageData.fileuploaderrorinfo || "Dosyalarınız bir hata sonucu ya da istemli olarak yüklenmedi"),
-                                        "error"
+                                    Status.Add(elementFileStatusArea,
+                                        String(_LanguageData?.fileuploaderror ?? "Yükleme Başarısız"),
+                                        String(_LanguageData?.fileuploaderrorinfo ?? "Dosyalarınız bir hata sonucu ya da istemli olarak yüklenmedi"),
+                                        Status?.Error ?? "error"
                                     );
                             }
                         break;

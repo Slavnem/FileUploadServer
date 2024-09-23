@@ -1,3 +1,6 @@
+// Slavnem @2024-09-20
+// MySession
+
 // Methods
 import * as QueryMethods from "../Global/Methods.js";
 

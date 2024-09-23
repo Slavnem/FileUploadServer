@@ -1,7 +1,22 @@
-// Dil Bilgileri
+// Slavnem @2024-09-21
+// Global.JS
+
+// Dil Bilgisi İçin
 import {
-    MyLanguageData
-} from "../../Data/SessionData.js";
+    MyLanguage
+} from "../Language/MyLanguage.js";
+
+// Oturum Bilgileri
+import {
+    _SessionData,
+    _SessionLanguage
+} from "../Data/SessionData.js";
+
+// Dil
+const _LanguageData = await MyLanguage.Fetch(
+    _SessionLanguage ?? "en",
+    MyLanguage.PageFiles // giriş yap
+);
 
 // Genel İşler
 export class Global {
@@ -70,7 +85,7 @@ export class Global {
         // metinleri ayarla
         elementTitle.textContent = String(title ? title : "");
         elementMsg.textContent = String(msg ? msg : "");
-        elementBtnOkYes.textContent = String(onlytrue ? (MyLanguageData.ok || "Tamam") : (MyLanguageData.yes || "Evet"));
+        elementBtnOkYes.textContent = String(onlytrue ? (_LanguageData?.ok ?? "Tamam") : (_LanguageData?.yes ?? "Evet"));
 
         // stiller
         const styleBody = `overflow-y: hidden;`;
@@ -101,7 +116,7 @@ export class Global {
             color: #ffffff;
             background: rgba(0,0,0, 0.25);
             border: 0;
-            border-radius: 0.5rem;
+            border-radius: 1rem;
             padding: clamp(0.25rem, 5dvh, 1.5rem) clamp(0.25rem, 5vw, 2.5rem);
             margin: 0;
             z-index: 999;`;
@@ -139,7 +154,7 @@ export class Global {
             justify-content: center;
             text-align: center;
             border: 0;
-            border-radius: 0.5rem;
+            border-radius: 0.75rem;
             outline: 0;
             font-size: clamp(0.8rem, 5vw, 0.9rem);
             color: #ffffff;
@@ -187,7 +202,7 @@ export class Global {
                 elementBtnNo.setAttribute("class", "btn messagebox_btn messagebox_btn_no");
 
                 // metinleri ayarla
-                elementBtnNo.textContent = String(MyLanguageData.no || "Hayır");
+                elementBtnNo.textContent = String(_LanguageData?.no ?? "Hayır");
 
                 // still
                 elementBtnNo.style.cssText = styleMessageBoxBtn;
