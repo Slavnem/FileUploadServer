@@ -267,10 +267,8 @@ export class MyFiles {
 
             // yüzde değerini sil ve yükleyiciyi sıfırla
             if(progressbar.style.display != "none") {
-                setTimeout(function() {
-                    progressbar.style.width = "0%";
-                    progressbar.style.display = "none";
-                }, 1000);
+                progressbar.style.width = "0%";
+                progressbar.style.display = "none";
             }
         };
 
